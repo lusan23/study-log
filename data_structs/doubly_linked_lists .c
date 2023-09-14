@@ -4,6 +4,7 @@
 typedef struct node {
   int value;
   struct node * next;
+  struct node * previous;
   
 }node_t;
 
@@ -38,11 +39,13 @@ void initList(node_t** head, int defaultVal) {
 
   (*head)->value = defaultVal;
   (*head)->next = (node_t*)malloc(sizeof(node_t));
-
+  (*head)->previous = NULL;
+  
   check_allocation(&(*head)->next);
   
-  (*head)->next->value = defaultVal;
+  (*head)->next->value = defaultVal +1;
   (*head)->next->next = NULL;
+  (*head)->next->previous = *head;
   
 }
 
@@ -93,6 +96,8 @@ void append(node_t ** n, int val) {
   
   current->next->value = val;
   current->next->next = NULL;
+  current->next->previous = current;
+  
 } 
 
 void push(node_t ** head, int val) {
@@ -108,7 +113,7 @@ void push(node_t ** head, int val) {
 
   new_node->value = val;
   new_node->next = *head;
-  
+  new_node->previous = NULL;
   *head = new_node;
 
 }
@@ -127,7 +132,7 @@ int pop(node_t ** head){
 
   check_allocation(*head);
   next_node = (*head)->next;
-  
+  next_node->previous = NULL;
   free(*head);
   *head = next_node;
 
@@ -150,7 +155,7 @@ int remove_last(node_t * head) {
     current = current->next;
   }
 
-  /*now current points to the second to last item*/
+  /*now current points to the second last item*/
   retval = current->next->value;
   free(current->next);
   current->next = NULL;
@@ -158,7 +163,7 @@ int remove_last(node_t * head) {
 }
 
 int remove_by_index(node_t ** head, int n) {
-  //working on it
+  
   printf("removing node of index %d", n);
   int i = 0;
   int retval = -1;
@@ -180,10 +185,11 @@ int remove_by_index(node_t ** head, int n) {
   if (current->next == NULL) {
     return -1;
   }
-  //make the before node n refer to the node after and delete node n 
+  //make the node before n refer to the node after and delete node n 
   temp_node = current->next;
   retval = temp_node->value;
   current->next = temp_node->next;
+  current->next->previous = current;
   free(temp_node);
 
   return retval;
@@ -191,8 +197,14 @@ int remove_by_index(node_t ** head, int n) {
 
 int main() {
   node_t * head = NULL;
- 
-  initList(&head, 1);
+  initList(&head, 0);
+  append(&head, 2);
+  append(&head, 3);
+  append(&head, 4);
+  print_list(head);
+  remove_by_index(&head, 3);
+  print_list(head);
+  /*
   append(&head, 10);
   print_list(head);
   push(&head, 999);
@@ -203,5 +215,6 @@ int main() {
   print_list(head);
   remove_by_index(&head, 1);
   print_list(head);
+  */
   return 0;
 }
