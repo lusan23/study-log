@@ -2,6 +2,8 @@
 
 This file provides an explanation of the functionality and usage of the provided code.
 
+Code based on this tutorial: https://www.learn-c.org/en/Linked_lists
+
 ```c
 #include<stdio.h>
 #include<stdlib.h>
