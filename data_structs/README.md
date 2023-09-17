@@ -15,7 +15,7 @@ typedef struct node {
 } node_t;
 ```
 
-The `node` struct is used to represent a node in a doubly linked list. It contains an integer value and pointers to the next and previous nodes in the list.
+The `node_t` is a struct representing a node in the linked list, containing an integer value and a pointer to the next node.
 
 ```c
 void check_allocation(void * node) {
@@ -24,7 +24,7 @@ void check_allocation(void * node) {
 }
 ```
 
-The `check_allocation` function is a utility function that checks if a memory allocation was successful. If the allocation failed (i.e., the passed node is NULL), the function displays an error message and terminates the program.
+The `check_allocation` checks if dynamic allocation was successful. If not, it prints an error message and exits the program.
 
 ```c
 void initList(node_t** head, int defaultVal) {
@@ -39,7 +39,7 @@ void initList(node_t** head, int defaultVal) {
 }
 ```
 
-The `initList` function initializes an empty doubly linked list. It takes a double pointer to a node (`head`) and a default value as parameters. It creates the tail node, allocates memory for the head node, sets its value, allocates memory for the tail node, sets its value, and establishes the link between the head and tail nodes.
+The `initList` initializes a linked list with two nodes. It allocates memory for the head and tail, sets default values, and links them.
 
 ```c
 void print_list(node_t * head) {
@@ -49,7 +49,7 @@ void print_list(node_t * head) {
 }
 ```
 
-The `print_list` function iterates through the linked list and prints the value of each node.
+The `print_list` traverses the list, starting from the head, and prints each node's value.
 
 ```c
 void append(node_t ** n, int val) {
@@ -62,7 +62,7 @@ void append(node_t ** n, int val) {
 }
 ```
 
-The `append` function adds a new node with the given value at the end of the linked list. It finds the last node in the list, allocates memory for the new tail node, sets its value, and establishes the link between the new tail node and the previous tail node.
+The `append` adds a new node to the end of the list.
 
 ```c
 void push(node_t ** head, int val) {
@@ -76,7 +76,7 @@ void push(node_t ** head, int val) {
 }
 ```
 
-The `push` function adds a new node with the given value at the beginning of the linked list. It creates a new node, allocates memory for it, sets its value, establishes the link between the new node and the current head node, and updates the head pointer to point to the new node.
+The `push` adds a new node after a specified value.
 
 ```c
 int pop(node_t ** head){
@@ -90,7 +90,7 @@ int pop(node_t ** head){
 }
 ```
 
-The `pop` function deletes the first node in the linked list and returns its value. It creates a new node to store the second node, saves the value of the second node, frees the memory allocated for the current head node, updates the head pointer to point to the second node, and returns the value of the deleted node.
+The `pop` inserts a new node at the beginning of the list.
 
 ```c
 int remove_last(node_t * head) {
@@ -105,7 +105,7 @@ int remove_last(node_t * head) {
 }
 ```
 
-The `remove_last` function removes the last node in the linked list and returns its value. If there is only one item in the list, it is removed directly. Otherwise, it traverses the list to find the second-to-last node, saves the value of the last node, frees the memory allocated for the last node, updates the next pointer of the second-to-last node to NULL, and returns the value of the deleted node.
+The `remove_last` the name describes itself, removes the last node in the list.
 
 ```c
 int remove_by_index(node_t ** head, int n) {
@@ -120,19 +120,99 @@ int remove_by_index(node_t ** head, int n) {
 }
 ```
 
-The `remove_by_index` function removes a node at the given index from the linked list and returns its value. It handles the special case when the node to be removed is the first node, traverses the list to find the node right before the one to be removed, handles the case when the node to be removed is the last node, makes the previous node point to the next node, frees the memory allocated for the node to be removed, and returns the value of the deleted node.
+The `remove_by_index` removes a node at a given index.
+
+# Doubly Linked List Operations
+
+---
+
+### Struct Definition<a name="struct-definition"></a>
 
 ```c
-int main() {
-  // Initialize the head of the linked list with default value
-  // Append nodes to the linked list
-  // Print the linked list
-  // Remove a node at a given index
-  // Print the updated linked list
-  // Return 0 to exit the program
-}
+typedef struct node {
+  int value;
+  struct node * next;
+  struct node * tail;   
+  struct node * previous;
+}node_t;
 ```
 
-In the `main` function, the program initializes the head of the linked list with a default value, appends nodes to the linked list using the `append` function, prints the linked list using the `print_list` function, removes a node at a given index using the `remove_by_index` function, prints the updated linked list, and returns 0 to exit the program.
+This defines a structure `node_t` which represents a node in the doubly linked list. It contains an integer value, and pointers to the next, tail, and previous nodes.
 
-This documentation provides an overview of the code's functionality and usage.
+### Initialization<a name="initialization"></a>
+
+```c
+void initList(node_t** head, int defaultVal);
+```
+
+This function initializes a new linked list. It takes a pointer to a `node_t*` and an integer `defaultVal` which is the value of the first node.
+
+### Print List<a name="print-list"></a>
+
+```c
+void print_list(node_t * head);
+```
+
+This function prints the elements of the linked list.
+
+### Append<a name="append"></a>
+
+```c
+void append(node_t ** n, int val);
+```
+
+This function adds a new node with value `val` at the end of the list.
+
+### Push<a name="push"></a>
+
+```c
+void push(node_t ** head, int val);
+```
+
+This function adds a new node with value `val` at the beginning of the list.
+
+### Pop<a name="pop"></a>
+
+```c
+int pop(node_t ** head);
+```
+
+This function deletes the first node in the list and returns its value.
+
+### Remove Last<a name="remove-last"></a>
+
+```c
+int remove_last(node_t * head);
+```
+
+This function removes the last node in the list and returns its value.
+
+### Remove by Index<a name="remove-by-index"></a>
+
+```c
+int remove_by_index(node_t ** head, int n);
+```
+
+This function removes the node at index `n` in the list and returns its value.
+
+### Add After<a name="add-after"></a>
+
+```c
+void addAfter(node_t ** head, int ref_node_value, int new_value);
+```
+
+This function adds a new node with value `new_value` after the node with value `ref_node_value`.
+
+### Add Before<a name="add-before"></a>
+
+```c
+void addBefore(node_t ** head, int ref_node_value, int new_value);
+```
+
+This function adds a new node with value `new_value` before the node with value `ref_node_value`.
+
+---
+
+Please refer to the individual function descriptions for more details on how each operation is performed.
+
+
