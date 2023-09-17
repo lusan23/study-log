@@ -95,6 +95,38 @@ void append(node_t ** n, int val) {
   current->next->next = NULL;
 } 
 
+
+void addAfter(node_t ** n, int val) {
+  /*interacts through all list and add a new tail (last element) 
+
+  create current node,
+  current node = head,
+
+  while current node is not the last node
+    go to the next element
+
+  current node is now the last node(tail),
+  allocate memory for tail,
+  insert value to tail node,
+  finish the list inserting null in tail.
+  */
+
+  printf("adding a new tail...\n");
+  node_t * current = *n;
+  
+  while (current->next != NULL) {
+    current = current->next;
+  }
+  printf("tail found!\n");
+  current->next = (node_t *)malloc(sizeof(node_t));
+  check_allocation(current->next);
+  
+  current->next->value = val;
+  current->next->next = NULL;
+} 
+
+
+
 void push(node_t ** head, int val) {
   /*creates a new head (a new first element in the list.)
 
@@ -187,21 +219,4 @@ int remove_by_index(node_t ** head, int n) {
   free(temp_node);
 
   return retval;
-}
-
-int main() {
-  node_t * head = NULL;
- 
-  initList(&head, 1);
-  append(&head, 10);
-  print_list(head);
-  push(&head, 999);
-  print_list(head);
-  pop(&head);
-  print_list(head);
-  remove_last(head);
-  print_list(head);
-  remove_by_index(&head, 1);
-  print_list(head);
-  return 0;
 }
