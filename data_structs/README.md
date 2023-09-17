@@ -153,8 +153,6 @@ void addBefore(node_t ** head, int ref_node_value, int new_value);
 
 This function adds a new node with value `new_value` before the node with value `ref_node_value`.
 
-### Doubly Circular Linked Lists
-##Working on it...
 ---
 
 # Doubly Linked List
