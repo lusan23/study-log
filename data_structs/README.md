@@ -1,13 +1,9 @@
 **Linked Lists**
 
-This file provides an explanation of the functionality and usage of the provided code.
 
 Code based on this tutorial: https://www.learn-c.org/en/Linked_lists
 
 ```c
-#include<stdio.h>
-#include<stdlib.h>
-
 typedef struct node {
   int value;
   struct node * next;
@@ -139,61 +135,7 @@ typedef struct node {
 
 This defines a structure `node_t` which represents a node in the doubly linked list. It contains an integer value, and pointers to the next, tail, and previous nodes.
 
-### Initialization<a name="initialization"></a>
-
-```c
-void initList(node_t** head, int defaultVal);
-```
-
-This function initializes a new linked list. It takes a pointer to a `node_t*` and an integer `defaultVal` which is the value of the first node.
-
-### Print List<a name="print-list"></a>
-
-```c
-void print_list(node_t * head);
-```
-
-This function prints the elements of the linked list.
-
-### Append<a name="append"></a>
-
-```c
-void append(node_t ** n, int val);
-```
-
-This function adds a new node with value `val` at the end of the list.
-
-### Push<a name="push"></a>
-
-```c
-void push(node_t ** head, int val);
-```
-
-This function adds a new node with value `val` at the beginning of the list.
-
-### Pop<a name="pop"></a>
-
-```c
-int pop(node_t ** head);
-```
-
-This function deletes the first node in the list and returns its value.
-
-### Remove Last<a name="remove-last"></a>
-
-```c
-int remove_last(node_t * head);
-```
-
-This function removes the last node in the list and returns its value.
-
-### Remove by Index<a name="remove-by-index"></a>
-
-```c
-int remove_by_index(node_t ** head, int n);
-```
-
-This function removes the node at index `n` in the list and returns its value.
+## Doubly Linked Lists have the functions as singly linked lists, plus these:
 
 ### Add After<a name="add-after"></a>
 
@@ -213,6 +155,5 @@ This function adds a new node with value `new_value` before the node with value 
 
 ---
 
-Please refer to the individual function descriptions for more details on how each operation is performed.
 
 
