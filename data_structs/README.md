@@ -118,7 +118,7 @@ int remove_by_index(node_t ** head, int n) {
 
 The `remove_by_index` removes a node at a given index.
 
-# Doubly Linked List Operations
+# Doubly Linked List
 
 ---
 
@@ -154,6 +154,10 @@ void addBefore(node_t ** head, int ref_node_value, int new_value);
 This function adds a new node with value `new_value` before the node with value `ref_node_value`.
 
 ---
+
+# Doubly Linked List
+
+## Working on it!!!
 
 
 
