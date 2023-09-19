@@ -4,6 +4,8 @@
 typedef struct node {
   int value;
   struct node * next;
+  struct node * tail;   
+  struct node * previous;
   
 }node_t;
 
@@ -28,21 +30,29 @@ void initList(node_t** head, int defaultVal) {
   insert value to head 
   allocate memory for tail
   insert value to tail
+  set tail pointer
   finish list adding null to tail.
+  
   */
 
   printf("setting up a new linked list...\n");
-  node_t * tail;
+  
   *head = (node_t*)malloc(sizeof(node_t));
   check_allocation(&head);
 
   (*head)->value = defaultVal;
   (*head)->next = (node_t*)malloc(sizeof(node_t));
-
+  (*head)->tail = (*head)->next;
+  (*head)->previous = NULL;
+  
   check_allocation(&(*head)->next);
   
-  (*head)->next->value = defaultVal;
+  (*head)->next->value = defaultVal +1;
   (*head)->next->next = NULL;
+
+  check_allocation(&(*head)->tail);
+
+  (*head)->next->previous = *head;
   
 }
 
@@ -57,7 +67,7 @@ void print_list(node_t * head) {
     print current element's value
     go to the next element
   */
-  printf("interacting with the linked list...\n");
+  printf("\ninteracting with the linked list...\n");
   node_t * current = head;
   while (current != NULL) {
     printf("[%d,->]\n", current->value);
@@ -79,6 +89,7 @@ void append(node_t ** n, int val) {
   allocate memory for tail,
   insert value to tail node,
   finish the list inserting null in tail.
+  set the tail pointer refering to the newly created node 
   */
 
   printf("adding a new tail...\n");
@@ -93,55 +104,31 @@ void append(node_t ** n, int val) {
   
   current->next->value = val;
   current->next->next = NULL;
-} 
-
-
-void addAfter(node_t ** n, int val) {
-  /*interacts through all list and add a new tail (last element) 
-
-  create current node,
-  current node = head,
-
-  while current node is not the last node
-    go to the next element
-
-  current node is now the last node(tail),
-  allocate memory for tail,
-  insert value to tail node,
-  finish the list inserting null in tail.
-  */
-
-  printf("adding a new tail...\n");
-  node_t * current = *n;
+  (*n)->tail = current->next;
+  current->next->previous = current;
   
-  while (current->next != NULL) {
-    current = current->next;
-  }
-  printf("tail found!\n");
-  current->next = (node_t *)malloc(sizeof(node_t));
-  check_allocation(current->next);
-  
-  current->next->value = val;
-  current->next->next = NULL;
 } 
-
-
 
 void push(node_t ** head, int val) {
   /*creates a new head (a new first element in the list.)
 
     create a new node
     allocate memory to new node
+    //set up the head attributes: value, next pointer, tail pointer etc...
 
   */
   printf("adding a new head...\n");
   node_t * new_node;
   new_node = (node_t *)malloc(sizeof(node_t));
 
+  //sets up all of the members for the head node.
   new_node->value = val;
   new_node->next = *head;
-  
+  new_node->previous = NULL;
+  new_node->tail = (*head)->tail;
+
   *head = new_node;
+  
 
 }
 
@@ -150,6 +137,7 @@ int pop(node_t ** head){
 
     create a new node, 
     save the second node and its value in the new node,
+    sets the previous and tail pointers of the newly created node,
     free/delete current head,
     make the new node become head.
   */
@@ -159,7 +147,9 @@ int pop(node_t ** head){
 
   check_allocation(*head);
   next_node = (*head)->next;
-  
+  next_node->previous = NULL;
+  next_node->tail = (*head)->tail;
+
   free(*head);
   *head = next_node;
 
@@ -176,21 +166,23 @@ int remove_last(node_t * head) {
     return retval;
   }
 
-  /*get to the second to last node in the list*/
+  /*get to the second last node in the list*/
   node_t * current = head;
   while (current->next->next != NULL) {
     current = current->next;
   }
 
-  /*now current points to the second to last item*/
+  /*now current points to the second last item*/
   retval = current->next->value;
+  head->tail = current;
   free(current->next);
   current->next = NULL;
+
   return retval;
 }
 
 int remove_by_index(node_t ** head, int n) {
-  //working on it
+  
   printf("removing node of index %d", n);
   int i = 0;
   int retval = -1;
@@ -212,28 +204,101 @@ int remove_by_index(node_t ** head, int n) {
   if (current->next == NULL) {
     return -1;
   }
-  //make the before node n refer to the node after and delete node n 
+  //make the node before n refer to the node after and delete node n 
   temp_node = current->next;
   retval = temp_node->value;
   current->next = temp_node->next;
+  current->next->previous = current;
   free(temp_node);
 
   return retval;
 }
 
+void addAfter(node_t ** head, int ref_node_value, int new_value) {
+  //look for the specific node by using part of the tortoise and hare algorithm
+  node_t * current = *head;
+  node_t * new_node;
+
+  printf("\nadd after...\n");
+  if (current->next->next == NULL) {
+    append(&current, new_value);
+
+  } else {
+        do {
+          printf("current:[%d,->]\n", current->value);
+        
+          if (current->value == ref_node_value)
+          {
+            printf("found!!!");
+            break;
+          }
+          current = current->next;
+        } while (current->next != NULL);
+    
+        new_node = (node_t *)malloc(sizeof(node_t));
+        check_allocation(new_node);
+        new_node->previous = current;
+        new_node->next = current->next;
+        new_node->value = new_value;
+        
+        current->next->previous = new_node;
+        current->next = new_node;
+    }
+
+
+
+}
+
+void addBefore(node_t ** head, int ref_node_value, int new_value) {
+  //look for the specific node by using part of the tortoise and hare algorithm
+  node_t * current = *head;
+  node_t * new_node;
+  int found = 0;
+
+  printf("\nadd after...\n");
+  if (current->next->next == NULL) {
+    push(&current, new_value);
+
+  } else {
+        do {
+          printf("current:[%d,->]\n", current->value);
+        
+          if (current->value == ref_node_value)
+          {
+            printf("found!!!");
+            found = 1;
+            break;
+          }
+          current = current->next;
+        } while (current->next != NULL);
+        if (found == 1) {
+          new_node = (node_t *)malloc(sizeof(node_t));
+          check_allocation(new_node);
+          new_node->previous = current->previous->previous;
+          new_node->next = current;
+          new_node->value = new_value;
+          
+          current->previous->next = new_node;
+          current->previous = new_node;
+        } else {printf("node note found!!!\n");}
+    }
+
+
+
+}
+
 int main() {
   node_t * head = NULL;
- 
-  initList(&head, 1);
-  append(&head, 10);
+  initList(&head, 0);
+  append(&head, 69);
+  //append(&head, 64);
+  //append(&head, 23);
   print_list(head);
-  push(&head, 999);
+
+  addBefore(&head, 64, 111);
   print_list(head);
-  pop(&head);
-  print_list(head);
-  remove_last(head);
-  print_list(head);
-  remove_by_index(&head, 1);
-  print_list(head);
-  return 0;
+
+  //next test inserting in the middle of the list.
+  //printf("tail pointer:%p|tail itself:%p\n", head->tail,head->next->next->next);
+  return 0; 
 }

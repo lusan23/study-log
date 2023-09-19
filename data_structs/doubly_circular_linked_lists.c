@@ -2,11 +2,12 @@
 #include<stdlib.h>
 
 typedef struct node {
+  //the previous node of head is null by default, because of the buffer.
   int value;
   struct node * next;
   struct node * tail;   
   struct node * previous;
-  
+  int size;  
 }node_t;
 
 void check_allocation(void * node) {
@@ -42,18 +43,21 @@ void initList(node_t** head, int defaultVal) {
 
   (*head)->value = defaultVal;
   (*head)->next = (node_t*)malloc(sizeof(node_t));
-  (*head)->tail = (*head)->next;
+  (*head)->tail = (node_t*)malloc(sizeof(node_t));
+  (*head)->tail->next = *head;
+  (*head)->tail->value = 0;
+  (*head)->tail->previous = NULL;
   (*head)->previous = NULL;
   
   check_allocation(&(*head)->next);
   
   (*head)->next->value = defaultVal +1;
-  (*head)->next->next = NULL;
+  (*head)->next->next = (*head);
 
   check_allocation(&(*head)->tail);
 
   (*head)->next->previous = *head;
-  
+  (*head)->size = 2;
 }
 
 
@@ -69,11 +73,12 @@ void print_list(node_t * head) {
   */
   printf("\ninteracting with the linked list...\n");
   node_t * current = head;
-  while (current != NULL) {
+
+  for (int i = 1; i <= head->size+1; i++) {
     printf("[%d,->]\n", current->value);
     current = current->next;
   }
-   
+  
 }
 
 void append(node_t ** n, int val) {
@@ -93,20 +98,18 @@ void append(node_t ** n, int val) {
   */
 
   printf("adding a new tail...\n");
-  node_t * current = *n;
+  node_t * new_node;
+  new_node = (node_t *)malloc(sizeof(node_t));
+  check_allocation(new_node);
   
-  while (current->next != NULL) {
-    current = current->next;
-  }
+  new_node->value = val;
+  new_node->next = (*n);
+  new_node->previous = (*n)->tail->next->previous;
+
   printf("tail found!\n");
-  current->next = (node_t *)malloc(sizeof(node_t));
-  check_allocation(current->next);
   
-  current->next->value = val;
-  current->next->next = NULL;
-  (*n)->tail = current->next;
-  current->next->previous = current;
-  
+  (*n)->tail->next = new_node;
+  (*n)->size++;
 } 
 
 void push(node_t ** head, int val) {
@@ -214,91 +217,11 @@ int remove_by_index(node_t ** head, int n) {
   return retval;
 }
 
-void addAfter(node_t ** head, int ref_node_value, int new_value) {
-  //adds a new node after the the ref node
-  node_t * current = *head;
-  node_t * new_node;
-
-  printf("\nadd after...\n");
-  if (current->next->next == NULL) {
-    append(&current, new_value);
-
-  } else {
-        do {
-          printf("current:[%d,->]\n", current->value);
-        
-          if (current->value == ref_node_value)
-          {
-            printf("found!!!");
-            break;
-          }
-          current = current->next;
-        } while (current->next != NULL);
-    
-        new_node = (node_t *)malloc(sizeof(node_t));
-        check_allocation(new_node);
-        new_node->previous = current;
-        new_node->next = current->next;
-        new_node->value = new_value;
-        
-        current->next->previous = new_node;
-        current->next = new_node;
-    }
-
-
-
-}
-
-void addBefore(node_t ** head, int ref_node_value, int new_value) {
-  //  //adds a new node before the the ref node
-  node_t * current = *head;
-  node_t * new_node;
-  int found = 0;
-
-  printf("\nadd after...\n");
-  if (current->next->next == NULL) {
-    push(&current, new_value);
-
-  } else {
-        do {
-          printf("current:[%d,->]\n", current->value);
-        
-          if (current->value == ref_node_value)
-          {
-            printf("found!!!");
-            found = 1;
-            break;
-          }
-          current = current->next;
-        } while (current->next != NULL);
-        if (found == 1) {
-          new_node = (node_t *)malloc(sizeof(node_t));
-          check_allocation(new_node);
-          new_node->previous = current->previous->previous;
-          new_node->next = current;
-          new_node->value = new_value;
-          
-          current->previous->next = new_node;
-          current->previous = new_node;
-        } else {printf("node note found!!!\n");}
-    }
-
-
-
-}
-
 int main() {
   node_t * head = NULL;
   initList(&head, 0);
-  append(&head, 69);
-  //append(&head, 64);
-  //append(&head, 23);
-  print_list(head);
-
-  addBefore(&head, 64, 111);
-  print_list(head);
-
-  //next test inserting in the middle of the list.
-  //printf("tail pointer:%p|tail itself:%p\n", head->tail,head->next->next->next);
+  //print_list(head);
+  append(&head, 10);
+  printf("|||%d\n", head->next->next->value);
   return 0; 
 }

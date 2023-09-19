@@ -1,0 +1,113 @@
+//do a stack of array based.
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct stack_i {
+  int init[4];
+  int * first;
+  int * last; 
+} stack_i;
+
+void  createStack(struct stack_i * entry)
+{
+  //O(n) to be fixed
+  memset(entry->init, 0, sizeof(entry->init)); 
+  entry->first = NULL;
+  entry->last = NULL;
+  
+  printf("initialized!\n");
+  
+}
+
+int  is_empty(stack_i * entry)
+{
+  //O(1)
+  // verify if the stack is empty by looking if  the first element == 0  
+  if (entry->first == 0)
+  {
+    printf("Empty stack!!!\n");
+    return EXIT_FAILURE;
+  }
+  else { return 0;}
+}
+
+int is_full (stack_i * entry) {
+  //O(1)
+  
+  return (entry.last != NULL ) ? 1 :  0;
+}
+
+int peek()
+{
+  //O(n) to be fixed
+  for (int i = 3; i >= 0; i--)
+    {
+      printf("teste:%d\n", i);
+      if ( stack[i] != 0)
+	{
+	  return stack[i];
+	  
+        }
+    }
+  return -1;
+}
+
+int push(int value) {
+  //O(n) to be fixed
+  // insert a new element on the top of the previous elements. 
+  printf("pushing...\n");
+  if (is_full(stack))
+  {
+    printf("stack full!!\n");
+    return -1;
+  }
+  else
+    {
+      for (int i = 0; i <= 3; i++)
+	{
+        if ( stack[i] == 0)
+	  {
+	    stack[i] = value;
+	    return 1; 
+          }
+        }
+    } return 0;
+}
+
+int pop()
+{
+  //o(n) to be fixed
+  printf("popping...\n");
+   for (int i = 3; i >= 0 ; i--)
+     {
+     if (stack[i] != 0)
+       {
+	 stack[i] = 0;
+	 return 1;
+       }
+     
+     }
+   return 0;
+}
+*/
+void print_all(stack_i * entry) {
+  //0(n) done
+  printf("--------\n");
+  for (int i = 3; i >=  0; i--) {
+
+    printf("|  %d  |\n",entry->init[i] );
+    printf("--------\n");
+    
+  }
+  printf("end of stack\n\n");
+}
+
+int main ()
+{
+  stack_i s;
+  createStack(&s);
+  print_all(&s);
+  return 0;
+
+}
