@@ -1,4 +1,4 @@
-## README
+## [array_stack_v1.1.c](https://github.com/lusan23/study-log/blob/master/data_structs/stack/array_stack_v1.1.c)
 
 This is a C implementation of a stack using arrays. The stack is a last-in-first-out (LIFO) data structure, which means that the last element added to the stack is the first element removed.
 
