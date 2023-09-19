@@ -92,6 +92,7 @@ int pop()
 }
 */
 void print_all(stack_i * entry) {
+
   //0(n) done
   printf("--------\n");
   for (int i = 3; i >=  0; i--) {

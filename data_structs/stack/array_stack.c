@@ -1,4 +1,4 @@
-//do a stack of array based.
+//do a stack of static array based 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
