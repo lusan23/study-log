@@ -1,3 +1,5 @@
+# [doubly_linked_list.c](https://github.com/lusan23/study-log/blob/master/data_structs/LLists/doubly_linked_list.c)
+
 This is a C implementation of a doubly linked list. A doubly linked list is a data structure that consists of a sequence of nodes where each node contains a value and two pointers, one to the next node in the list and one to the previous node in the list. This allows for efficient insertion and deletion operations at any point in the list.
 
 The following functions are provided:
