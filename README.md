@@ -1,7 +1,7 @@
 # Study Log
 
 A repo for track my study journey!
-
+#### Current task: Implement stacks using linked lists.
 ## Subjects to Study (for now)
 
 * [Data Structures and Algorithms](https://github.com/lusan23/study-log/tree/master/data_structs)
