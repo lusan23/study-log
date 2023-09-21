@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
+//#include"stack.h"
 //simple integer stack implemented using a linked list. (unlimited elements.)
+
 typedef struct node {
   int val;
   struct node * next; 
