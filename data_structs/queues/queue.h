@@ -12,5 +12,8 @@ typedef struct queue_arr
 int prepareQueue( queue_arr * queue);
 int is_empty(queue_arr queue);
 int  is_full (queue_arr  queue);
-int queued(queue_arr *  queue, char value);
+int enqueue(queue_arr *  queue, char value);
+char dequeue(queue_arr * queue);
+char peek(queue_arr queue);
+void clearAll(queue_arr * queue);
 #endif
