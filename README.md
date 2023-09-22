@@ -8,7 +8,7 @@ A repo for track my study journey!
     * Array
     * [Linked List](https://github.com/lusan23/study-log/tree/master/data_structs/LLists)
     * [Stack](https://github.com/lusan23/study-log/tree/master/data_structs/stack)
-    * Queue
+    * [Queue](https://github.com/lusan23/study-log/tree/master/data_structs/queues)
     * Hash Tables
     * Heap
     * Graph
