@@ -10,7 +10,7 @@
   Test Operations
     verify the corrects of outputs and error handling of these operations.
 */
-static queue_arr arrq;//variable modified globaly for testing porpuses
+static queue_arr arrq;//variable defined  globaly for testing porpuses
 
 static void test_prep(void) 
 {
@@ -22,7 +22,7 @@ static void test_prep(void)
     assert(is_empty(arrq) == 1);
 
     assert(is_full(arrq) == 0);
-  
+    printQueue(arrq);
   printf("memory test OK.\n");
 }
 
@@ -34,6 +34,8 @@ static void test_dequeued(void)
   for (int i = 0; i <= 4; i++)
   { //was the first element actually removed?
 
+    printQueue(arrq);
+      printf("\n");
     queue_arr old_q = arrq;
     char poppedChar =  dequeue(&arrq);
 
@@ -43,7 +45,9 @@ static void test_dequeued(void)
      
       assert(*arrq.first ==  *(old_q.first + 1));
     }
+    
   }
+  printQueue(arrq);
   printf("dequeue OK.\n");
 }
 
@@ -54,6 +58,9 @@ void test_enqueue(void)
       char randomLetter = 'a' + random() % 26;  
       enqueue(&arrq, randomLetter);
       assert(*arrq.last == randomLetter);
+      assert(size(arrq) == i+1);
+      printQueue(arrq);
+      printf("\n");
     }
     printf("enqueue OK.\n");
 }
@@ -73,21 +80,38 @@ static void test_clear(void)
   printf("clear OK.\n");
 }
 
+
+static void test_contain(void)
+{
+  char testedChar = 'b';
+    printf("DEBUGGING:TESTED CHAR:%c\n",testedChar);
+    if (contain(arrq, testedChar))
+    {
+      printf("%c is in the queue!!\n", testedChar);
+      printQueue(arrq);
+    }
+  else
+    {
+     printf("%c is not in the queue!!\n", testedChar);
+      printQueue(arrq);
+    }
+}
+
 static void test_operations(void)
 {
   test_enqueue();
   test_dequeued();
   test_peek();
   test_clear();
+  test_enqueue();
+  test_contain();
   //assert(arrq.a );
   //printf("%c\n", arrq.arr[0]);
 }
 
-
 int main(void)
 {
   test_prep();
-  
   test_operations();
   return 0;
 }

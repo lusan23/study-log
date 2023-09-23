@@ -1,38 +1,24 @@
+//Practicing the implementation of queues (FIFO) as an array
+//(Except by constain, which is O(n) all of the operations are Big O constant)
+
 #include<stdio.h>
 #include<string.h>
 #include"queue.h"
 
-//Practicing the implementation of queues (FIFO) as array
-/*
-  5 sized queue for int elements
-operations:
-queued done
-unqueueddone
-isEmpty done
-isFull done
-Peek done
-
-//Aditional 
-Clear all
-return size
-constain a specific number?
-
-(Except by constain, which is O(n) all of the operations are Big O constant)
-*/
-
-
 int prepareQueue(queue_arr * queue)
 {
   // stablish default values for all members of the structure. 
+  printf("DEBUGGING:RESET\n");
   memset(queue->arr, '\0', sizeof(queue->arr));
   queue->last = NULL;
   queue->first = NULL;
+  queue->size = 0;
   return 0;
 }
 
 int is_empty(queue_arr  queue)
 {
-  return (queue.first == NULL && queue.last == NULL) ? 1 : 0;
+  return (queue.first == NULL && queue.last == NULL && queue.size == 0) ? 1 : 0;
 }
 
 int  is_full (queue_arr  queue) 
@@ -54,6 +40,8 @@ int enqueue(queue_arr *  queue, char value)
       queue->arr[0] = value;
       queue->first = &queue->arr[0];
       queue->last = &queue->arr[0];
+      queue->size++;
+      
       return 1;
     } 
   else 
@@ -65,6 +53,7 @@ int enqueue(queue_arr *  queue, char value)
       */
       queue->last++;
       *queue->last = value;
+      queue->size++;
     } return 1;
 }
 
@@ -77,13 +66,13 @@ char dequeue(queue_arr * queue)
     retval = *queue->first;
     *queue->first = '\0';
     queue->first++;
-
+    queue->size--;
     return retval;
-  } else
+  } else 
   {//if the queue is empty reset the pointers to their original position.
     prepareQueue(&(*queue));
   }
-
+ 
 }
 
 char peek(queue_arr queue)
@@ -94,4 +83,42 @@ char peek(queue_arr queue)
 void clearAll(queue_arr * queue)
 {
   prepareQueue(&(*queue));
+}
+
+int size(queue_arr queue)
+{
+  return queue.size;
+}
+
+void printQueue(queue_arr queue)
+{
+  if (!is_empty(queue))
+  {
+    printf("current size:%d\n",size(queue));
+    for(int i = 0; i<=4; i++)
+    {
+      
+      if (i != 4)
+	{
+	  printf("|"); printf("%c", queue.arr[i]); printf("|");
+	}
+      else {printf("|"); printf("%c", queue.arr[i]); printf("|\n");}
+
+      
+    }
+  
+  }
+}
+
+int contain(queue_arr queue, char value)
+{
+  for (int i = 0; i<= (size(queue)-1); i++)
+    {
+      if (value == queue.arr[i])
+	{
+	  return 1;
+	}
+    }
+
+  return 0;
 }
