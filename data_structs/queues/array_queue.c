@@ -5,6 +5,28 @@
 #include<string.h>
 #include"queue.h"
 
+<<<<<<< HEAD
+=======
+//Practicing the implementation of queues (FIFO) as array
+/*
+  5 sized queue for int elements
+operations:
+queued done
+unqueueddone
+isEmpty done
+isFull done
+Peek done
+
+//Aditional 
+Clear all
+return size
+contain a specific number?
+
+(Except by contain, which is O(n) all of the operations are Big O constant)
+*/
+
+
+>>>>>>> ec7458d813dbc2d05af4f6c2bc53020db1ce2e2f
 int prepareQueue(queue_arr * queue)
 {
   // stablish default values for all members of the structure. 
@@ -84,6 +106,7 @@ void clearAll(queue_arr * queue)
 {
   prepareQueue(&(*queue));
 }
+<<<<<<< HEAD
 
 int size(queue_arr queue)
 {
@@ -122,3 +145,5 @@ int contain(queue_arr queue, char value)
 
   return 0;
 }
+=======
+>>>>>>> ec7458d813dbc2d05af4f6c2bc53020db1ce2e2f
