@@ -15,9 +15,9 @@ Peek done
 //Aditional 
 Clear all
 return size
-constain a specific number?
+contain a specific number?
 
-(Except by constain, which is O(n) all of the operations are Big O constant)
+(Except by contain, which is O(n) all of the operations are Big O constant)
 */
 
 
