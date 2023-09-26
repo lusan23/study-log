@@ -1,8 +1,7 @@
 # Study Log
 
 A repo for track my study journey!
-#### Current task: Implement queues using arrays/linked lists. *additional: make tests for my previous algorithms.
-## Subjects to Study (for now)
+#### Current task: Implement a hashing table size: 10; (division and multiplication bathing method & Channing ) additional: Universal hashing method & open addressing.
 
 * [Data Structures and Algorithms](https://github.com/lusan23/study-log/tree/master/data_structs)
     * Array
