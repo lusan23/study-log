@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+char * read_file(char filename[200])
+{
+  int num;
+  FILE *fptr;
+
+  if ((fptr = fopen(filename), "r") == NULL)
+    {
+      printf("Error! opening file");
+    }
+}
