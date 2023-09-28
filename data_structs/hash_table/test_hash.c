@@ -4,38 +4,52 @@
 #include"hash.h"
 #include<stdlib.h>
 #include<string.h>
-struct hash_node hash_table[10];
 
+const int HASH_TABLE_SIZE = 30;
 //tomorrow test the prehashing using the random words file
+
 void test_alg_componentes(void)
 {
-  //10 sized array
-  /*
-
-    [ 
-      struct hash_node{hash_code; key; value; }, struct hash_node{hash_code; key; value; LL; }, ... , xm-1
-    ]
-    x
-   */
   int i = 0;
-
+  hash_node hash_table[HASH_TABLE_SIZE];
+  prepareTable(hash_table, HASH_TABLE_SIZE);
   //strcpy(hash_table[5].key, "food");
-  while (i<= 9)
+  while (i<= 29)
     {
-      printf("node:%s\n",hash_table[i].key);
-      assert(hash_table[i].hash_code == 0);
+      assert(hash_table[i].hash_code > 0 &&  hash_table[i].hash_code <= HASH_TABLE_SIZE);
+      printf("hash code:%d\n", hash_table[i].hash_code);
       assert(strcmp(hash_table[i].key, "") == 0);
       assert(strcmp(hash_table[i].value, "") == 0);
-      
 	  i++;
+    //break
     }
 }
 
-void test_prehashing(void)
+int test_prehashing(char filename[300])
+{
+  int max_line_length = 1000;
+    FILE    *textfile;
+    char    line[max_line_length];
+     
+    textfile = fopen(filename, "r");
+    if(textfile == NULL)
+        return 1;
+
+    while(fgets(line, max_line_length, textfile))
+    {
+        printf("the hash of %s is: %d\n", line, preHashing(line, 'd'));
+    }
+
+    fclose(textfile);
+}
+
+
+void test_preh(void)
 
 {
-  int hash = preHashing("asd90a", 'd');
-  for (int i = 0; i<= 100; random)
+  //from file prehashing.c
+  test_prehashing("random-words.txt");
+  
 }
 
 /*
@@ -69,8 +83,8 @@ void test_prehashing(void)
  */
 int main (void)
 {
-  //test_alg_componentes();
-  test_prehashing();
+  test_alg_componentes();
+  test_preh();
 
   
   
