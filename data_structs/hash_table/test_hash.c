@@ -10,6 +10,7 @@ const int HASH_TABLE_SIZE = 30;
 
 void test_alg_componentes(void)
 {
+  printf("test_alg_componentes\n");
   int i = 0;
   hash_node hash_table[HASH_TABLE_SIZE];
   prepareTable(hash_table, HASH_TABLE_SIZE);
@@ -22,11 +23,13 @@ void test_alg_componentes(void)
       assert(strcmp(hash_table[i].value, "") == 0);
 	  i++;
     //break
+    
     }
 }
 
 int test_prehashing(char filename[300])
 {
+   printf("test_prehashing\n");
   int max_line_length = 1000;
     FILE    *textfile;
     char    line[max_line_length];
@@ -52,19 +55,28 @@ void test_preh(void)
   
 }
 
+void test_colisions(void)
+{
+  printf("test_colisions\n");
+  char test_key[] = "sodifhsodf";
+  char test_value[] = "dijpok";
+  hash_node  hash_table[HASH_TABLE_SIZE];
+  prepareTable(&hash_table, HASH_TABLE_SIZE);
+  insert(&hash_table, preHashing(test_key, 'd'), test_key, test_value);
+  assert(strcmp(*hash_table[preHashing(test_key,'d')-1].key, test_key) == 0);
+  assert(strcmp(*hash_table[preHashing(test_key,'d')-1].value, test_value) == 0);
+  printf("inserted\n");
+  //first colision test
+  insert(&hash_table, preHashing(test_key, 'd'), test_key, test_value);
+  printf("aaa:%s\n", hash_table[preHashing(test_key, 'd')-1].next->key);
+  assert(strcmp(hash_table[preHashing(test_key,'d')-1].next->key, test_key) == 0);
+  //assert(strcmp(*hash_table[preHashing(test_key,'d')-1].next->value, test_value) == 0);
+
+}
+
+
 /*
 
-  //prehashing algorithm
-
-   
-    for (int i = 0; i <= 2; i++)
-    {
-      for (in t j = 0; i <= 9; j++)
-	{
-	  int hashGenerated;
-	  assert(hashGenerated  == key % 10);
-	}
-    }
   //can i deal with collisions?
 
     //struct structname name[10] 
@@ -85,7 +97,7 @@ int main (void)
 {
   test_alg_componentes();
   test_preh();
-
+  test_colisions();
   
   
   return 0;

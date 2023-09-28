@@ -2,7 +2,7 @@
 #include"hash.h"
 #include<stdlib.h>
 #include<string.h>
-
+#include<assert.h>
 void prepareTable(hash_node * table, int size)
 {
   for (int i = 0; i <= size-1; i++)
@@ -11,7 +11,7 @@ void prepareTable(hash_node * table, int size)
       strncpy(table[i].key, "", sizeof(table[i].key));
       strncpy(table[i].value, "", sizeof(table[i].value));
       
-    printf("new hash code:%s\n", table[i].key);
+    printf("new hash code:%d\n", table[i].hash_code);
   }
 
 }
@@ -37,21 +37,37 @@ int preHashing(char new_key[200], char hashing_function)
     }
 }
 
-void insert(hash_node * table, int hash_code, 
-char key[200], char value[200])
+void insert(hash_node * table, int hash_code, char new_key[200], char new_value[200])
 {//if there's no colisions insert the key and value to the list
-  if (!table[hash_code].next)
+  int index = hash_code-1;
+  if (strcmp(table[index].key, "") == 0 && strcmp(table[index].value, "") == 0)
   {
-    strncpy(table[hash_code].key, key, sizeof(table[hash_code].key));
-    strncpy(table[hash_code].value, value, sizeof(table[hash_code].key));
+    printf("teste1\n");
+    strncpy(table[index].key, new_key, sizeof(table[index].key));
+    strncpy(table[index].value, new_value, sizeof(table[index].value));
+    table[index].next = NULL;
+
   } else
-  {
-    chain * current = table[hash_code].next;
-      while (current->next != NULL)
-	    {
-	      current = current->next;
-	    }
+  {  
+    printf("teste2\n");
+    if (table[index].next == NULL)
+    {//if it's the first collision...
+      hash_node * current = table[index].next;
+
+      current = (chain *)malloc(sizeof(chain));
+      strncpy(current->key, table[index].key, sizeof(current->key));
+      strncpy(current->value, table[index].value, sizeof(current->value));
+
+      current->next = (chain *)malloc(sizeof(chain));
+      strncpy(current->next->key, new_key, sizeof(current->next->key));
+      //*current->next->value = new_value;
+
+      strncpy(table[index].key, "", sizeof(table[index].key));
+      strncpy(table[index].value, "", sizeof(table[index].value));
       
+      
+    } 
+
   }
   
 }
