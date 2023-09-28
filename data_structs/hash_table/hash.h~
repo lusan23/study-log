@@ -1,9 +1,0 @@
-#ifndef HASH_H_
-#define HASH_H_
-typedef struct hash_node{
-  int hash_code;
-  char key[5];
-  char value;
-} hash_node;
-
-#endif
