@@ -15,7 +15,9 @@ typedef struct hash_node{
   chain * next;
 } hash_node;
 
-void prepareTable(hash_node * table, int size);
+void prepareTable(hash_node (*table)[30], int size);
 int getInt (char key[200]);
 int preHashing(char new_key[200], char hashing_function);
+void insert(hash_node (*table)[30], int hash_code, char new_key[200], char new_value[200]);
+
 #endif
