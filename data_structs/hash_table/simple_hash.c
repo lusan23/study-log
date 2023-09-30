@@ -4,7 +4,18 @@
 #include<string.h>
 #include<stdbool.h>
 #include<assert.h>
-const int TABLE_SIZE = 30;
+const int TABLE_SIZE = 5;
+
+
+void check_allocation(chain * node) {
+  //checks if the dinamic allocation was successful.
+  printf("checking memory allocation...\n");
+  if (node  == NULL) {
+    printf("Memory allocation failed!\n");
+    exit(EXIT_FAILURE); 
+  }
+  
+}
 
 void prepareTable(hash_node (*table)[TABLE_SIZE], int size)
 {
@@ -13,7 +24,7 @@ void prepareTable(hash_node (*table)[TABLE_SIZE], int size)
       (*table)[i].hash_code = i+1; 
       strncpy((*table)[i].key, "", sizeof((*table)[i].key));
       strncpy((*table)[i].value, "", sizeof((*table)[i].value));
-    
+      (*table)[i].next = NULL;
   }
   printf("Setting up default values...\n");
   
@@ -49,10 +60,11 @@ bool is_empty(hash_node table), int index)
 }
 */
 
-void insert(hash_node (*table)[TABLE_SIZE], int hash_code, char new_key[200], char new_value[200])
+int insert(hash_node (*table)[TABLE_SIZE], int hash_code, char new_key[200], char new_value[200])
 {//if there's no colisions insert the key and value to the list
   int index = hash_code-1;
-  if (strcmp((*table)[index].key, "") == 0 && strcmp((*table)[index].value, "") == 0)
+  int colsn_num;
+  if (strcmp((*table)[index].key, "") == 0 && strcmp((*table)[index].value, "") == 0 && )
   {
     printf("No collision case\n");
     strncpy((*table)[index].key, new_key, sizeof((*table)[index].key));
@@ -68,10 +80,12 @@ void insert(hash_node (*table)[TABLE_SIZE], int hash_code, char new_key[200], ch
       chain * current = (*table)[index].next;
       
       current = (chain *)malloc(sizeof(chain));
+      check_allocation(current);
       strncpy(current->key, (*table)[index].key, sizeof(current->key));
       strncpy(current->value, (*table)[index].value, sizeof(current->value));
       
       current->next = (chain *)malloc(sizeof(chain));
+      check_allocation(current->next);
       strncpy(current->next->key, new_key, sizeof(current->next->key));
       strncpy(current->next->value, new_value, sizeof(current->next->value));
 
@@ -79,21 +93,36 @@ void insert(hash_node (*table)[TABLE_SIZE], int hash_code, char new_key[200], ch
       strncpy((*table)[index].value, "#", sizeof((*table)[index].value));
 
       (*table)[index].next = current;
+
+      colsn_num++;
+      return colsn_num;
     } 
     else
     { //if is not the first collision....
       printf("Second or more collision case\n");
       chain * current = (*table)[index].next;
-
+      int node_count = 0;
       while (current->next != NULL)
-      {
+      { 
+        //printf("chain:%d\n", node_count);
+        //printf("AAAAAA:%d\n", current->next);
         current = current->next;
+        
+        node_count++;
       }
-      assert(current->next == NULL);
+            printf("aAAAAAA:%d\n", current->next);
+      
       current->next = (chain *)malloc(sizeof(chain));
+    
+      
       strncpy(current->next->key, new_key, sizeof(current->next->key));
       strncpy(current->next->value, new_value, sizeof(current->next->value));
+
       current->next->next = NULL;
+      assert(current->next->next == NULL);
+      colsn_num++;
+      return colsn_num;
+ 
     }
   }
 }

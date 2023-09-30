@@ -8,16 +8,17 @@ typedef struct chain
   struct chain * next;
 } chain;
 
-typedef struct hash_node{
+typedef struct hash_node
+{
   int hash_code;
   char key[200];
   char value[200];
   chain * next;
 } hash_node;
 
-void prepareTable(hash_node (*table)[30], int size);
+void prepareTable(hash_node (*table)[5], int size);
 int getInt (char key[200]);
 int preHashing(char new_key[200], char hashing_function);
-void insert(hash_node (*table)[30], int hash_code, char new_key[200], char new_value[200]);
+int insert(hash_node (*table)[5], int hash_code, char new_key[200], char new_value[200]);
 
 #endif
