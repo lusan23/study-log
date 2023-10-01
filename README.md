@@ -1,7 +1,7 @@
 # Study Log
 
-A repo for track my study journey!
-#### Current task: Implement a hashing table size: 10; (division and multiplication bathing method & Channing ) additional: Universal hashing method & open addressing.
+A repo for tracking my study journey!
+#### Current task: Implement a Tree
 
 * [Data Structures and Algorithms](https://github.com/lusan23/study-log/tree/master/data_structs)
     * Array
@@ -9,5 +9,6 @@ A repo for track my study journey!
     * [Stack](https://github.com/lusan23/study-log/tree/master/data_structs/stack)
     * [Queue](https://github.com/lusan23/study-log/tree/master/data_structs/queues)
     * [Hash Tables](https://github.com/lusan23/study-log/tree/master/data_structs/hash_table)
+    * [Tree](#)
     * Heap
     * Graph
