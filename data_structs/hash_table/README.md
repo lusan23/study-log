@@ -30,7 +30,7 @@ typedef struct hash_tbl
 
 You can use these functions in your .c file just be including the path `"path_direct/hash.h"`.
 
-## Creating a hash table
+### Creating a hash table
 
 ```C
 hash_tbl* createHashTable(int size)
@@ -88,6 +88,6 @@ Those are: `getInt` and `preHashing`, they aren't declared as static/private so 
 
 ## Tests
 
-I've made a few a few tests while implementing at `test_hash.c`, the executable file on the folder [build](/data_structs/build/).
+I've made a few a few tests while implementing at [`test_hash.c`](/data_structs/hash_table/test_hash.c), the executable file on the folder [build](/data_structs/build/).
 
 Thank you for taking a look! :)
