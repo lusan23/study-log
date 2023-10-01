@@ -9,6 +9,9 @@
         "tuple": "c",
         "type_traits": "c",
         "utility": "c",
-        "LL_stack.C": "cpp"
+        "LL_stack.C": "cpp",
+        "string.h": "c",
+        "algorithm": "c",
+        "stdio.h": "c"
     }
 }
