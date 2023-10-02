@@ -41,13 +41,18 @@ int getInt (char key[200])
     {//use division method as default
       int result; 
       printf("getting hash code...\n");
-      result = (getInt(new_key) % size);
+      result = (getInt((new_key)) % size);
       
       return result;
     }
 }
 
-
+int linearProb(int hash_code, int size)
+{
+  hash_code++;
+  hash_code %=  size;
+  return hash_code;
+}
 
 int insert(hash_tbl* table ,  char new_key[200], char new_value[200])
 { /*
@@ -60,10 +65,7 @@ int insert(hash_tbl* table ,  char new_key[200], char new_value[200])
   printf("key:%s\n", table->table[hash_value].key);
   while (strcmp(table->table[hash_value].key, "") != 0 && strcmp(table->table[hash_value].key, "\0") != 0)
   {
-    hash_value++;
-    printf("aaa:%d\n", hash_value);
-    hash_value %= table->size;
-    printf("aaa:%d\n", hash_value);
+    hash_value = linearProb(hash_value, table->size);
   }
   if (hash_value == table->size-1 && strcmp(table->table[hash_value].key, "") != 0)
   {
@@ -92,8 +94,8 @@ char * search(hash_tbl * table, char key[200])
   {
     printf("teste1:%d\n", hash_value);
 
-    hash_value++;
-    hash_value %= table->size;
+    hash_value =  linearProb(hash_value, table->size);
+    
     if (hash_value+=1 == 10)
     {
       printf("Key not Found!!!\n");
@@ -115,8 +117,7 @@ char * delete(hash_tbl * table, char key[200])
   {
 
 
-    hash_value++;
-    hash_value %= table->size;
+    hash_value = linearProb(hash_value, table->size);
     if (hash_value+=1 == 10)
     {
       printf("Key not Found!!!\n");
