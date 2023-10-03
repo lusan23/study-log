@@ -9,12 +9,15 @@ It's a hashing division function that handle collisions using opening address/pr
 #include<stdbool.h>
 #include<assert.h>
 
-
-
+static inline void check_alloc(hash_tbl* table) {(table == NULL && table->table == NULL) ? printf("allocation failed.\n") : printf("allocation succeed.\n");}
+inline void free_table(hash_tbl* table) {free(table->table); free(table);}
+static inline bool string_equals(char* a, char* b) { return strcmp(a,b) == 0; }
 hash_tbl* createHashTable(int size)
 {
   hash_tbl* table = malloc(sizeof(hash_tbl));
+  check_alloc(table);
   table->table = malloc(sizeof(hash_node) * size);
+  check_alloc(table->table);
   table->size = size;
   
   for (int i = 0; i < size; i++)
@@ -27,7 +30,7 @@ hash_tbl* createHashTable(int size)
 
 int getInt (char key[200])
 {//increments  the code point of each char of the string
-  int val;
+  unsigned int val;
   for (int i = 0; i <strlen(key); i++)
     {
       val+= (int)key[i];
@@ -63,11 +66,11 @@ int insert(hash_tbl* table ,  char new_key[200], char new_value[200])
 
   int hash_value = preHashing(new_key, 'd', table->size);
   printf("key:%s\n", table->table[hash_value].key);
-  while (strcmp(table->table[hash_value].key, "") != 0 && strcmp(table->table[hash_value].key, "\0") != 0)
+  while (!string_equals(table->table[hash_value].key, "") && !string_equals(table->table[hash_value].key, "\0"))
   {
     hash_value = linearProb(hash_value, table->size);
   }
-  if (hash_value == table->size-1 && strcmp(table->table[hash_value].key, "") != 0)
+  if (hash_value == table->size-1 && !string_equals(table->table[hash_value].key, ""))
   {
     printf("unable to insert. table is full.\n");
     return -1;
@@ -89,8 +92,8 @@ char * search(hash_tbl * table, char key[200])
     otherwise return # to indicate not found
   */
   int   hash_value = preHashing(key, 'd', table->size);
-  
-  while (strcmp(table->table[hash_value].key, key) != 0)
+    
+  while (!string_equals(table->table[hash_value].key, key))
   {
     printf("teste1:%d\n", hash_value);
 
@@ -111,9 +114,9 @@ char * search(hash_tbl * table, char key[200])
 }
 
 char * delete(hash_tbl * table, char key[200])
-{
+{ 
   int   hash_value = preHashing(key, 'd', table->size);
-  while (strcmp(table->table[hash_value].key, key) != 0)
+  while (!string_equals(table->table[hash_value].key, key))
   {
 
 

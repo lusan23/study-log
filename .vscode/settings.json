@@ -12,6 +12,8 @@
         "LL_stack.C": "cpp",
         "string.h": "c",
         "algorithm": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "string_view": "c",
+        "initializer_list": "c"
     }
 }

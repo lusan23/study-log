@@ -27,6 +27,8 @@ void test_alg_componentes(void)
     //break
     }
     printf("Integrety test sucessful!!!\n");
+    free_table(table);
+ 
 }
 
 int test_prehashing(char filename[300])
@@ -86,6 +88,7 @@ void test_colisions(void)
   assert(strcmp(table->table[hash_value_two+2].value, "three") == 0);
 
   print_all(table);
+  free_table(table);
 }
 
 void test_search(void)
@@ -106,6 +109,8 @@ void test_search(void)
 
 
   print_all(table);
+
+    free_table(table);
 }
 
 void test_delete(void)
@@ -120,7 +125,8 @@ void test_delete(void)
   assert(strcmp(table->table[a].key, "\0") == 0 );
   assert(strcmp(table->table[a].value, "\0") == 0 );
 
-
+  free(table->table);
+  free(table);
 }
 
 int main (void)

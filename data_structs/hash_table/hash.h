@@ -21,5 +21,5 @@ int insert(hash_tbl* table , char new_key[200], char new_value[200]);
 char * search(hash_tbl * table, char key[200]);
 char * delete(hash_tbl * table, char key[200]);
 void print_all(hash_tbl* table);
-
+void free_table(hash_tbl* table);
 #endif
