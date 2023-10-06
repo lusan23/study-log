@@ -12,4 +12,8 @@ dinamic_array* setDA(int size);
 void append(dinamic_array ** da, int dt);
 void printArr(dinamic_array* da);
 int searchEmpty(dinamic_array * da);
+int size(dinamic_array *da);
+void insert(dinamic_array ** da,int index, int new_value);
+int delete(dinamic_array ** da,int index);
+int peek(dinamic_array *da, int index);
 #endif

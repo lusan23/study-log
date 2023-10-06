@@ -76,6 +76,10 @@ void append(dinamic_array ** da, int dt)
     
 }
 
+int size(dinamic_array *da)
+{
+    return (da != NULL && da->i != NULL) ? da->size : -1;
+}
 void printArr(dinamic_array* da)
 {   printf("-----------------\n");
     for (int i=0; i <= da->size-1; i++)

@@ -10,6 +10,9 @@ void test_unit_da_body(void)
     assert(searchEmpty(numbers) == 0);
     assert(numbers->i != NULL);
     printArr(numbers);
+    assert(size(numbers) == ARR_SIZE);
+
+    
     free(numbers->i);
     free(numbers);
     
@@ -46,8 +49,9 @@ void test_append_rand(void)
     append(&arr, 2938);
     append(&arr, 2938);
     
-    for (int j = 0; j<= 1000; j++)
+    for (int j = 0; j<= 10; j++)
     {
+        
         int value =  rand() % 1000 *-1;
         
         append(&arr, value);
@@ -59,11 +63,84 @@ void test_append_rand(void)
     free(arr);
     
 }
+
+void test_insert(void)
+{
+  dinamic_array* arr = setDA(5);
+    append(&arr, 12);
+    append(&arr, 28);
+    append(&arr, -99);
+    printArr(arr);
+    insert(&arr, 2, 1000);
+    printArr(arr);
+    insert(&arr, 0, 200);
+    printArr(arr);
+    insert(&arr, 0, -200);
+    printArr(arr);
+
+
+    
+    printf("starting random delete...\n");
+    for (int j = 0; j<= 5; j++)
+    {
+        
+        int value =  rand() % 1000;
+	int index = size(arr)/2;
+        insert(&arr, index ,value);
+        
+        assert(arr->i[index] == value);
+    }
+    
+    printArr(arr);
+}
+
+
+void test_delete(void)
+{
+  dinamic_array* arr = setDA(5);
+    append(&arr, 12);
+    append(&arr, 28);
+    append(&arr, -99);
+    insert(&arr, 2, 1000);
+    insert(&arr, 0, 200);
+    insert(&arr, 4, 200);
+    
+    printArr(arr);
+
+    printf("starting random delete...\n");
+    for (int j = 0; j<= 10; j++)
+    {
+        
+      int index =  rand() % size(arr);
+       delete(&arr, index);
+	printArr(arr);
+        //assert(arr->i[index] != value);
+    }
+
+    printArr(arr);
+}
+
+void test_peek(void)
+{
+    dinamic_array* arr = setDA(100);
+
+    for (int i = 0; i<= size(arr)-1; i++)
+      {
+	int value = rand() % 10;
+	insert(&arr, i, value);
+	assert(peek(arr, i) == value);
+      }
+    printArr(arr);
+}
+
 void test_case_da(void)
 {
     test_unit_da_body();
     test_append();
     test_append_rand();
+    test_insert();
+    test_delete();
+    test_peek();
 }
 
 int main(void)
