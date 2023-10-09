@@ -1,6 +1,6 @@
 # Binary Tree
 
-This is a simple implementation of [Binary Tree](/data_structs/array/dinamic_array.c) in C for learning porpuses 
+This is a simple implementation of [Binary Tree](/data_structs/trees/binary_search_tree.c) in C for learning porpuses 
 
 ## How is it structured?
 ![C struct ](https://github.com/lusan23/study-log/assets/142463065/e19f63c5-4685-481c-a7a7-394531a33d94)
@@ -23,5 +23,9 @@ typedef struct  binary_tree
   tree_node *root;
 }binary_tree;
 ```
+`tree_node` calls itself recursively by defining `parent`, `left` and `right`.
+
 `binary_tree` stores a `tree_node` type pointer ( it will be  dynamically allocated, similar to linked lists).
+
+#Operations
 
