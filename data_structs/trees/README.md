@@ -27,5 +27,5 @@ typedef struct  binary_tree
 
 `binary_tree` stores a `tree_node` type pointer ( it will be  dynamically allocated, similar to linked lists).
 
-#Operations
+## Operations
 
