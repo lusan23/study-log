@@ -13,7 +13,7 @@ typedef struct  tree_node
 }tree_node;
 
 typedef struct  binary_tree
-{ 
+{ int size;
   int heigh;
   tree_node *root;
 }binary_tree;
@@ -21,7 +21,8 @@ typedef struct  binary_tree
 bool alloc_succeed(tree_node *bt);
 void malloc_binary_tree(struct binary_tree **bt, int first_value);
 void free_tree(binary_tree** tree);
-static tree_node* subtree_last(binary_tree** tree);
+tree_node* subtree_last(binary_tree** tree);
 tree_node* subtree_first(struct tree_node * subtree_root);
-void subtree_insert_after(tree_node** entry_node, int value);
+void subtree_insert_after(binary_tree** tree, tree_node** entry_node, int new_value);
+void printAll(binary_tree* tree);
 #endif
