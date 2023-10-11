@@ -18,7 +18,8 @@ typedef struct  tree_node
 }tree_node;
 
 typedef struct  binary_tree
-{ 
+{
+  int size;
   int heigh;
   tree_node *root;
 }binary_tree;
