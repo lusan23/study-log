@@ -3,53 +3,14 @@ implementation of a binary tree based on this lesson:
 https://www.youtube.com/watch?v=76dhtgZt38A&list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY&index=10
 
 DEVELOPMENT NOTE FOR TOMORROW:
-TO MAKE INSERT_BEFORE I NEED TO MAKE PRECESSOR AND SUBTREE_LAST
+TO MAKE INSERT_BEFORE I NEED TO MAKE PREDECESSOR* AND SUBTREE_LAST*
+TOMORROW FIX THE PRINTALL
 */
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
 #include"trees.h"
 #include<assert.h>
-
-
-//PRIVATE FUNCTIONS
-bool alloc_succeed(struct tree_node *bt)
-{ //verifies with a memory allocation was sucessfull
-  if (bt != NULL)
-    {
-      return true;
-    }
-  return false;
-}
-
-
-tree_node* subtree_first(struct tree_node * subtree_root)
-{ //traversal inorder, returns the first node inorde
- if (subtree_root == NULL) {return NULL;}
-  tree_node* current_node = subtree_root;
-  //printf("before the while: %d\n", current_node->value);
-  while (current_node->left != NULL)
-  { 
-    //printf("node[%d]\n", current_node->value);
-    //printf("the parent of %d is %d\n", current_node->value, current_node->parent->value);
-    current_node = current_node->left;
-  }
-  //printf("after the while: %d\n", current_node->value);
-  return current_node;
-}
-
-
-tree_node* subtree_last(binary_tree** tree)
-{//returns the last node in the tree (transversal order).
-  tree_node* current_node = (*tree)->root;
-
-  while (current_node->right != NULL)
-  {
-    printf("node[%d]\n", current_node->value);
-    current_node = current_node->right;
-  }
-  return current_node;
-}
 
 
 void malloc_binary_tree(struct binary_tree **bt, int first_value)
@@ -68,110 +29,6 @@ void malloc_binary_tree(struct binary_tree **bt, int first_value)
     }
 
 }
-
-
-tree_node* sucessor(struct tree_node *any_node) 
-{
-  /* Node's value should be inserted
-  return the sucessor's node (after node) of the given node(in transvers order)
-  if there is no right node and the given node is a right child.. the sucessor is actually the left node of its parent node.
-  */ 
-   if (any_node == NULL) {return NULL;}
-
-  if (any_node->right != NULL) 
-  { //printf("case one\n");
-    subtree_first(any_node->right);
-    
-  }else
-  {   // if any node is a left leaf....
-      if (any_node == any_node->parent->left)
-      { 
-        //printf("case two\n");
-        return any_node->parent;
-      } 
-      else
-      //if any node is a right leaf...
-       if (any_node == any_node->parent->right)
-       {
-        return any_node;
-       }
-       else
-      {
-        //printf("case three\n");
-        tree_node* current_node = any_node;
-        
-        while ( &current_node != &any_node->parent->left )
-        { 
-          //printf("node[%d]\n", current_node->value);
-          
-          current_node = current_node->parent;
-      
-        }
-      
-      return current_node;
-    }
-  }
-}
-
-tree_node* precessor(struct tree_node *any_node) 
-{
-  /* Node's value should be inserted
-  return the sucessor's node (after node) of the given node(in transvers order)
-  if there is no right node and the given node is a right child.. the sucessor is actually the left node of its parent node.
-  */ 
-   if (any_node == NULL) {return NULL;}
-
-  if (any_node->right != NULL) 
-  { //printf("case one\n");
-    subtree_first(any_node->right);
-    
-  }else
-  {   // if any node is a left leaf....
-      if (any_node == any_node->parent->left)
-      { 
-        //printf("case two\n");
-        return any_node->parent;
-      } 
-      else
-      //if any node is a right leaf...
-       if (any_node == any_node->parent->right)
-       {
-        return any_node;
-       }
-       else
-      {
-        //printf("case three\n");
-        tree_node* current_node = any_node;
-        
-        while ( &current_node != &any_node->parent->left )
-        { 
-          //printf("node[%d]\n", current_node->value);
-          
-          current_node = current_node->parent;
-      
-        }
-      
-      return current_node;
-    }
-  }
-}
-
-static tree_node* recursive_free(tree_node** root)
-{
-  //free the all the nodes recursively.
-  if ((*root) == NULL)
-  { //base case
-    return (*root);
-  }
-  else
-  { //recursive calls
-    recursive_free(&((*root)->right));
-    recursive_free(&((*root)->left));
-    free((*root));
-  }
-  
-}
-
 void free_tree(binary_tree** tree)
 { //free the allocated heaps and set the pointer to NULL
     
@@ -187,6 +44,7 @@ void subtree_insert_after(binary_tree** tree, tree_node** entry_node, int new_va
   
   if (!(*entry_node)->right)
   { 
+    printf("case one\n");
     (*entry_node)->right = (tree_node *)calloc(1, sizeof(tree_node));
     (*entry_node)->right->value = new_value;
     (*entry_node)->right->parent = (*entry_node);
@@ -195,6 +53,7 @@ void subtree_insert_after(binary_tree** tree, tree_node** entry_node, int new_va
   }
   else
   { 
+    printf("case two\n");
     tree_node * scsr =  sucessor((*entry_node)); 
     scsr->left = (tree_node *)calloc(1, sizeof(tree_node));
 
@@ -207,11 +66,6 @@ void subtree_insert_after(binary_tree** tree, tree_node** entry_node, int new_va
 }
 
 
-
-bool is_leaf(struct tree_node* node)
-{
-  return (node->left == NULL && node->right == NULL && node->parent != NULL) ? true : false;
-}
 /*
 void swap_prescr_node(tree_node** node)
 {
@@ -262,12 +116,11 @@ void printAll(binary_tree* tree)
   tree_node* first_node = subtree_first(tree->root);
   int node_count = 0;
   //printf("||node[%d]=%d\n", node_count, first_node->value);
-  while (node_count <= tree->size-1)
-  {
+  while (node_count <= tree->size-1 )
+  {   printf("||nodevsparent[%p]=%p\n", &first_node,&first_node->parent);
       printf("||node[%d]=%d\n", node_count, first_node->value);
       first_node = sucessor(first_node);
       node_count++;
-      
       
   }
     printf("||node[%d]=%d\n", node_count, first_node->value);
