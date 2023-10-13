@@ -3,8 +3,6 @@
 This is a simple implementation of [Binary Tree](/data_structs/trees/binary_search_tree.c) in C for learning porpuses 
 
 ## How is it structured?
-![C struct ](https://github.com/lusan23/study-log/assets/142463065/e19f63c5-4685-481c-a7a7-394531a33d94)
-
 
 ```C
 typedef struct  tree_node
