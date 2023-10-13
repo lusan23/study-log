@@ -20,7 +20,7 @@ typedef struct  tree_node
 typedef struct  binary_tree
 {
   int size;
-  int heigh;
+  int height;
   tree_node *root;
 }binary_tree;
 ```
