@@ -7,7 +7,6 @@ typedef struct  tree_node
   struct tree_node* parent;
   struct tree_node* left;
   struct tree_node* right;
-  int deph;
   int value;
   
 }tree_node;
