@@ -1,9 +1,0 @@
-{
-    "files.readonlyExclude": {
-        "editor.rulers: [80, 120]": true
-    },
-    "files.associations": {
-        "test.h": "c",
-        "assert.h": "c"
-    }
-}
