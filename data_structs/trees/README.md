@@ -98,20 +98,3 @@ if (is_first(tree->root->right-->left))
   //do something
 }
 ```
-
-
-```C
-if (is_last(tree->root->right-->left))
-{
-  //do something
-}
-```
-
-
-```C
-if (is_leaf(tree->root->right-->left))
-{
-  //do something
-}
-```
-
