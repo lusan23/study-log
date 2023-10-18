@@ -70,6 +70,36 @@ void subtree_insert_after(binary_tree** tree, tree_node** entry_node, int new_va
 }
 
 
+void subtree_insert_before(binary_tree** tree, tree_node** entry_node, int new_value)
+{//add another after entry node in the in-order tranversal of the tree
+  
+  if (!(*entry_node)->right)
+  { //check its left child
+    printf("case one: %d\n", new_value);
+    (*entry_node)->left = (tree_node *)calloc(1, sizeof(tree_node));
+    (*entry_node)->left->value = new_value;
+    (*entry_node)->left->parent = (*entry_node);
+    assert((*entry_node)->left->left == NULL);
+    assert((*entry_node)->left->right == NULL);
+    
+    assert((*entry_node)->left->parent->value == (*entry_node)->value);
+    (*tree)->size++;
+  }
+  else
+  { 
+    printf("case two: %d\n", new_value);
+    tree_node * scsr =  predecessor((*entry_node)); 
+    scsr->left = (tree_node *)calloc(1, sizeof(tree_node));
+    scsr->left->value = new_value;
+    scsr->left->parent = scsr;
+    assert(scsr->left->value == new_value);
+    assert(scsr->left->parent->value == scsr->value);
+    (*tree)->size++;
+  }
+}
+
+
+
 tree_node* subtree_delete(struct tree_node** to_be_deleted_node)
 {
   /* a leaf node == having a parent and no childs.
@@ -101,30 +131,5 @@ tree_node* subtree_delete(struct tree_node** to_be_deleted_node)
 
     subtree_delete(&((*to_be_deleted_node)->right));
   }
-
-}
-
-void printAll(binary_tree* tree)
-{
-  //NECESSARY TO HANDLE THE CASE WHERE IT HITS THE LAST
-  printf("--------------PRINT ALL------------------\n");
-  //printf("before subtree_first functigion:%d\n", tree->root->value);
-  tree_node* first_node = subtree_first(tree->root);
-  int node_count = 0;
-  //printf("||node[%d]=%d\n", node_count, first_node->value);
-  while (node_count <= tree->size-1)
-  {   //printf("||nodevsparent[%p]=%p\n", &first_node,&first_node->parent);
-
-      printf("||node[%d]=%d\n", node_count, first_node->value);
-      first_node = sucessor(first_node);
-      node_count++;
-      
-  }
-
-  if (first_node != NULL)
-  {
-    printf("||node[%d]=%d\n", node_count, first_node->value);
-  }
-
 
 }

@@ -30,10 +30,16 @@ tree_node* subtree_first(struct tree_node * subtree_root)
 }
 
 
-tree_node* subtree_last(binary_tree** tree)
+tree_node* subtree_last(tree_node* node)
 {//returns the last node in the tree (transversal order).
-  tree_node* current_node = (*tree)->root;
+  tree_node* current_node = node;
   printf("looking for the last node...\n");
+  if (current_node->right == NULL)
+  {
+    printf("there's no right child in this root.\n");
+    return current_node;
+  }
+  printf("teste-last\n");
   while (current_node->right != NULL)
   {
     printf("node[%d]\n", current_node->value);
@@ -152,7 +158,7 @@ bool is_last(tree_node* given_node)
    if (any_node == NULL) {return NULL;}
 
   if (any_node->right != NULL) 
-  { //printf("case one\n");
+  { printf("sucessor: case one\n");
     subtree_first(any_node->right);
     
   }else
@@ -163,7 +169,7 @@ bool is_last(tree_node* given_node)
       // if any node is a left leaf....
       if (any_node == any_node->parent->left)
       { 
-        //printf("sucessor: case two, in %d\n", any_node->value);
+        printf("sucessor: case two, in %d\n", any_node->value);
         return any_node->parent;
       } 
       else
@@ -229,4 +235,32 @@ bool is_last(tree_node* given_node)
 bool is_leaf(struct tree_node* node)
 {
   return (node->left == NULL && node->right == NULL && node->parent != NULL) ? true : false;
+}
+
+
+void printAll(binary_tree* tree)
+{
+  
+  printf("--------------PRINT ALL------------------\n");
+  //printf("before subtree_first functigion:%d\n", tree->root->value);
+  tree_node* first_node = subtree_first(tree->root);
+  printf("teste\n");
+  tree_node* last_node = subtree_last(tree->root);
+  int node_count = 0;
+  //printf("||node[%d]=%d\n", node_count, first_node->value);
+
+  while (first_node != last_node)
+  {   //printf("||nodevsparent[%p]=%p\n", &first_node,&first_node->parent);
+
+      printf("||node[%d]=%d\n", node_count, first_node->value);
+      first_node = sucessor(first_node);
+      break;      
+  }
+
+  if (first_node != NULL)
+  {
+    printf("||node[%d]=%d\n", node_count, first_node->value);
+  }
+
+
 }
