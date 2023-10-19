@@ -11,6 +11,7 @@ void test_primitive_opr(void)
 {
   //test case for the primitive functions
   test_bt();
+  test_first();
   test_last();
   test_predecessor();
   test_sucessor();
@@ -35,7 +36,8 @@ void test_global_opr(void)
 int main(void)
 { srand(time(0));
 
-  test_global_opr();
+  //test_global_opr();
+  test_primitive_opr();
 
   return 0;
 }

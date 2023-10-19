@@ -25,6 +25,7 @@ tree_node* predecessor(struct tree_node *any_node);
 
 bool is_leaf(struct tree_node* node);
 bool alloc_succeed(tree_node *bt);
+tree_node* get_root(tree_node* given_node);
 
 
 void malloc_binary_tree(struct binary_tree **bt, int first_value);
