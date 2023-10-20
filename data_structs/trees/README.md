@@ -50,7 +50,7 @@ These are the functions that define the concept of traversal order by following 
 
 2. The **right** child of a node is **after** its parent.
 
-#### [Find first](https://github.com/lusan23/study-log/blob/master/data_structs/trees/private_func.c#L17)
+#### [Find first](https://github.com/lusan23/study-log/blob/subtree_prvts/data_structs/trees/private_func.c#L17)
 
 It starts at the root node and looks for the first node in the tree by **going to the left until it reaches the last node**, 
 and no matter how big the tree is, it will always be the leftmost node.
@@ -63,7 +63,7 @@ tree_node* first_node = subtree_first(tree->root);
 ```
 
 
-#### [Find last](https://github.com/lusan23/study-log/blob/master/data_structs/trees/private_func.c#L33)
+#### [Find last](https://github.com/lusan23/study-log/blob/subtree_prvts/data_structs/trees/private_func.c#L33)
 ![graphviz(7)](https://github.com/lusan23/study-log/assets/142463065/0a8a9dda-cb65-42cb-bad2-c05552a2fa6c)
 
 The opposite of `subtree_last()`, it looks for the last node in the tree by **going to the right until there are no more right children.**
@@ -73,14 +73,14 @@ The opposite of `subtree_last()`, it looks for the last node in the tree by **go
 tree_node* last_node = subtree_last(tree->root);
 ```
 
-#### Predecessor
+#### [Predecessor](https://github.com/lusan23/study-log/blob/subtree_prvts/data_structs/trees/private_func.c#L68)
 It returns the node before the given node (in traversal order). If the given node is the first one, it returns the same node.
 
 ```C
 tree_node* previous_node = predecessor(tree->root);
 ```
 
-#### Successor
+#### [Successor](https://github.com/lusan23/study-log/blob/subtree_prvts/data_structs/trees/private_func.c#L118)
 The opposite of Predecessor, if the given node is the last one it returns the last node 
 
 ```C
@@ -88,7 +88,7 @@ tree_node* next_node = successor(tree->root);
 ```
 ---
 
-#### is_last, is_first and is_leaf
+#### [is_last](https://github.com/lusan23/study-log/blob/subtree_prvts/data_structs/trees/private_func.c#L103) and [is_leaf](https://github.com/lusan23/study-log/blob/subtree_prvts/data_structs/trees/private_func.c#L177)
 These are boolean functions, mostly used internally make the code shorter.
 This functions verify if a given node is the first and last node on the tree. `is_leaf` verifies with the given node as no children nodes.
 
