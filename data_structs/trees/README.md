@@ -73,14 +73,14 @@ The opposite of `subtree_last()`, it looks for the last node in the tree by **go
 tree_node* last_node = subtree_last(tree->root);
 ```
 
-#### Predecessor
+#### [Predecessor](https://github.com/lusan23/study-log/blob/master/data_structs/trees/private_func.c#L68)
 It returns the node before the given node (in traversal order). If the given node is the first one, it returns the same node.
 
 ```C
 tree_node* previous_node = predecessor(tree->root);
 ```
 
-#### Successor
+#### [Successor](https://github.com/lusan23/study-log/blob/master/data_structs/trees/private_func.c#L149)
 The opposite of Predecessor, if the given node is the last one it returns the last node 
 
 ```C
@@ -88,12 +88,12 @@ tree_node* next_node = successor(tree->root);
 ```
 ---
 
-#### is_last, is_first and is_leaf
+#### [is_last](https://github.com/lusan23/study-log/blob/master/data_structs/trees/private_func.c#L134), and [is_leaf](https://github.com/lusan23/study-log/blob/master/data_structs/trees/private_func.c#L235)
 These are boolean functions, mostly used internally make the code shorter.
 This functions verify if a given node is the first and last node on the tree. `is_leaf` verifies with the given node as no children nodes.
 
 ```C
-if (is_first(tree->root->right-->left))
+if (is_last(tree->root->right-->left))
 {
   //do something
 }
