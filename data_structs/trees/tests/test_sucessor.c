@@ -26,5 +26,6 @@ void test_sucessor(void)
   assert(sucessor(tree->root)->value = 7);
   //because it's a subtree operations
   assert(sucessor(tree->root->right)->value == 7);
+  assert(sucessor(tree->root->left)->value == 5);
   free_tree(&tree);
 }
