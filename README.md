@@ -1,8 +1,6 @@
 # Study Log
-
- A repo for tracking my study journey!
-#### Current task: Implement a Tree
-
+### Current task: Implement a Tree
+## Glossary
 * [Data Structures and Algorithms](https://github.com/lusan23/study-log/tree/master/data_structs)
     * [Array](https://github.com/lusan23/study-log/blob/master/data_structs/array)
     * [Linked List](https://github.com/lusan23/study-log/tree/master/data_structs/LLists)
