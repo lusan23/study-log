@@ -66,7 +66,8 @@
 
 
 void create_digraph(binary_tree* tree)
-{
+{ //This function on work on binary search tree
+  // where traversal order = insertion order
     
 
     if (alloc_succeed(tree->root))
@@ -79,9 +80,11 @@ void create_digraph(binary_tree* tree)
 
         char* fn = create_file(command, "nodess");
         //create_img(fn, "tree");
+
+        free(command);
     }
 }
-
+/*
 int main(void)
 {
   binary_tree *tree;
@@ -124,3 +127,5 @@ int main(void)
   create_digraph(tree);
 return 0;
 }
+
+*/

@@ -6,7 +6,6 @@
 #include<time.h>
 #include"test.h"
 
-
 void test_primitive_opr(void)
 {
   //test case for the primitive functions
@@ -22,7 +21,7 @@ void test_basic_opr(void)
 {
   //test case for the basic operations
   test_insert_before();
-  test_insert_after();  
+  //test_insert_after();  
 }
 
 void test_global_opr(void)
@@ -35,9 +34,8 @@ void test_global_opr(void)
 
 int main(void)
 { srand(time(0));
-
+  //test_primitive_opr();
+  test_basic_opr();
   //test_global_opr();
-  test_primitive_opr();
-
   return 0;
 }

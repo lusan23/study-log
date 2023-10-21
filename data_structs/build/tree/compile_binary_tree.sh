@@ -28,9 +28,12 @@ sudo gcc -o test_global_insert.o -c ../../trees/tests/test_global_insert.c
 
 sudo gcc -o tbt.o -c ../../trees/tests/test_main.c 
 
+sudo gcc -o crt_gvs.o -c ../../trees/digraph/create_gvscript.c
+
+sudo gcc -o tst_gvs.o -c ../../trees/digraph/test_digraph.c
 
 #gcc -g -o bin_tree bt.o tbt.o pf.o 
 
-gcc -o bin_tree go.o bt.o tbt.o test_bt.o test_first.o test_last.o test_predecessor.o test_sucessor.o test_insert_after.o test_insert_before.o pf.o test_choose_rand_node.o test_global_insert.o  -fsanitize=address # no debugger 
+gcc -o bin_tree go.o bt.o tbt.o test_bt.o test_first.o test_last.o test_predecessor.o test_sucessor.o test_insert_after.o test_insert_before.o pf.o test_choose_rand_node.o test_global_insert.o  crt_gvs.o tst_gvs.o  -fsanitize=address # no debugger 
 
 ./bin_tree 

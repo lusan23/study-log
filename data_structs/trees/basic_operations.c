@@ -73,7 +73,7 @@ void subtree_insert_after(binary_tree** tree, tree_node** entry_node, int new_va
 void subtree_insert_before(binary_tree** tree, tree_node** entry_node, int new_value)
 {//add another after entry node in the in-order tranversal of the tree
   
-  if (!(*entry_node)->right)
+  if ((*entry_node)->left == NULL)
   { //check its left child
     printf("case one: %d\n", new_value);
     (*entry_node)->left = (tree_node *)calloc(1, sizeof(tree_node));
@@ -89,13 +89,17 @@ void subtree_insert_before(binary_tree** tree, tree_node** entry_node, int new_v
   { 
     printf("case two: %d\n", new_value);
     tree_node * scsr =  predecessor((*entry_node)); 
-    scsr->left = (tree_node *)calloc(1, sizeof(tree_node));
-    scsr->left->value = new_value;
-    scsr->left->parent = scsr;
-    assert(scsr->left->value == new_value);
-    assert(scsr->left->parent->value == scsr->value);
+    scsr->right = (tree_node *)calloc(1, sizeof(tree_node));
+    scsr->right->value = new_value;
+    scsr->right->parent = scsr;
+
+    
+    assert(scsr->right->value == new_value);
+    assert(scsr->right->parent->value == scsr->value);
+    
     (*tree)->size++;
   }
+  
 }
 
 

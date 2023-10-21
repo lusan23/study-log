@@ -65,16 +65,17 @@ bool node_on_root_right(tree_node* given_node)
 
 }
 
+/*
  tree_node* predecessor(struct tree_node *any_node) 
 {
-  /*
+  
 
-  If has a left child node, just return its left child.
-  if there's no left child... is the given node before or after the root? (it changes the way it looks for the predecessor)
-    if it's after the root...
-      if it's a left child leaf go up the tree and return its predecessor
-      if
-  */ 
+  // If has a left child node, just return its left child.
+  // if there's no left child... is the given node before or after the root? (it changes the way it looks for the predecessor)
+  //   if it's after the root...
+  //     if it's a left child leaf go up the tree and return its predecessor
+  //     if
+   
     printf("-----------PREDECESSOR------------\n");
   if (any_node == NULL) {return NULL;}
   if (any_node->left != NULL) 
@@ -86,6 +87,7 @@ bool node_on_root_right(tree_node* given_node)
 
       if (any_node == any_node->parent->left)
        {  printf("case 2\n");
+
           return any_node->parent;
        }
       else if (any_node == any_node->parent->right)
@@ -93,6 +95,7 @@ bool node_on_root_right(tree_node* given_node)
         printf("case 3\n");
         while (any_node != any_node->parent->right)
         {
+         
           any_node = any_node->parent;
         }
         return any_node->parent;
@@ -100,6 +103,75 @@ bool node_on_root_right(tree_node* given_node)
     }
 
 }
+*/
+
+
+ tree_node* predecessor(struct tree_node *any_node) 
+{
+  /*
+  return the predesucessor's node (before node) of the given node(in transversal order)
+
+
+  If has a left child node, just return its left child.
+  if there's no left child... is the given node before or after the root? (it changes the way it looks for the predecessor)
+    if it's after the root...
+      if it's a left child leaf go up the tree and return its predecessor
+      if
+  */ 
+    printf("-----------PREDECESSOR------------\n");
+  if (any_node == NULL) {return NULL;}
+  printf("input:%d\n", any_node->value);
+  if (any_node->left != NULL) 
+  { //if the given node has a left child go to the first node of that subtree and return it
+    printf("case one\n");
+    return any_node->left;
+  }else
+      if (any_node->parent == NULL)
+      {
+        printf("it's the root!!!\n");
+        return any_node;
+      }
+      if(node_on_root_right(any_node))
+      { // if the given node comes after the root...
+        printf("testing it!!!\n");
+        if (any_node == any_node->parent->left)
+        {//if the given node is a left child and and doesn't a left child go up 
+         //the tree and find your predecessor.
+          
+          while (any_node != any_node->parent->right)
+          {
+            any_node = any_node->parent;
+          }
+          return any_node->parent;
+        }else
+        {//if the given is a right child and doesn't have a left child return its parent!!!
+          return any_node->parent;
+        }
+      }
+      else
+      {//if the node is before the root... (NOT TESTED YET!!!)
+        if (any_node == any_node->parent->left && any_node->parent->parent->right == any_node->parent)
+        {//if it's a left child leaft and its on the right side of its subtree 
+         //root go up and return your predecessor
+
+
+          while (any_node != any_node->parent->right)
+          {
+            any_node = any_node->parent;
+          }
+          return any_node->parent;
+        }
+
+        if (any_node == any_node->parent->left)
+        {
+          printf("it's the first one!!!\n");
+          return any_node;
+        }
+      }
+  {   
+}
+}
+
 bool is_last(tree_node* given_node)
 {
   bool is_right_child = false;
@@ -115,13 +187,14 @@ bool is_last(tree_node* given_node)
   return is_right_child;
 }
 
+/*
  tree_node* sucessor(struct tree_node *any_node) 
 {
-  /* Node's value should be inserted
-  return the sucessor's node (after node) of the given node(in transvers order)
-  if there is no right node and the given node is a right child.. 
-  the sucessor is actually the left node of its parent node.
-  */ 
+  // Node's value should be inserted
+  // return the sucessor's node (after node) of the given node(in transvers order)
+  // if there is no right node and the given node is a right child.. 
+  // the sucessor is actually the left node of its parent node.
+  // 
 
   //printf("----------SUCESSOR--------------\n");
    if (any_node == NULL) {return NULL;}
@@ -157,6 +230,77 @@ bool is_last(tree_node* given_node)
       }
   } 
 
+*/
+
+ tree_node* sucessor(struct tree_node *any_node) 
+{
+  /* Node's value should be inserted
+  return the sucessor's node (after node) of the given node(in transvers order)
+  if there is no right node and the given node is a right child.. 
+  the sucessor is actually the left node of its parent node.
+  */ 
+
+  //printf("----------SUCESSOR--------------\n");
+   if (any_node == NULL) {return NULL;}
+
+  if (any_node->right != NULL) 
+  { printf("sucessor: case one\n");
+    subtree_first(any_node->right);
+    
+  }else
+
+  if (node_on_root_right(any_node))
+  {
+    
+      // if any node is a left leaf....
+      if (any_node == any_node->parent->left)
+      { 
+        printf("sucessor: case two, in %d\n", any_node->value);
+        return any_node->parent;
+      } 
+      else
+      //if any node is a right leaf...
+       if (any_node == any_node->parent->right)
+       { 
+        if (is_last(any_node) == true)
+        {
+          if (any_node->left != NULL)
+          {
+            return any_node->left;
+          }
+          return any_node;
+        }
+
+        if (any_node->parent == any_node->parent->parent->left && any_node->left )
+        { 
+          
+          //printf("THE LEFT NODE OF %d IS %p\n", any_node->value, &any_node->left);
+          while (any_node != any_node->parent->right)
+          {
+            any_node = any_node->parent;
+          }
+        }else if (any_node == any_node->parent->right)
+        {//if it's a right child leaf...
+        
+        
+        while (any_node != any_node->parent->left)
+        {
+          any_node = any_node->parent;
+        }
+        
+        while (any_node != any_node->parent->right)
+        {
+          any_node = any_node->parent;
+        }
+        return any_node;
+        }
+       }
+  
+   
+    
+    return any_node;
+  } ///HANDLE (INSERT_BEFORE) NODES IN THE FUTURE.
+}
 
  tree_node* recursive_free(tree_node** root)
 {
