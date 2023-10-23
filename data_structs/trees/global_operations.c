@@ -23,7 +23,7 @@ void insert(binary_tree** tree, int new_value)
     if (alloc_succeed((*tree)->root))
     {
         tree_node* root = (*tree)->root;
-        tree_node* last_node = subtree_last(root);
+        
 
         printf("isert global func: last_node:%d\n", last_node->value);
         if (new_value >= last_node->value)
@@ -36,6 +36,8 @@ void insert(binary_tree** tree, int new_value)
             printf("before was choosen...\n");
             subtree_insert_before(&(*tree), &last_node, new_value);
         }
+
+        
     } 
     else
     {

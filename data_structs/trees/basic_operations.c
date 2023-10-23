@@ -92,9 +92,12 @@ void subtree_insert_before(binary_tree** tree, tree_node** entry_node, int new_v
     scsr->left = (tree_node *)calloc(1, sizeof(tree_node));
     scsr->left->value = new_value;
     scsr->left->parent = scsr;
+    (*tree)->size++;
+    
     assert(scsr->left->value == new_value);
     assert(scsr->left->parent->value == scsr->value);
-    (*tree)->size++;
+
+   
   }
 }
 

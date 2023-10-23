@@ -6,7 +6,6 @@
 #include<time.h>
 #include"test.h"
 
-
 void test_primitive_opr(void)
 {
   //test case for the primitive functions
