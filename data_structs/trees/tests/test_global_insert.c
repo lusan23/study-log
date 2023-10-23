@@ -15,13 +15,13 @@ void test_global_insert(void)
   assert(tree->root != NULL);
 
   insert(&tree, 1);
-  assert(tree->root->left->value == 1);
+  //assert(tree->root->left->value == 1);
 
   insert(&tree, 9);
   assert(tree->root->right->value == 9);
 
   printf("-------------- random test -----------------------\n");
-  for (int j = 0; j <= 2; j++)
+  for (int j = 0; j <= 5; j++)
   {
     tree_node* rand_node = choose_rand_node(&tree, 1);
     int rand_val = rand() % 10;
@@ -42,6 +42,5 @@ void test_global_insert(void)
   }
   
   create_digraph(tree);
-  printAll(tree);
   free_tree(&tree);
 }

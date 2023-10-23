@@ -152,6 +152,8 @@ bool is_last(tree_node* given_node)
   return the sucessor's node (after node) of the given node(in transvers order)
   if there is no right node and the given node is a right child.. 
   the sucessor is actually the left node of its parent node.
+
+  this sucessor is a global operator in the binary tree, it handles different cases along the whole data structure.
   */ 
 
   //printf("----------SUCESSOR--------------\n");
@@ -214,6 +216,22 @@ bool is_last(tree_node* given_node)
     
     return any_node;
   } ///HANDLE (INSERT_BEFORE) NODES IN THE FUTURE.
+  else
+  {
+    printf("left side of the tree test.\n");
+    if (is_leaf(any_node))
+    {
+      if (any_node->parent->right == any_node)
+      {
+        while (any_node->parent->left != any_node)
+        {
+          any_node = any_node->parent;
+        }
+        return any_node->parent;
+      }
+    }
+  }
+
 }
 
  tree_node* recursive_free(tree_node** root)

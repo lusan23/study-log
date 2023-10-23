@@ -4,10 +4,11 @@
 
 typedef struct  tree_node
 {
+    int value;
   struct tree_node* parent;
   struct tree_node* left;
   struct tree_node* right;
-  int value;
+
   
 }tree_node;
 

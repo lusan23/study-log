@@ -44,9 +44,11 @@ void free_tree(binary_tree** tree)
 void subtree_insert_after(binary_tree** tree, tree_node** entry_node, int new_value)
 {//add another after entry node in the in-order tranversal of the tree
   
-  if (!(*entry_node)->right)
+  if ((*entry_node) == NULL) { return;}
+
+  if ((*entry_node)->right == NULL)
   { //check its left child
-    printf("case one: %d\n", new_value);
+    printf("inserting after: case one: %d\n", new_value);
     (*entry_node)->right = (tree_node *)calloc(1, sizeof(tree_node));
     (*entry_node)->right->value = new_value;
     (*entry_node)->right->parent = (*entry_node);
@@ -58,7 +60,7 @@ void subtree_insert_after(binary_tree** tree, tree_node** entry_node, int new_va
   }
   else
   { 
-    printf("case two: %d\n", new_value);
+    printf("inserting after: case two: %d\n", new_value);
     tree_node * scsr =  sucessor((*entry_node)); 
     scsr->left = (tree_node *)calloc(1, sizeof(tree_node));
     scsr->left->value = new_value;
@@ -73,9 +75,10 @@ void subtree_insert_after(binary_tree** tree, tree_node** entry_node, int new_va
 void subtree_insert_before(binary_tree** tree, tree_node** entry_node, int new_value)
 {//add another after entry node in the in-order tranversal of the tree
   
+    if ((*entry_node) == NULL) { return;}
   if (!(*entry_node)->right)
   { //check its left child
-    printf("case one: %d\n", new_value);
+    printf("inserting before: case one: %d\n", new_value);
     (*entry_node)->left = (tree_node *)calloc(1, sizeof(tree_node));
     (*entry_node)->left->value = new_value;
     (*entry_node)->left->parent = (*entry_node);
@@ -87,13 +90,13 @@ void subtree_insert_before(binary_tree** tree, tree_node** entry_node, int new_v
   }
   else
   { 
-    printf("case two: %d\n", new_value);
+    printf("inserting after: case two: %d\n", new_value);
     tree_node * scsr =  predecessor((*entry_node)); 
     scsr->left = (tree_node *)calloc(1, sizeof(tree_node));
     scsr->left->value = new_value;
     scsr->left->parent = scsr;
     (*tree)->size++;
-    
+
     assert(scsr->left->value == new_value);
     assert(scsr->left->parent->value == scsr->value);
 
