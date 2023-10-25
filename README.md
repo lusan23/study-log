@@ -9,6 +9,6 @@
     * [Stack](https://github.com/lusan23/study-log/tree/master/data_structs/stack)
     * [Queue](https://github.com/lusan23/study-log/tree/master/data_structs/queues)
     * [Hash Tables](https://github.com/lusan23/study-log/tree/master/data_structs/hash_table)
-    * [Tree](https://github.com/lusan23/study-log/tree/master/data_structs/trees)
+    * [Tree](https://#)
     * Heap
     * Graph
