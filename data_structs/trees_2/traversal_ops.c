@@ -1,13 +1,23 @@
+/*Functions that establish the rules of traversal order.
+
+    The LEFT child of a given node it's BEFORE the given node.
+    The RIGHT child of a given node it's AFTER the given node.
+
+*/
 #include<stdio.h>
 #include<stdlib.h>
 #include"tree.h"
 
  tree_node* subtree_first(tree_node** given_node)
-{
+{   
+    //it goes to left until find the first node.
+
+    //Error handling
     if ((*given_node) == NULL)
     {
         return NULL;
     }
+
     tree_node* current_node = (*given_node);
 
     while (current_node->left != NULL)
@@ -19,13 +29,16 @@
 }
 
  tree_node* subtree_last(tree_node** given_node)
-{
+{   
+    //it goes to right until find the last node.
+
+    //Error handling
     if ((*given_node) == NULL)
     {
         return NULL;
     }
-    tree_node* current_node = (*given_node);
 
+    tree_node* current_node = (*given_node);
     while (current_node->right != NULL)
     {
         current_node = current_node->right;
@@ -36,14 +49,18 @@
 
 
 tree_node* sucessor(tree_node** given_node) 
-{   //Return the sucessor node in traversal order or NULL if the given is the last node.
-    tree_node* current_node = (*given_node);
+{   
+    //Return the sucessor node in traversal order or NULL if the given is the last node.
 
-    if (current_node == NULL)
+
+    //Error handling
+    if ((*given_node) == NULL)
     {
         return NULL;
     }
 
+    tree_node* current_node = (*given_node);
+    
     if (current_node->right)
     {
         return subtree_first(&current_node->right);
@@ -70,7 +87,7 @@ tree_node* sucessor(tree_node** given_node)
 
 
 tree_node* predecessor(tree_node** given_node) 
-{   //Return the sucessor node in traversal order or NULL if the given is the last node.
+{   //Return the sucessor node in traversal order or NULL if the given is the first node.
     tree_node* current_node = (*given_node);
 
     if (current_node == NULL)

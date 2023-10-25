@@ -9,4 +9,5 @@ void test_sucessor(void);
 void test_predecessor(void);
 
 void test_insert(void);
+void test_delete(void);
 #endif

@@ -9,6 +9,7 @@ int main(void)
     test_last();
     test_predecessor();
     test_insert();
+    test_delete();
     printf("DONE\n");
     return 0;
 }
