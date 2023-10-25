@@ -1,7 +1,6 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include"tree.h"
-
-
 
  tree_node* subtree_first(tree_node** given_node)
 {
@@ -53,6 +52,40 @@ tree_node* sucessor(tree_node** given_node)
     {
         tree_node* parent = current_node->parent;
         while (parent != NULL && parent->right == current_node)
+        {
+            current_node = parent;
+            parent = parent->parent;
+        }
+
+        if (parent != NULL)
+        {
+            return parent;
+        }
+        else
+        {
+            return NULL; // If there is no successor
+        }
+    }
+}
+
+
+tree_node* predecessor(tree_node** given_node) 
+{   //Return the sucessor node in traversal order or NULL if the given is the last node.
+    tree_node* current_node = (*given_node);
+
+    if (current_node == NULL)
+    {
+        return NULL;
+    }
+
+    if (current_node->left)
+    {
+        return subtree_last(&current_node->left);
+    }
+    else
+    {
+        tree_node* parent = current_node->parent;
+        while (parent != NULL && parent->left == current_node)
         {
             current_node = parent;
             parent = parent->parent;
