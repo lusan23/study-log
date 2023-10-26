@@ -16,7 +16,7 @@ void test_delete(void)
 
     //THIS IS NOT A BINARY SEARCH TREE!!! Here the values still doesn't matter.
     /*
-                 3
+                3                 
                /  \
              600    100
                \    /  \
@@ -29,5 +29,5 @@ void test_delete(void)
     //Delete leaf case.
     subtree_delete(&t->root);
     
-    recursive_free(&t->root);
+    free_tree(&t);
 }

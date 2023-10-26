@@ -2,14 +2,6 @@
 #include<stdlib.h>
 #include"tree.h"
 
-void free_tree_node(struct tree_node* node) {
-    if (node == NULL) return;
-
-    free_tree_node(node->left);
-    free_tree_node(node->right);
-
-    free(node);
-}
 
 void swap_nodes(tree_node** node_src, tree_node** node_dest)
 {
@@ -32,10 +24,12 @@ void subtree_delete(tree_node** given_node)
     */
     if(is_leaf(&(*given_node)))
     {
-
         free((*given_node));
-        //(*given_node)->parent = NULL;
-        //*given_node = NULL;
+        //the freed flag is implemented to handle the double free exception.
+        (*given_node)->is_freed = 1;
+        (*given_node) = NULL;
+        
+        
     }
     else
     {   

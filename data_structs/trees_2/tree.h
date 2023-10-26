@@ -5,10 +5,12 @@
 //Primitives
 typedef struct  tree_node
 {
-    int value;
+  int value;
   struct tree_node* parent;
   struct tree_node* left;
   struct tree_node* right;
+  int is_freed;
+  unsigned int height;
 
 }tree_node;
 
@@ -37,7 +39,9 @@ void subtree_insert_after(tree_node** given_node, int new_value);
 void swap_nodes(tree_node** node_src, tree_node** node_dest);
 void subtree_delete(tree_node** given_node);
 
-
+//BST Operations
+tree_node* subtree_find(tree_node** given_node, int given_value);
+void bst_subtree_insert(tree_node** give_node, int new_value);
 //Boolean Functions
 bool is_leaf(tree_node** given_node);
 #endif

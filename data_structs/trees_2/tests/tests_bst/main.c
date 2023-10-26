@@ -2,17 +2,11 @@
 #include<stdlib.h>
 #include"test.h"
 
-/*
 int main(void)
 {
-    test_first();
-    test_sucessor();
-    test_last();
-    test_predecessor();
-    test_insert();
-    test_delete();
+
     test_find();
+    test_bst_insert();
     printf("DONE\n");
     return 0;
 }
-*/

@@ -34,20 +34,19 @@ tree_node* recursive_free(tree_node** root)
   //base case
   if ((*root) == NULL)
   { 
-    return;
+    return NULL;
   }
   
    //recursive calls
     recursive_free(&((*root)->left));
     recursive_free(&((*root)->right));
     
-    free((*root));
-    //(*root)= NULL;
-    //(*root)->left = NULL;
-    //(*root)->right = NULL;
     
-  
-  
+    if ((*root) != NULL && !(*root)->is_freed)
+    {
+      free((*root));
+      (*root)= NULL;
+    }
 }
 
 void free_tree(binary_tree** tree)
@@ -55,7 +54,8 @@ void free_tree(binary_tree** tree)
   //free the allocated heaps and set the pointer to NULL
 
     recursive_free(&(*tree)->root);
-    //(*tree)->root = NULL;
-    //free((*tree));
+  
+    free((*tree));
+    (*tree) = NULL;
      
 }

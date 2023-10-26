@@ -10,4 +10,5 @@ void test_predecessor(void);
 
 void test_insert(void);
 void test_delete(void);
+void test_find(void);
 #endif
