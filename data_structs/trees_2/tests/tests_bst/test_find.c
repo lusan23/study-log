@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<assert.h>
 #include"../../tree.h"
-#include"test.h"
+#include"test_bst.h"
 
 void test_find(void)
 {
@@ -15,6 +15,8 @@ void test_find(void)
     subtree_insert_after(&t->root->right, 100);
     subtree_insert_before(&t->root->right, 60);
     subtree_insert_before(&t->root->left, 10);
+
+
     // BINARY SEARCH TREE
     /*
                  50                 
@@ -28,10 +30,10 @@ void test_find(void)
     */
 
    //test cases
-   tree_node* tree = subtree_find(&t->root, 50);
-   tree_node* node_key_one = subtree_find(&t->root, 10);
-   tree_node* node_key_hundred = subtree_find(&t->root, 100);
-   tree_node* none = subtree_find(&t->root, 12800);
+   tree_node* tree = subtree_find(&t->root, 50, false);
+   tree_node* node_key_one = subtree_find(&t->root, 10, false);
+   tree_node* node_key_hundred = subtree_find(&t->root, 100, false);
+   tree_node* none = subtree_find(&t->root, 12800, false);
 
    
 }

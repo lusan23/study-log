@@ -2,14 +2,11 @@
 #include<stdlib.h>
 #include"../tree.h"
 
-void bst_subtree_insert(tree_node** give_node, int new_value)
+
+
+void bst_subtree_insert(tree_node** given_node, int new_value)
 {
-    if (new_value >= (*give_node)->value) 
-    {
-        subtree_insert_after(&(*give_node), new_value);
-    }
-    else
-    {
-        subtree_insert_before(&(*give_node), new_value);
-    }
+    tree_node * found_node = subtree_find(&(*given_node), new_value, true);
+    found_node = create_tree_node(&found_node->parent, new_value); 
+    printf("insert into subtree with new value %d\n", new_value);
 }
