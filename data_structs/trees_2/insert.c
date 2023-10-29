@@ -9,6 +9,14 @@
 
 tree_node* create_tree_node(tree_node** parent, int given_value)
 {
+  /*
+    Creates a new node by allocating dinamic memory to it.
+
+    Parameters:
+        parent: the existent node where the new node will be attached to as a child.
+        given_value: the value that will be stored in the inserted node. 
+  */
+
   tree_node* tmp = (tree_node *)calloc(1, sizeof(tree_node));
 
   tmp->parent = (*parent);
@@ -20,6 +28,14 @@ tree_node* create_tree_node(tree_node** parent, int given_value)
 
 void subtree_insert_after(tree_node** given_node, int new_value)
 {   
+    /*
+        This function inserts a new node after the given node in traversal order.
+
+        Parameters:
+            given_node: the node where the new node will be inserted after.
+            new_value: the value that will be inserted on the new node.
+    */
+
     //add the new_node after the given node in traversal order.
     if ((*given_node)->right == NULL)
     {

@@ -8,6 +8,7 @@ void swap_nodes(tree_node** node_src, tree_node** node_dest)
     /*
         It don't actually swap the node structure, but only its values.
         Meant for swaping predecessor/sucessors with a given node. 
+
     */
     int tmp = (*node_dest)->value;
     (*node_dest)->value = (*node_src)->value;
@@ -20,7 +21,17 @@ void subtree_delete(tree_node** given_node)
         Delete a leaf, if the given node it's not a leaf 
             make it a leaf(recursively) and delete it.
 
-        //Base Case
+        Delete Cases:
+            1 - the given node is a leaf - so it will be easily removed 
+            (it might get random values afer freed).
+                1.2 - when a node is deleted it sets a deleted frag as true, 
+                so when we use free_tree()it won't cause a double free error.
+
+            2 - the given node is not a leaf - Its value will be swaping 
+            with its predecessor/sucessor (depending on what side of the 
+            root the given node is.)
+
+    //Base Case
     */
     if(is_leaf(&(*given_node)))
     {
