@@ -5,7 +5,7 @@
 int main(void)
 {
 
-    //test_find();
+    test_find();
     test_bst_insert();
     
     printf("DONE\n");

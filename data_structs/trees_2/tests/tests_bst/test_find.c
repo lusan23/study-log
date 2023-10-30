@@ -30,10 +30,10 @@ void test_find(void)
     */
 
    //test cases
-   tree_node* tree = subtree_find(&t->root, 50, false);
-   tree_node* node_key_one = subtree_find(&t->root, 10, false);
-   tree_node* node_key_hundred = subtree_find(&t->root, 100, false);
-   tree_node* none = subtree_find(&t->root, 12800, false);
+   tree_node* tree = subtree_find_key(&t->root, 50, false);
+   tree_node* node_key_one = subtree_find_key(&t->root, 10, false);
+   tree_node* node_key_hundred = subtree_find_key(&t->root, 100, false);
+   tree_node* none = subtree_find_key(&t->root, 12800, false);
 
    
 }

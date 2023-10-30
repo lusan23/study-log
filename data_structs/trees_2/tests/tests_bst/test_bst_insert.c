@@ -7,16 +7,17 @@
 
 void test_bst_insert(void)
 {
+    printf(".............test bst set insert.............\n");
     binary_tree* t;
     malloc_binary_tree(&t, 50);
 
-    bst_subtree_insert(&t->root, 30);
+    // bst_subtree_insert(&t->root, 30);
 
-    bst_subtree_insert(&t->root, 80);
+    // bst_subtree_insert(&t->root, 80);
 
     // RANDOM TEST
     printf("Starting random insert test...\n");
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 10; i++)
     {
         int j = rand() % 100;
         bst_subtree_insert(&t->root, j);

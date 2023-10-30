@@ -2,10 +2,10 @@
 #include<stdlib.h>
 #include"../tree.h"
 
-tree_node* subtree_find(tree_node** given_node, int given_value, bool static_mode)
+tree_node* subtree_find_key(tree_node** given_node, int given_value, bool static_mode)
 {   
     /*
-    //THIS FUNCTION IS MEANT TO WORK IN A BINARY WHERE TRAVERSAL ORDER == SEQUENTIAL ORDER 
+    //THIS FUNCTION IS MEANT TO WORK IN A BINARY AS A SET
         Returns the tree node that contains the given value on the given subtree.
         
         Parameters:
@@ -57,7 +57,7 @@ tree_node* subtree_find(tree_node** given_node, int given_value, bool static_mod
     //traversal order
     if (given_value < (*given_node)->value)
     {
-        subtree_find(&(*given_node)->left, given_value, static_mode);
+        subtree_find_key(&(*given_node)->left, given_value, static_mode);
     }
     else if ((*given_node)->value == given_value)
     {
@@ -65,7 +65,7 @@ tree_node* subtree_find(tree_node** given_node, int given_value, bool static_mod
     } 
     else if (given_value > (*given_node)->value )
     {
-        subtree_find(&(*given_node)->right, given_value, static_mode);
+        subtree_find_key(&(*given_node)->right, given_value, static_mode);
     }
     
 }

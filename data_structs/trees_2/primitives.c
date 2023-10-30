@@ -14,6 +14,7 @@ void malloc_binary_tree(struct binary_tree **bt, int first_value)
   (*bt)->root = (tree_node *)calloc(1,sizeof(tree_node));
   (*bt)->root->value = first_value;
   
+  
   if ((*bt) != NULL && (*bt)->root != NULL)
     {
       printf("allocation succeed.\n");

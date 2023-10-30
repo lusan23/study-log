@@ -1,3 +1,6 @@
+/*
+    Functions designed to create a SET squence of binary by using its key. 
+*/
 #include<stdio.h>
 #include<stdlib.h>
 #include"../tree.h"
@@ -17,16 +20,17 @@ void bst_subtree_insert(tree_node** given_node, int new_value)
             new_value: the data that will inserted in the binary tree.
                 if there's already data with the same value it will be overwriten.
     */
-    tree_node * found_node = subtree_find(&(*given_node), new_value, true);
+    tree_node * found_node = subtree_find_key(&(*given_node), new_value, true);
     if (found_node->value > new_value)
     {
         found_node->left = create_tree_node(&found_node, new_value);
+        
     }else if (found_node->value < new_value)
     {
         found_node->right = create_tree_node(&found_node, new_value);
     } else
     {
-        found_node->right = create_tree_node(&found_node, new_value);
+        found_node->value = new_value;
     }
     
      

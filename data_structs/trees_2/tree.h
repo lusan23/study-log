@@ -11,6 +11,7 @@ typedef struct  tree_node
   struct tree_node* right;
   int is_freed;
   unsigned int height;
+  unsigned int size;
 
 }tree_node;
 
@@ -40,8 +41,11 @@ void swap_nodes(tree_node** node_src, tree_node** node_dest);
 void subtree_delete(tree_node** given_node);
 
 //BST Operations
-tree_node* subtree_find(tree_node** given_node, int given_value, bool static_mode);
+tree_node* subtree_find_key(tree_node** given_node, int given_value, bool static_mode);
 void bst_subtree_insert(tree_node** given_node, int new_value);
+
+//subtree properties operations
+void add_size(tree_node** given_node);
 
 //Boolean Functions
 bool is_leaf(tree_node** given_node);
