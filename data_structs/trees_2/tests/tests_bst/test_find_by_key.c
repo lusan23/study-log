@@ -35,5 +35,5 @@ void test_find(void)
    tree_node* node_key_hundred = subtree_find_key(&t->root, 100, false);
    tree_node* none = subtree_find_key(&t->root, 12800, false);
 
-   
+   free_tree(&t);
 }

@@ -13,12 +13,11 @@ void test_first(void)
     assert(subtree_first(&t->root) == t->root);
 
     t->root->left = create_tree_node(&t->root, 4);
-    t->size++;
 
     assert(subtree_first(&t->root) == t->root->left);
     
     t->root->right = create_tree_node(&t->root, 6);
-    t->size++;
+
 
     assert(subtree_first(&t->root) == t->root->left);
 

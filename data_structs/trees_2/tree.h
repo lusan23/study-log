@@ -10,13 +10,14 @@ typedef struct  tree_node
   struct tree_node* left;
   struct tree_node* right;
   int is_freed;
+  //subtree properties
   unsigned int height;
   unsigned int size;
 
 }tree_node;
 
 typedef struct  binary_tree
-{ int size;
+{
   tree_node *root;
 }binary_tree;
 
@@ -42,10 +43,11 @@ void subtree_delete(tree_node** given_node);
 
 //BST Operations
 tree_node* subtree_find_key(tree_node** given_node, int given_value, bool static_mode);
+tree_node* subtree_find_ith(tree_node** given_node, unsigned int ith);
 void bst_subtree_insert(tree_node** given_node, int new_value);
 
 //subtree properties operations
-void add_size(tree_node** given_node);
+void update_size(tree_node** given_node, bool del_mode);
 
 //Boolean Functions
 bool is_leaf(tree_node** given_node);

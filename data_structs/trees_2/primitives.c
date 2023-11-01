@@ -13,7 +13,7 @@ void malloc_binary_tree(struct binary_tree **bt, int first_value)
   (*bt) = (binary_tree *)calloc(1,sizeof(binary_tree));
   (*bt)->root = (tree_node *)calloc(1,sizeof(tree_node));
   (*bt)->root->value = first_value;
-  
+  (*bt)->root->size = 1;
   
   if ((*bt) != NULL && (*bt)->root != NULL)
     {
