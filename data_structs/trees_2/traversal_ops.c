@@ -20,9 +20,12 @@
 
     tree_node* current_node = (*given_node);
 
-    while (current_node->left != NULL)
+    while ((current_node->left != NULL))
     {
-        current_node = current_node->left;
+        if (!current_node->left->is_freed)
+        {
+            current_node = current_node->left;
+        }else { return current_node;}
     }
 
     return current_node;
@@ -41,7 +44,10 @@
     tree_node* current_node = (*given_node);
     while (current_node->right != NULL)
     {
-        current_node = current_node->right;
+        if (!current_node->right->is_freed)
+        {
+            current_node = current_node->right;
+        }else {return current_node;}
     }
 
     return current_node;

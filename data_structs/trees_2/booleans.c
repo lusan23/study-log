@@ -7,5 +7,10 @@
 
 bool is_leaf(tree_node** given_node)
 {
-    return ((*given_node)->parent != NULL && (*given_node)->left == NULL && (*given_node)->right == NULL) ? true : false;
+    /*
+        Verifies if a given node is a leaf.
+        
+        it verifies not only if childs has NULL but also if their children were freed or not.
+    */
+    return ((*given_node)->parent != NULL && (((*given_node)->left == NULL || (*given_node)->left->is_freed) && ((*given_node)->right == NULL) || (*given_node)->right->is_freed)) ? true : false;
 }

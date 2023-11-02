@@ -28,6 +28,10 @@ void test_delete(void)
 
     //Delete leaf case.
     subtree_delete(&t->root);
-    
+    subtree_delete(&t->root);
+    subtree_delete(&t->root);
+    subtree_delete(&t->root);
+    subtree_delete(&t->root);
+    subtree_delete(&t->root);
     free_tree(&t);
 }

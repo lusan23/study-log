@@ -34,18 +34,35 @@ void subtree_delete(tree_node** given_node)
     //Base Case
     */
     if(is_leaf(&(*given_node)))
-    {
-        free((*given_node));
+    {   tree_node* parent = (*given_node)->parent;
+        printf("node value:%d\n", (*given_node)->value);
+        update_size(&parent, true);
+
+        //unlink the given node from its parent
+        // if (parent->left == (*given_node))
+        // {
+        //     parent->left = NULL;
+        // }
+        // else if (parent->right == (*given_node))
+        // {
+        //     parent->right = NULL;
+        // }
+
+        (*given_node)->size = 0;
+        (*given_node)->value = 0;
         //the freed flag is implemented to handle the double free exception.
         (*given_node)->is_freed = 1;
         (*given_node) = NULL;
+
+        free((*given_node));
         
+      
         
     }
     else
     {   
         //If the given node is in the left side of the subtree.
-        if ((*given_node)->left)
+        if ((*given_node)->left && !(*given_node)->left->is_freed)
         {
             tree_node* prdcsr = predecessor(&(*given_node));
             swap_nodes(&(*given_node), &prdcsr);
@@ -53,7 +70,7 @@ void subtree_delete(tree_node** given_node)
         }
 
         //If the given node is in the right side of the subtree...
-        else if ((*given_node)->right)
+        else if ((*given_node)->right && !(*given_node)->right->is_freed)
         {
             tree_node* scsr = sucessor(&(*given_node));
             swap_nodes(&(*given_node), &scsr);
