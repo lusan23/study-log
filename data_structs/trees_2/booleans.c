@@ -5,6 +5,12 @@
 #include"tree.h"
 #include<stdbool.h>
 
+
+bool max_equal(unsigned int a, unsigned int b)
+{
+    return (a >= b) ? true : false;
+}
+
 bool is_leaf(tree_node** given_node)
 {
     /*
