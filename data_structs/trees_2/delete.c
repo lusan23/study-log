@@ -36,6 +36,9 @@ void subtree_delete(tree_node** given_node)
     if(is_leaf(&(*given_node)))
     {   tree_node* parent = (*given_node)->parent;
         printf("node value:%d\n", (*given_node)->value);
+        (*given_node)->size = 0;
+        (*given_node)->is_freed = 1;
+        (*given_node)->value = 0;
         update_size(&parent, true);
 
         //unlink the given node from its parent
@@ -47,12 +50,7 @@ void subtree_delete(tree_node** given_node)
         // {
         //     parent->right = NULL;
         // }
-
-        (*given_node)->size = 0;
-        (*given_node)->value = 0;
         //the freed flag is implemented to handle the double free exception.
-        (*given_node)->is_freed = 1;
-        (*given_node) = NULL;
 
         free((*given_node));
         

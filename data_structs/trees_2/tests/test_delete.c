@@ -16,13 +16,16 @@ void test_delete(void)
 
     //THIS IS NOT A BINARY SEARCH TREE!!! Here the values still doesn't matter.
     /*
-                3                 
+                3          root.size =   root.right.size + 1;         
                /  \
-             600    100
+             666    100    root.right.size = root.right.left.size + root.right.right.size + 1 
                \    /  \
-                \  666  \
-                326      521
-                    
+                \  666   \    0
+                 326      521 0
+
+      root.size == 4          | 2
+      root.right.sze = 3      | 1
+         
                    
     */
 

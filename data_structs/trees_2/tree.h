@@ -249,5 +249,5 @@ tree_node* subtree_find_ith(tree_node** given_node, unsigned int ith);
 */
 bool is_leaf(tree_node** given_node);
 
-bool max_equal(unsigned int a, unsigned int b);
+unsigned int max_equal(unsigned int a, unsigned int b);
 #endif

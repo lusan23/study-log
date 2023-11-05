@@ -21,35 +21,30 @@ void update_size(tree_node** given_node, bool del_mode)
     if (del_mode)
     {
         
-         tree_node* ancestor_node = (*given_node);
+        ancestor_node = (*given_node);
     }
     (*given_node)->size = 1;
-    (*given_node)->height = 0;
+
     
     while (ancestor_node != NULL)
     {   //node.size = node.left.size + node.right.size + 1
-        unsigned int childrens_size = 0;
-        unsigned int childrens_height[2];
-        
+        int childrens_size = 0;
         //if the given node parents has two childs...    
+
         if (ancestor_node->left )
         {
             childrens_size += ancestor_node->left->size;
-            childrens_height[0] = ancestor_node->left->height;
         }
         if (ancestor_node->right)
         {
             childrens_size += ancestor_node->right->size;
-            childrens_height[1] = ancestor_node->right->height;
         }
-        if (del_mode)
-        {
-            ancestor_node->size = childrens_size;
+        // if (del_mode)
+        // {
+        //     ancestor_node->size = childrens_size;
             
-        }
+        // }
         ancestor_node->size = childrens_size + 1;
-        ancestor_node->height = max_equal(childrens_height[0], childrens_height[1]) + 1;
-        
         ancestor_node = ancestor_node->parent;
         
     }
