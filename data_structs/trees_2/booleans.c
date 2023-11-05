@@ -20,3 +20,13 @@ bool is_leaf(tree_node** given_node)
     */
     return ((*given_node)->parent != NULL && (((*given_node)->left == NULL || (*given_node)->left->is_freed) && ((*given_node)->right == NULL) || (*given_node)->right->is_freed)) ? true : false;
 }
+
+bool is_root(tree_node** given_node)
+{
+    /*
+        Verifies if a given node is the root.
+        
+        it verifies not only if the children have NULL value, but also if their children were freed or not.
+    */
+    return ((*given_node)->parent == NULL && (((*given_node)->left == NULL || (*given_node)->left->is_freed) && ((*given_node)->right == NULL) || (*given_node)->right->is_freed)) ? true : false;
+}

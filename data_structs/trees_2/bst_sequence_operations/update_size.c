@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include"../tree.h"
 #include<stdbool.h>
+
 void update_size(tree_node** given_node, bool del_mode)
 {
     /*
@@ -36,16 +37,25 @@ void update_size(tree_node** given_node, bool del_mode)
 
         if (ancestor_node->left )
         {
-            childrens_size += ancestor_node->left->size;
-            left_height = ancestor_node->left->height;
+            if (ancestor_node->left->is_freed != 1)
+            {
+                childrens_size += ancestor_node->left->size;
+                left_height = ancestor_node->left->height;
+            }
         }
         if (ancestor_node->right)
         {
-            childrens_size += ancestor_node->right->size;
-            right_height = ancestor_node->right->height;
+            if (ancestor_node->right->is_freed != 1)
+            {
+                childrens_size += ancestor_node->right->size;
+                right_height = ancestor_node->right->height;
+            }
         }
         ancestor_node->size = childrens_size + 1;
-        ancestor_node->height = left_height + right_height + 1;
+        ancestor_node->height = max_equal(left_height,right_height) + 1;
+        if (is_leaf(&ancestor_node)) {ancestor_node->height--;}
+        if (is_root(&ancestor_node)) {ancestor_node->height= 0;}
+        
         ancestor_node = ancestor_node->parent;
         
     }

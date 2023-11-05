@@ -249,5 +249,26 @@ tree_node* subtree_find_ith(tree_node** given_node, unsigned int ith);
 */
 bool is_leaf(tree_node** given_node);
 
+/*
+
+  Verifies if  one of the given unsinged integers is bigger or equal than other
+  Used to calculate the height of a node.
+
+  @param a the left child's height
+  @param b the right child's height
+
+  @return the biggest height
+  
+*/
 unsigned int max_equal(unsigned int a, unsigned int b);
+
+/*
+  Verifies if  a given node is the root of the binary tree
+
+  @param the given node.
+
+  @return True if it's the root.
+*/
+bool is_root(tree_node** given_node);
+
 #endif
