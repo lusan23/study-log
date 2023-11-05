@@ -36,5 +36,6 @@ void test_delete(void)
     subtree_delete(&t->root);
     subtree_delete(&t->root);
     subtree_delete(&t->root);
+    printf("finally done!!!");
     free_tree(&t);
 }

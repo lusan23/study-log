@@ -37,6 +37,8 @@ void subtree_delete(tree_node** given_node)
     {   tree_node* parent = (*given_node)->parent;
         printf("node value:%d\n", (*given_node)->value);
         (*given_node)->size = 0;
+        (*given_node)->height = 0;
+        
         (*given_node)->is_freed = 1;
         (*given_node)->value = 0;
         update_size(&parent, true);

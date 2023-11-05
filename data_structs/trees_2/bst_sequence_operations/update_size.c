@@ -23,28 +23,29 @@ void update_size(tree_node** given_node, bool del_mode)
         
         ancestor_node = (*given_node);
     }
+    //properties of a leaf
     (*given_node)->size = 1;
-
+    (*given_node)->height = 0;
+    
     
     while (ancestor_node != NULL)
     {   //node.size = node.left.size + node.right.size + 1
         int childrens_size = 0;
+        int left_height = 0, right_height = 0;
         //if the given node parents has two childs...    
 
         if (ancestor_node->left )
         {
             childrens_size += ancestor_node->left->size;
+            left_height = ancestor_node->left->height;
         }
         if (ancestor_node->right)
         {
             childrens_size += ancestor_node->right->size;
+            right_height = ancestor_node->right->height;
         }
-        // if (del_mode)
-        // {
-        //     ancestor_node->size = childrens_size;
-            
-        // }
         ancestor_node->size = childrens_size + 1;
+        ancestor_node->height = left_height + right_height + 1;
         ancestor_node = ancestor_node->parent;
         
     }
