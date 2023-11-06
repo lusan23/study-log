@@ -2,7 +2,7 @@
 
  A repo for tracking my study journey! 
  Obs.: All the code in this repository was made with the porpuse of enduring conceps of DSA in my long term memory by practice only.
-#### Current task: Implement an AVL
+#### Current task: Study Heaps
 
 * [Data Structures and Algorithms](https://github.com/lusan23/study-log/tree/master/data_structs)
     * [Array](https://github.com/lusan23/study-log/blob/master/data_structs/array)
@@ -10,6 +10,6 @@
     * [Stack](https://github.com/lusan23/study-log/tree/master/data_structs/stack)
     * [Queue](https://github.com/lusan23/study-log/tree/master/data_structs/queues)
     * [Hash Tables](https://github.com/lusan23/study-log/tree/master/data_structs/hash_table)
-    * [Tree]([https://](https://github.com/lusan23/study-log/tree/master/data_structs/trees_2)https://github.com/lusan23/study-log/tree/master/data_structs/trees_2)
+    * [Tree](https://github.com/lusan23/study-log/tree/master/data_structs/trees_2)
     * Heap
     * Graph
