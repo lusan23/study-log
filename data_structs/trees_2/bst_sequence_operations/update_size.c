@@ -3,7 +3,7 @@
 #include"../tree.h"
 #include<stdbool.h>
 
-void update_size(tree_node** given_node, bool del_mode)
+void update_properties(tree_node** given_node, bool del_mode)
 {
     /*
 
@@ -17,24 +17,28 @@ void update_size(tree_node** given_node, bool del_mode)
         del_mode - it must be set to 'true' when this function is being used 
         in the delete node func.
     */
+
     if (!(*given_node)) {printf("The given node is empty!!!\n"); return; }
     tree_node* ancestor_node = (*given_node)->parent;
+   
     if (del_mode)
-    {
-        
+    {     
         ancestor_node = (*given_node);
     }
+   
     //properties of a leaf
     (*given_node)->size = 1;
     (*given_node)->height = 0;
     
     
     while (ancestor_node != NULL)
-    {   //node.size = node.left.size + node.right.size + 1
+    {   
+        //node.size = node.left.size + node.right.size + 1
         int childrens_size = 0;
         int left_height = 0, right_height = 0;
         //if the given node parents has two childs...    
 
+        //takes the properties from ancestor children's node
         if (ancestor_node->left )
         {
             if (ancestor_node->left->is_freed != 1)
@@ -51,8 +55,11 @@ void update_size(tree_node** given_node, bool del_mode)
                 right_height = ancestor_node->right->height;
             }
         }
+
+        //subtree properties update
         ancestor_node->size = childrens_size + 1;
         ancestor_node->height = max_equal(left_height,right_height) + 1;
+ 
         if (is_leaf(&ancestor_node)) {ancestor_node->height--;}
         if (is_root(&ancestor_node)) {ancestor_node->height= 0;}
         

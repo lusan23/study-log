@@ -24,12 +24,12 @@ void bst_subtree_insert(tree_node** given_node, int new_value)
     if (found_node->value > new_value)
     {
         found_node->left = create_tree_node(&found_node, new_value);
-        update_size(&found_node->left, false);
+        update_properties(&found_node->left, false);
         
     }else if (found_node->value < new_value)
     {
         found_node->right = create_tree_node(&found_node, new_value);
-        update_size(&found_node->right, false);
+        update_properties(&found_node->right, false);
     } else
     {
         found_node->value = new_value;

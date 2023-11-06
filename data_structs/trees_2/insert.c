@@ -43,14 +43,14 @@ void subtree_insert_after(tree_node** given_node, int new_value)
     if ((*given_node)->right == NULL)
     {
         (*given_node)->right = create_tree_node(&(*given_node), new_value);
-        update_size(&(*given_node)->right, false);
+        update_properties(&(*given_node)->right, false);
     }
     else
     {   
         tree_node* subtree_first_node =  sucessor(&(*given_node));
         
         subtree_first_node->left = create_tree_node(&subtree_first_node, new_value);
-        update_size(&(*given_node)->left, false);
+        update_properties(&(*given_node)->left, false);
     }
 }
 
@@ -62,12 +62,12 @@ void subtree_insert_before(tree_node** given_node, int new_value)
     if ((*given_node)->left == NULL)
     {
         (*given_node)->left = create_tree_node(&(*given_node), new_value);
-        update_size(&(*given_node)->left, false);
+        update_properties(&(*given_node)->left, false);
     }
     else
     {   
         tree_node* subtree_first_node =  predecessor(&(*given_node));
         subtree_first_node->right = create_tree_node(&subtree_first_node, new_value);
-        update_size(&subtree_first_node->right, false);
+        update_properties(&subtree_first_node->right, false);
     }
 }

@@ -23,13 +23,13 @@ tree_node* recursion_find_ith(tree_node** given_node, unsigned int ith)
    } 
    
 
-
    unsigned int size_left_node;
 
-   if ((*given_node)->left)
-   {
+   if ((*given_node)->left){
+
     size_left_node = (*given_node)->left->size;
-   }else { size_left_node = 0;}
+   }else { 
+    size_left_node = 0;}
 
     if (ith == size_left_node) { return (*given_node);}
     if (ith < size_left_node) { recursion_find_ith(&(*given_node)->left, ith);}
@@ -37,7 +37,6 @@ tree_node* recursion_find_ith(tree_node** given_node, unsigned int ith)
 
 
 }
-
 
 tree_node* subtree_find_ith(tree_node** given_node, unsigned int ith)
 {
@@ -51,13 +50,12 @@ tree_node* subtree_find_ith(tree_node** given_node, unsigned int ith)
    }
 
     unsigned int size_left_node = (*given_node)->left->size;
-    if (ith > (*given_node)->size)
-    {
+    if (ith > (*given_node)->size){
+        
         printf("%d is out of indexes range!!!\n", ith); return NULL;
     }
 
     tree_node* node =  recursion_find_ith(&(*given_node), ith);
 
     return node;
-
 }

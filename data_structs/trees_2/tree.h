@@ -219,14 +219,14 @@ tree_node* subtree_find_key(tree_node** given_node, int given_value, bool static
 void bst_subtree_insert(tree_node** given_node, int new_value);
 
 /*
-  Recalcules the size of all the ancestors of a given node until the binary tree's root.
+  Recalculates the subtreeproperties of all the ancestors of a given node until the binary tree's root.
   
   @param given_node -It can be a new created leaf or the parent of a deleted leaf.
   @param del_mode:
     - when true it won't set the size of the given node as 1.
     - when true the given node's size will the defined as 1.
 */
-void update_size(tree_node** given_node, bool del_mode);
+void update_properties(tree_node** given_node, bool del_mode);
 
 /*
   Looks for the index of subtree's node in the range (0 to subtree's size-1)

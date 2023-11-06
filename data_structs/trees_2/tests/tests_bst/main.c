@@ -5,7 +5,7 @@
 
 int main(void)
 {
-    //test_insert();
+    test_insert();
     test_delete();
     //  test_find();
     // test_bst_insert();

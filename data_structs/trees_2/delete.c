@@ -42,7 +42,7 @@ void subtree_delete(tree_node** given_node)
         
         (*given_node)->is_freed = 1;
         (*given_node)->value = 0;
-        update_size(&parent, true);
+        update_properties(&parent, true);
 
         //unlink the given node from its parent
         // if (parent->left == (*given_node))

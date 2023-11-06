@@ -29,6 +29,18 @@ void test_delete(void)
                    
     */
 
+   for (int j = 0; j <= 99; j++)
+   {
+      subtree_insert_after(&t->root, j);
+      printf("adding %d after root...\n", j);
+   }
+
+   for (int k = 0; k <= 99; k++)
+   {
+    subtree_delete(&t->root);
+    printf("removing root (%d)...\n", k);
+   }
+
     //Delete leaf case.
     subtree_delete(&t->root);
     subtree_delete(&t->root);
