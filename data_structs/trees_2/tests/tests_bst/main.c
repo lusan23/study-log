@@ -7,8 +7,8 @@ int main(void)
 {
     test_insert();
     test_delete();
-    //  test_find();
-    // test_bst_insert();
+    test_find();
+    test_bst_insert();
     // test_find_th();
     printf("DONE\n");
     return 0;

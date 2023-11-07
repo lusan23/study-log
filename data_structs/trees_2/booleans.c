@@ -54,5 +54,32 @@ bool is_root(tree_node** given_node)
         
         it verifies not only if the children have NULL value, but also if their children were freed or not.
     */
-    return ((*given_node)->parent == NULL && (((*given_node)->left == NULL || (*given_node)->left->is_freed) && ((*given_node)->right == NULL) || (*given_node)->right->is_freed)) ? true : false;
+    bool has_parent =false;
+    bool left_deleted = false;
+    bool right_deleted = false;
+
+    if ((*given_node)->parent != NULL)
+    {
+        has_parent = true;
+        
+    }
+
+
+    if ((*given_node)->left != NULL)
+    {
+        if ((*given_node)->left->is_freed == 1)
+        {
+            left_deleted = true;
+        }
+    }
+
+    if ((*given_node)->right != NULL)
+    {
+        if ((*given_node)->right->is_freed == 1)
+        {
+            right_deleted = true;
+        }
+    }
+
+    return (!has_parent && left_deleted && right_deleted) ? true : false;
 }
