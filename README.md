@@ -11,5 +11,5 @@
     * [Queue](https://github.com/lusan23/study-log/tree/master/data_structs/queues)
     * [Hash Tables](https://github.com/lusan23/study-log/tree/master/data_structs/hash_table)
     * [Tree](https://github.com/lusan23/study-log/tree/master/data_structs/trees_2)
-    * [Graph](https://github.com/lusan23/study-log/tree/master/data_structs/)
+    * [Graph](https://github.com/lusan23/study-log/tree/master/data_structs/graphs)
     * Heap
