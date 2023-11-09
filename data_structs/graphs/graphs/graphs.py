@@ -28,7 +28,16 @@ class Vertex:
 
     def update_data(self, new_data: int) -> int:
         """ (int) -> int
-        Overwrite the vertex's data and return the old  data
+        
+        Overwrite the vertex's data and RETURN the old data
+        
+        >>> node_a.data
+        10000
+        >>> node_a.update(20)
+        10000 # returned after removed
+        >>> node_a.data
+        20
+
         """
         retval = self.data
         self.data = new_data
