@@ -1,6 +1,6 @@
+from sys import path
 import unittest
-from graphs import Vertex
-from random import random
+from graphs.graphs import Vertex
 
 class TestVertex(unittest.TestCase):
     """Test the behavior of the vertex class"""
@@ -56,19 +56,17 @@ class TestVertex(unittest.TestCase):
         self.assertEqual(self.vertex_two.in_edge, self.vertex_one)
 
         # remove the in_edge and check if it has actually removed
-        self.vertex_one.remove_edge(self.vertex_one.in_edge)
-        self.assertEqual(self.vertex_one.in_edge,None)
-
         self.vertex_one.remove_edge(self.vertex_one.out_edge)
-        self.assertEqual(self.vertex_one.out_edge,None)
+        self.assertEqual(self.vertex_one.out_edge, None)
+
+        self.vertex_one.remove_edge(self.vertex_two.in_edge)
+
+        self.assertEqual(self.vertex_one.in_edge, None)
 
         # self.vertex_one = Vertex(10)
         # self.vertex_two = Vertex(20) 
 
 
        
+        print("test ended")
         
-        
-
-if __name__ == "__main__":
-    unittest.main()

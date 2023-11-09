@@ -9,7 +9,7 @@ class Vertex:
             A -> B -> C
     """
 
-    def __init__(self, data=None, out_edge=None, in_edge=None):
+    def __init__(self, data: int =None, out_edge=None, in_edge=None) -> None:
         """ (Int) -> Vertex object
         >>> node_a = Vertex(10)
         >>> node_a.data
@@ -25,9 +25,8 @@ class Vertex:
         self.in_edge = in_edge
         self.out_edge = out_edge
 
-    
 
-    def update_data(self, new_data: int):
+    def update_data(self, new_data: int) -> int:
         """ (int) -> int
         Overwrite the vertex's data and return the old  data
         """
@@ -35,7 +34,7 @@ class Vertex:
         self.data = new_data
         return retval
     
-    def point_to(self, vertex: "Vertex"):
+    def point_to(self, vertex: "Vertex") -> None:
         """  
         Make the current vertex point to another vertex object.
         a -> B
@@ -43,7 +42,7 @@ class Vertex:
         None
         >>> a.point_to(b)
         >>> a,out_edge
-        <Vetex b object>
+        <Vetex B object>
         """
 
         if (self.out_edge == None):
@@ -53,17 +52,17 @@ class Vertex:
            
         
 
-    def pointed_by(self, vertex: "Vertex"):
+    def pointed_by(self, vertex: "Vertex") -> None:
         """  
         Make  A  point to B, it should be called if and only If B is ponting to A.
 
         A <--> B
 
-        >>> a.
-        [node_b,node_g]
-        >>> node_a.add(node_b)
-        >>> node_a.edges
-        [node_b,node_g, node_b]
+        >>> a.in_edge
+        None
+        >>> node_a.pointed_by(node_b)
+        >>> node_a.in_edge
+        <Vertex B Object> 
         """
 
         if (self.in_edge == None):
@@ -71,39 +70,59 @@ class Vertex:
         else:
             print(f"This vertex is already been pointed!!!")
         
-    def remove_edge(self, edge):
+    def remove_edge(self, edge: "Vertex") -> None:
         """
         Remove an existent vertex from the in or out edge attribute.
 
         >>> node_a.in_edge
         [node_b]
-        >>> node_a.remove_edge(node_a.in_edge)
-        >>> node_a.in_edge
+        >>> node_a.remove_edge(node_a.in_edge/out_edge)
+        >>> node_a.in_edge/out_edge
         None  
         """
-        edge = None
+        if (edge == None):
+            raise Exception("the given argument is empty")
+
+        if (edge is self.in_edge):
+            self.in_edge = None
+        elif (edge is self.out_edge):
+            self.out_edge = None
 
         
 
 class GraphSet:
-    def __init__(self, number_nodes=None):
-        """ 
+    def __init__(self, number_nodes=None, enumerated=False) -> None:
+        """  (int) -> GraphSet
         Create a set of nodes/vertex
         >>> graph_x = GraphSet()
         >>> graph_x.vertex_set
-        []
+        {}
         >>> graphs_a = GraphSet(3)
         >>> graphs_a.vertex_set
-        [vertex object, vertex object , vertex object]
+        {'a': <Vertex Object> , 'b': <Vertex Object>, }
+
+        @param enumerated if True the keys become numbers
         """
 
         # if an argument is given, Create a list contaning (number_node) nodes with data None
         # else just create a empty list
 
         if (number_nodes != None):
-            self.vertex_set = [ Vertex(None) for i in list( range(0,number_nodes) ) ]
+            # Dict {str : Vertex }
+            self.vertex_set = {}
+
+            if (not enumerated):
+                    
+                # Generate a dictinary  {'a': <Vertex Object>, ... number_nodes}
+                for label in range(ord('a'), ord('a') + number_nodes):
+                    self.vertex_set[chr(label)] = Vertex(None)
+            else:
+                # Generate a dictinary  {'0': <Vertex Object>, ... number_nodes}
+                for label in range(1, number_nodes + 1):
+                    self.vertex_set[label] = Vertex(None)
+                    
         else:
-            self.vertex_set = []
+            self.vertex_set = {}
         
     
 
