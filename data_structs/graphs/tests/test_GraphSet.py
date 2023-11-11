@@ -28,4 +28,5 @@ class TestGraphSet(unittest.TestCase):
         print(f"dict:{filled_set.get_graphs()}")
         self.assertEqual(len(filled_set.get_graphs()), 10)
             
-
+        for i in filled_set.get_graphs():
+            print(filled_set.get_graphs()[i].get_data()) 

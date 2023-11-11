@@ -19,6 +19,9 @@ class TestDirectGraph(unittest.TestCase):
 
         # check the integrity when a empty DGS
         self.assertEqual({}, self.graph_set_empty.get_graphs())
+        self.assertEqual(3, len(self.graph_set.get_graphs()))
+
+    
 
 
 

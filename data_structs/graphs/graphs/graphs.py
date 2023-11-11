@@ -127,14 +127,18 @@ class GraphSet:
         self.__number_nodes = None
         self.__enumerated = None
 
+
     def set_vertexes(self, number_nodes=None, enumerated=False) -> None:
         # Create an dict of {str: <Vertex Object>}
 
         if (not self.__enumerated):    
             # Generate a dictinary  {'a': <Vertex Object>, ... number_nodes} of length number_nodes
             for label in range(ord('a'), ord('a') + number_nodes):
-                self.__vertex_set[chr(label)] = Vertex(None)
-
+                if (label < number_nodes):
+                    self.__vertex_set[chr(label)] = Vertex(None)
+                    self.__vertex_set[chr(label)].point_to(Vertex(None))
+                else:
+                    self.__vertex_set[chr(label)] = Vertex(None)
             self.__number_nodes = number_nodes
         else:
             # Generate a dictinary  {'0': <Vertex Object>, ... number_nodes} of length number_nodes
@@ -142,7 +146,6 @@ class GraphSet:
             for label in range(1, self.__number_nodes + 1):
                 self.__vertex_set[label] = Vertex(None)
                     
- 
                     
     def get_graphs(self):
         return self.__vertex_set
