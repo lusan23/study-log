@@ -15,17 +15,17 @@ class TestGraphSet(unittest.TestCase):
 
         # Verify if a empty graphset is 
 
-        self.assertTrue(self.graph_set.vertex_set == {})
+        self.assertTrue(self.graph_set.get_graphs() == {})
 
         # Verify if a filled graphset is created properly
 
-        filled_set = GraphSet(10, enumerated=True)
-
-        self.assertTrue(filled_set.vertex_set != {})
+        filled_set = GraphSet()
+        filled_set.set_vertexes(10)
+        self.assertTrue(filled_set.get_graphs() != {})
 
         # for each vertex inside the graphset verify if their default values
 
-        print(f"dict:{filled_set.vertex_set}")
-        self.assertEqual(len(filled_set.vertex_set), 10)
+        print(f"dict:{filled_set.get_graphs()}")
+        self.assertEqual(len(filled_set.get_graphs()), 10)
             
 

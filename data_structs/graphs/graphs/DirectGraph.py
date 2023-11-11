@@ -1,5 +1,5 @@
 """ Implementation of a DirectGraph Set"""
-from .graphs import GraphSet
+from graphs.graphs import GraphSet
 
 class DirectGraphSet(GraphSet):
     """ 
@@ -9,8 +9,8 @@ class DirectGraphSet(GraphSet):
     >>> set_a.vertex_set
     []
     """
-    def __init__(self, number_nodes=None) -> None:
-        super().__init__( number_nodes)
+    def __init__(self) -> None:
+        super().__init__()
 
     
     

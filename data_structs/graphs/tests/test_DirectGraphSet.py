@@ -13,11 +13,12 @@ class TestDirectGraph(unittest.TestCase):
         super(TestDirectGraph, self).__init__(*args, **kwargs)
 
         self.graph_set_empty = DirectGraphSet()
-        self.graph_set = DirectGraphSet(3)
+        self.graph_set = DirectGraphSet()
+        self.graph_set.set_vertexes(3)
     def test_settup(self):
 
         # check the integrity when a empty DGS
-        self.assertEqual({}, self.graph_set_empty.vertex_set)
+        self.assertEqual({}, self.graph_set_empty.get_graphs())
 
 
 

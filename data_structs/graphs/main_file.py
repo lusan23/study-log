@@ -5,6 +5,7 @@ import unittest
 from tests.test_vertex import TestVertex
 from tests.test_GraphSet import TestGraphSet
 from tests.test_DirectGraphSet import TestDirectGraph
+from tests.test_edge import TestEdge
 
 # Create a TestSuite nd add the test cases
 
@@ -23,6 +24,9 @@ def create_graphset_suite():
 
     suite_graphset.addTest(unittest.makeSuite(TestVertex))
     suite_graphset.addTest(unittest.makeSuite(TestGraphSet))
+
+    suite_graphset.addTest(unittest.makeSuite(TestEdge))
+    
 
     return suite_graphset
 
