@@ -30,7 +30,6 @@ class Edge:
     def get_dest_vertex(self):
         return self.__dest_vertex
     
-    
     def update_weight(self, new_weight: float) -> float: 
         """ 
         ### Change the weight of the edge and return the old weight value.

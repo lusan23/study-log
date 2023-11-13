@@ -4,12 +4,16 @@ import unittest
 from graphs.graphs import GraphSet
 from random import random
 
+DICT_SIZE = 10
+
 class TestGraphSet(unittest.TestCase):
     """Test the behavior of the vertex class"""
     def __init__(self, *args, **kwargs):
         super(TestGraphSet, self).__init__(*args, **kwargs)
         self.graph_set = GraphSet()
-        
+        self.filled_set = GraphSet()
+ 
+        self.filled_set.set_vertexes(DICT_SIZE)
     def test_settup(self):
         """ Test if the nodes at the the instance are stored in properly. """
 
@@ -19,14 +23,16 @@ class TestGraphSet(unittest.TestCase):
 
         # Verify if a filled graphset is created properly
 
-        filled_set = GraphSet()
-        filled_set.set_vertexes(10)
-        self.assertTrue(filled_set.get_graphs() != {})
+
+        self.assertTrue(self.filled_set.get_graphs() != {} and len(self.filled_set.get_graphs()) == DICT_SIZE)
 
         # for each vertex inside the graphset verify if their default values
-
-        print(f"dict:{filled_set.get_graphs()}")
-        self.assertEqual(len(filled_set.get_graphs()), 10)
+        self.assertEqual(len(self.filled_set.get_graphs()), 10)
             
-        for i in filled_set.get_graphs():
-            print(filled_set.get_graphs()[i].get_data()) 
+        for i in self.filled_set.get_graphs():
+            self.assertTrue(self.filled_set.get_graphs()[i].get_data() == None) 
+            self.assertTrue(self.filled_set.get_graphs()[i].get_edge() != None) 
+            
+    def test_graph_path(self):
+        self.filled_set.vertex_path(self.filled_set.get_graphs()['a'])
+        # new session i need to update its function code

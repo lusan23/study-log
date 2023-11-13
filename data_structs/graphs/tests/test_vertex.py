@@ -43,23 +43,18 @@ class TestVertex(unittest.TestCase):
         self.assertIs(vertex_a.get_edge().__dict__['_Edge__src_vertex'], vertex_b.get_edge().__dict__['_Edge__dest_vertex'])
   
         del vertex_a
-        del vertex_b       
-    # def test_remove_edge(self):
-    #     # confirming that vertex a and b already exist
-    #     print("rmove edge test")
-    #     vertex_a = Vertex(10)
-    #     vertex_b = Vertex(20)
-    #     vertex_a.point_to(self.vertex_b)
-
-    #     self.assertIs(id(vertex_a), id(vertex_b.get_edge()))
-
-    #     # remove the in_edge and check if it has actually removed
-    #     self.vertex_one.remove_edge()
-    #     self.assertEqual(vertex_a.get_edge(), None)
-
-
-
+        del vertex_b   
+            
+    def test_remove_edge(self):
+        # confirming that vertex a and b already exist
+        print("rmove edge test")
+        vertex_a = Vertex(10)
 
        
+        assert(vertex_a.__dict__['_Vertex__edge'] != None)
+        # remove the in_edge and check if it has actually removed
+        vertex_a.remove_edge()
+        self.assertEqual(vertex_a.get_edge(), None)
+
     #     print("test ended")
         

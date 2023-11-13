@@ -61,6 +61,12 @@ class Vertex:
          """
         self.__edge.update_edge(src, dest)
 
+    def replace_edge(self, new_edge: Edge):
+        """
+        Overwite the reference to an edge a to the new_edge object
+        """
+        self.__edge = new_edge
+
     def point_to(self, vertex: "Vertex", direct=False) -> None:
         """    
         Make this edge object point to the given Vertex, and changes the edge of the given Vertex.
@@ -75,10 +81,10 @@ class Vertex:
         >>> vertex_b.get_get() == vertex_a.get_edget()
         True
         """
-        print(f"test:{self.__edge.get_dest_vertex()}")
+    
         if (self.__edge.get_dest_vertex() == None):
             self.__edge.to_vtx(vertex)
-            if (direct):
+            if (not direct):
                 vertex.update_edge(vertex, self)
              
         else:
@@ -88,7 +94,7 @@ class Vertex:
         
     def remove_edge(self) -> None:
         """
-        Remove an existent vertex from the in or out edge attribute.
+        Remove an existent vertex from edge attribute.
 
         >>> node_a.in_edge
         [node_b]
@@ -96,16 +102,13 @@ class Vertex:
         >>> node_a.in_edge/out_edge
         None  
         """
-        if (self.edge == None):
+        if (self.__edge == None):
             raise Exception("the given argument is empty")
 
         else:
-            del self.edge
-            self.edge = None
-        
-
-
-        
+            del self.__edge
+            self.__edge = None
+         
 
 class GraphSet:
     def __init__(self) -> None:
@@ -116,7 +119,7 @@ class GraphSet:
         {}
         >>> graphs_a = GraphSet(3)
         >>> graphs_a.vertex_set
-        {'a': <Vertex Object> , 'b': <Vertex Object>, }
+        {'a': <Vertex Object> , 'b': <Vertex Object>, 'c': <Vertex Object>}
 
         @param enumerated if True the keys become numbers
         """
@@ -149,6 +152,32 @@ class GraphSet:
                     
     def get_graphs(self):
         return self.__vertex_set
+    
+    def vertex_path(self, first_vtx) -> [Vertex]:
+        """ (Vertex) -> [Vertex]
+        Return a list of vertexes conected to each other
+        >>> graphs_a = GraphSet(3)
+        >>> graphs_a.vertex_set
+        {'a': <Vertex Object> , 'b': <Vertex Object>, 'c': <Vertex Object>}
+        >>> graphs_a.vertex_path("a")
+        [<Vertex a Object> ,<Vertex b Object>]
+        """
+        current_vtx = first_vtx
+
+        # iterate through all the path of vertexes starting from first_vtx
+        c = 0
+        path_list = []
+        # if the graph path is undirect it will verify the last node
+        is_last_vtx = current_vtx.get_edge().get_src_vertex() is current_vtx.get_edge().get_dest_vertex()
+        while (current_vtx != None or is_last_vtx):
+            print(f"\ncurrent data[{c}]:{current_vtx}")
+            path_list.append(current_vtx)
+            current_vtx = current_vtx.get_edge().get_dest_vertex()
+            c+=1
+
+            
+
+        return path_list
         
     
 
