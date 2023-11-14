@@ -34,5 +34,9 @@ class TestGraphSet(unittest.TestCase):
             self.assertTrue(self.filled_set.get_graphs()[i].get_edge() != None) 
             
     def test_graph_path(self):
-        self.filled_set.vertex_path(self.filled_set.get_graphs()['a'])
-        # new session i need to update its function code
+        vtxs = self.filled_set.get_graphs()
+
+        vtxs['a'].point_to(vtxs['b'], direct=False)
+
+        path_list = self.graph_set.vertex_path(vtxs['a'])
+        print(path_list)

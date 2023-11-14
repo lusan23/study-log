@@ -14,7 +14,9 @@ class TestEdge(unittest.TestCase):
                             dest_vertex=self.vertex_b) # 18.1 km
         
     def test_setup(self):
-        print(f"\nattributes:{self.distance_ab.__dict__}")
+        print(f"\nattributes:{self.vertex_a.__dict__}")
+
+        pass
         
 
         

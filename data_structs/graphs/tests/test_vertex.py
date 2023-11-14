@@ -37,17 +37,25 @@ class TestVertex(unittest.TestCase):
         """ Test if the vertex A is has an edge to vertex B."""
         vertex_a = Vertex(10)
         vertex_b = Vertex(20)
+        vertex_c = Vertex(30)
+        # testing undirect edge
+        vertex_a.point_to(vertex_b, direct=False)
+        vertex_b.point_to(vertex_c, direct=True)
         
-        vertex_a.point_to(vertex_b, direct=True)
+        self.assertIs(vertex_a.get_edge(two=True).__dict__['_Edge__dest_vertex'], vertex_b)
+        self.assertIs(vertex_b.get_edge(two=False).__dict__['_Edge__dest_vertex'], vertex_a)
+
+        self.assertIs(vertex_b.get_edge(two=True).__dict__['_Edge__dest_vertex'], vertex_c)
+        self.assertIs(vertex_c.get_edge(two=False).__dict__['_Edge__dest_vertex'], None)
         
-        self.assertIs(vertex_a.get_edge().__dict__['_Edge__src_vertex'], vertex_b.get_edge().__dict__['_Edge__dest_vertex'])
-  
+
+
         del vertex_a
         del vertex_b   
             
     def test_remove_edge(self):
         # confirming that vertex a and b already exist
-        print("rmove edge test")
+        print("remove edge test")
         vertex_a = Vertex(10)
 
        

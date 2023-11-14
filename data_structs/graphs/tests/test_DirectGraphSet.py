@@ -21,13 +21,7 @@ class TestDirectGraph(unittest.TestCase):
         self.assertEqual({}, self.graph_set_empty.get_graphs())
         self.assertEqual(3, len(self.graph_set.get_graphs()))
 
-    def test_use(self):
-        vtxs = self.graph_set.get_graphs()
 
-        vtxs['a'].point_to(vtxs['b'])
-
-        path_list = self.graph_set.vertex_path(vtxs['a'])
-        print(path_list)
 
         
 

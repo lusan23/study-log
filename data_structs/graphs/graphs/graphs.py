@@ -5,32 +5,33 @@ from graphs.edges import Edge
 class Vertex:
     """   (int) -> Vertex
 
-    Represent a vertex b and its bidirectional and undirectional edges  
-            A <--> B <--> C
-            A -> B -> C
+    Represent a vertex b and its directional/undirectional edges  
     """
 
     def __init__(self, data=None) -> None:
         """ (Int) -> Vertex object
         >>> node_a = Vertex(10)
-        >>> node_a.data
-        10
-        >>> node_a.in_edge, node_a.out_edge
-        None, None
+        >>> node_a.__dict__
+        {'_Vertex__data': 10, 
+        '_Vertex__edge': <graphs.edges.Edge object at 0x7f3fe80e1f70>}
                  
         """
         self.__data = data
         
         # Attributes that will point to other Vertex Object
         self.__edge = Edge(src_vertex=self, dest_vertex=None)
-        
+        self.__edge_two = Edge(src_vertex=self, dest_vertex=None)
+
     def get_data(self) -> int:
         """ Return the data value """
         return self.__data
     
-    def get_edge(self) -> int:
+    def get_edge(self, two=False) -> int:
         """ Return the edge Object of this Vertex """
-        return self.__edge
+        if (two):
+            return self.__edge_two
+        else:
+            return self.__edge
 
     def update_data(self, new_data: int) -> int:
         """### (int) -> int
@@ -49,7 +50,7 @@ class Vertex:
         self.__data = new_data
         return retval
     
-    def update_edge(self, src, dest) -> None:
+    def update_edge(self, src, dest, two=True) -> None:
         """ (vertex, vertex) -> None
         It will change the src and dest attributes at its vertex's edge
 
@@ -59,7 +60,10 @@ class Vertex:
         >>> vertex_a.get_edge()__dict__
         {'__src_vertex': vertex_h, '__dest_vertex': vertex_g, 'weight':1.0}
          """
-        self.__edge.update_edge(src, dest)
+        if (not two):
+            self.__edge.update_edge(src, dest)
+        else:
+            self.__edge_two.update_edge(src, dest)
 
     def replace_edge(self, new_edge: Edge):
         """
@@ -81,16 +85,20 @@ class Vertex:
         >>> vertex_b.get_get() == vertex_a.get_edget()
         True
         """
-    
-        if (self.__edge.get_dest_vertex() == None):
-            self.__edge.to_vtx(vertex)
-            if (not direct):
-                vertex.update_edge(vertex, self)
-             
+        if (not direct):    
+            if (self.__edge_two.get_dest_vertex() == None):
+                self.__edge_two.to_vtx(vertex)
+                vertex.update_edge(vertex, self, two=False)
+                                
+            else:
+                print(f"This vertex is already pointing to somewhere else!!!")
+            
         else:
-            print(f"This vertex is already pointing to somewhere else!!!")
-           
-    
+            if (self.__edge_two.get_dest_vertex() == None):
+                self.__edge_two.to_vtx(vertex)
+            else:
+                print(f"This vertex is already pointing to somewhere else!!!")
+            
         
     def remove_edge(self) -> None:
         """
@@ -165,18 +173,20 @@ class GraphSet:
         current_vtx = first_vtx
 
         # iterate through all the path of vertexes starting from first_vtx
+        
         c = 0
         path_list = []
-        # if the graph path is undirect it will verify the last node
-        is_last_vtx = current_vtx.get_edge().get_src_vertex() is current_vtx.get_edge().get_dest_vertex()
-        while (current_vtx != None or is_last_vtx):
-            print(f"\ncurrent data[{c}]:{current_vtx}")
+        prev_vtx = current_vtx
+        while (current_vtx != None):
+            print(f"\ncurrent data[{c}]:{current_vtx.get_edge().__dict__}")
+            
             path_list.append(current_vtx)
-            current_vtx = current_vtx.get_edge().get_dest_vertex()
+
+            prev_vtx = current_vtx
+            current_vtx = current_vtx.get_edge(two=True).get_dest_vertex()
             c+=1
 
-            
-
+        
         return path_list
         
     
