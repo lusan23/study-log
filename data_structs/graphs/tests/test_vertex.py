@@ -53,16 +53,22 @@ class TestVertex(unittest.TestCase):
         del vertex_a
         del vertex_b   
             
-    def test_remove_edge(self):
-        # confirming that vertex a and b already exist
-        print("remove edge test")
-        vertex_a = Vertex(10)
+    def test_unpoint(self):
+        
+        vertex_a = Vertex("Chile")
+        vertex_b = Vertex('Santiago')
 
-       
-        assert(vertex_a.__dict__['_Vertex__edge'] != None)
+        vertex_a.point_to(vertex_a)
+        self.assertTrue(vertex_a.get_edge(two=True).__dict__['_Edge__dest_vertex'] != None)
         # remove the in_edge and check if it has actually removed
-        vertex_a.remove_edge()
-        self.assertEqual(vertex_a.get_edge(), None)
+        vertex_a.unpoint()
+        self.assertTrue(vertex_a.get_edge(two=True).__dict__['_Edge__dest_vertex'] == None)
+
+    def test_path(self):
+        vtx_a, vtx_b, vtx_c = Vertex('Buenos Aires'), Vertex('Paris'), Vertex('São Paulo')
+        vtx_a.point_to(vtx_b), vtx_b.point_to(vtx_c)
+
+        print(vtx_a.vertex_path())
 
     #     print("test ended")
         

@@ -33,10 +33,9 @@ class TestGraphSet(unittest.TestCase):
             self.assertTrue(self.filled_set.get_graphs()[i].get_data() == None) 
             self.assertTrue(self.filled_set.get_graphs()[i].get_edge() != None) 
             
-    def test_graph_path(self):
-        vtxs = self.filled_set.get_graphs()
-
-        vtxs['a'].point_to(vtxs['b'], direct=False)
-
-        path_list = self.graph_set.vertex_path(vtxs['a'])
-        print(path_list)
+    def test_adjacest_list(self):
+        # testing vertex path
+        cities_gs = GraphSet()
+        cities_gs.set_vertexes(5)
+        cities = cities_gs.get_graphs()
+        cities_gs.adjascent_list()

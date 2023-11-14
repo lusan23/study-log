@@ -26,7 +26,7 @@ class Vertex:
         """ Return the data value """
         return self.__data
     
-    def get_edge(self, two=False) -> int:
+    def get_edge(self, two=False) -> Edge:
         """ Return the edge Object of this Vertex """
         if (two):
             return self.__edge_two
@@ -75,11 +75,11 @@ class Vertex:
         """    
         Make this edge object point to the given Vertex, and changes the edge of the given Vertex.
 
-        >>> vertex_a.get_edge()
+        >>> vertex_a.get_edge(two=True)
         <An Edge Object x>
         >>> vertex_b.get_edge()
         <An Edge Object y>
-        >>> vertex_a.point_tio(vertex_b)
+        >>> vertex_a.point_to(vertex_b)
         >>> vertex_a.get_edge().get_dest_vertex()
         <Vertex  Object b>
         >>> vertex_b.get_get() == vertex_a.get_edget()
@@ -100,23 +100,52 @@ class Vertex:
                 print(f"This vertex is already pointing to somewhere else!!!")
             
         
-    def remove_edge(self) -> None:
+    def unpoint(self) -> None:
         """
         Remove an existent vertex from edge attribute.
 
-        >>> node_a.in_edge
-        [node_b]
-        >>> node_a.remove_edge(node_a.in_edge/out_edge)
-        >>> node_a.in_edge/out_edge
-        None  
+        >>> node_a = Vertex('USA'),
+        >>> node_b = Vertex('Canada'),
+        >>> node_b.point_to(node_a)
+        >>> node_a.vertex_path()
+        [<graphs.graphs.Vertex object at 0x7f60eb563610>, <graphs.graphs.Vertex object at 0x7f60eb4503d0>]
+        >>> node_a.unpoint()
+        [<graphs.graphs.Vertex object at 0x7f60eb563610>]
         """
         if (self.__edge == None):
             raise Exception("the given argument is empty")
 
         else:
             del self.__edge
-            self.__edge = None
+            self.__edge_two.update_edge(new_source=self, new_destiny=None)
          
+
+
+    def vertex_path(self) -> list:
+        """ (Vertex) -> [Vertex]
+        Return a list of vertexes conected to each other
+        >>> vtx_a, vtx_b, vtx_c = Vertex('Buenos Aires'), Vertex('Paris'), Vertex('São Paulo')
+        >>> vtx_a.point_to(vtx_b), vtx_b.point_to(vtx_c)
+        
+        >>> vtx_a.vertex_path()
+        [<Vertex a Object> ,<Vertex b Object>, <Vertex c Object>]
+        """
+        current_vtx = self
+
+        
+        c = 0
+        path_list = []
+        prev_vtx = current_vtx
+        # iterate through all the path of vertexes starting from first_vtx
+        while (current_vtx != None):
+            path_list.append(current_vtx)
+
+            prev_vtx = current_vtx
+            current_vtx = current_vtx.get_edge(two=True).get_dest_vertex()
+            c+=1
+
+        
+        return path_list
 
 class GraphSet:
     def __init__(self) -> None:
@@ -147,7 +176,10 @@ class GraphSet:
             for label in range(ord('a'), ord('a') + number_nodes):
                 if (label < number_nodes):
                     self.__vertex_set[chr(label)] = Vertex(None)
-                    self.__vertex_set[chr(label)].point_to(Vertex(None))
+                    next_vtx = Vertex(None)
+                    self.__vertex_set[chr(label)].point_to()
+                    
+                    print()
                 else:
                     self.__vertex_set[chr(label)] = Vertex(None)
             self.__number_nodes = number_nodes
@@ -161,33 +193,24 @@ class GraphSet:
     def get_graphs(self):
         return self.__vertex_set
     
-    def vertex_path(self, first_vtx) -> [Vertex]:
-        """ (Vertex) -> [Vertex]
-        Return a list of vertexes conected to each other
+    def adjascent_list(self) -> [Vertex]:
+        """ (None) -> dict of [Vertex]
+        Return a list of paths of each vertex in vertex_set 
         >>> graphs_a = GraphSet(3)
         >>> graphs_a.vertex_set
         {'a': <Vertex Object> , 'b': <Vertex Object>, 'c': <Vertex Object>}
-        >>> graphs_a.vertex_path("a")
-        [<Vertex a Object> ,<Vertex b Object>]
-        """
-        current_vtx = first_vtx
-
-        # iterate through all the path of vertexes starting from first_vtx
-        
-        c = 0
-        path_list = []
-        prev_vtx = current_vtx
-        while (current_vtx != None):
-            print(f"\ncurrent data[{c}]:{current_vtx.get_edge().__dict__}")
+        >>> graphs_a.adjascent_list("a")
+        [ 
+            [<Vertex a Object> ... Vertex n Object>] , 
+            [<Vertex b Object> ... <Vertex n Object>],
+            [<Vertex c Object> ... <Vertex n Object>] , 
+        ],
             
-            path_list.append(current_vtx)
-
-            prev_vtx = current_vtx
-            current_vtx = current_vtx.get_edge(two=True).get_dest_vertex()
-            c+=1
-
-        
-        return path_list
-        
-    
-
+        """
+        # make a adjct_dict
+        adjct_dict = {}
+        # iterate for each vtx in vertex_set and get its path
+        for key in list(self.__vertex_set.keys()):
+            print(self.__vertex_set[key].get_edge(two=True).__dict__)
+        # than append its path to
+           
