@@ -35,7 +35,12 @@ class TestGraphSet(unittest.TestCase):
             
     def test_adjacest_list(self):
         # testing vertex path
+        # setting up graphset
         cities_gs = GraphSet()
         cities_gs.set_vertexes(5)
+        # all vertexes have path length 1, because they start without edges.
         cities = cities_gs.get_graphs()
-        cities_gs.adjascent_list()
+        # ponting a to b, to the path length of a should be 2 
+        cities['a'].point_to(cities['b'])
+        adjacenst_list = cities_gs.adjascent_list()
+        self.assertTrue(len(adjacenst_list['a']) == 2)

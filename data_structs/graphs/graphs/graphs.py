@@ -74,7 +74,8 @@ class Vertex:
     def point_to(self, vertex: "Vertex", direct=False) -> None:
         """    
         Make this edge object point to the given Vertex, and changes the edge of the given Vertex.
-
+        >>> vertex_a =  Vertex("Jefferson")
+        >>> vertex_a.set_vertexes(3)
         >>> vertex_a.get_edge(two=True)
         <An Edge Object x>
         >>> vertex_b.get_edge()
@@ -152,11 +153,12 @@ class GraphSet:
         """  (int) -> GraphSet
         Create a set of nodes/vertex
         >>> graph_x = GraphSet()
-        >>> graph_x.vertex_set
+        >>> graph_x.get_graphs()
         {}
-        >>> graphs_a = GraphSet(3)
-        >>> graphs_a.vertex_set
-        {'a': <Vertex Object> , 'b': <Vertex Object>, 'c': <Vertex Object>}
+        >>> graphs_a = GraphSet()
+        >>> graphs_a.set_vertexes(3)
+        >>> len(graphs_a.get_graphs())
+        3
 
         @param enumerated if True the keys become numbers
         """
@@ -179,7 +181,6 @@ class GraphSet:
                     next_vtx = Vertex(None)
                     self.__vertex_set[chr(label)].point_to()
                     
-                    print()
                 else:
                     self.__vertex_set[chr(label)] = Vertex(None)
             self.__number_nodes = number_nodes
@@ -196,21 +197,26 @@ class GraphSet:
     def adjascent_list(self) -> [Vertex]:
         """ (None) -> dict of [Vertex]
         Return a list of paths of each vertex in vertex_set 
-        >>> graphs_a = GraphSet(3)
-        >>> graphs_a.vertex_set
-        {'a': <Vertex Object> , 'b': <Vertex Object>, 'c': <Vertex Object>}
-        >>> graphs_a.adjascent_list("a")
+        >>> graphs_a = GraphSet()
+        >>> graphs_a.set_vertexes(3)
+        >>> len(graphs_a.get_graphs())
+        3
+        >>> graphs_a.adjascent_list(0)
+        
         [ 
             [<Vertex a Object> ... Vertex n Object>] , 
             [<Vertex b Object> ... <Vertex n Object>],
             [<Vertex c Object> ... <Vertex n Object>] , 
-        ],
+        ]
             
         """
         # make a adjct_dict
         adjct_dict = {}
         # iterate for each vtx in vertex_set and get its path
         for key in list(self.__vertex_set.keys()):
-            print(self.__vertex_set[key].get_edge(two=True).__dict__)
-        # than append its path to
+            adjct_dict[key] = self.__vertex_set[key].vertex_path()
+        
+        return adjct_dict
+    
+        
            
