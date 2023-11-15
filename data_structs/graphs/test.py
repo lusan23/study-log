@@ -1,7 +1,4 @@
-from graphs.graphs import GraphSet, Vertex
+from graphs.mdv import Mdv
 
-# testing vertex path
-cities_gs = GraphSet()
-cities_gs.set_vertexes(5)
-cities = cities_gs.get_graphs()
-cities_gs.adjascent_list()
+vtx = Mdv()
+print(vtx.__data)

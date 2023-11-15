@@ -1,4 +1,3 @@
-from sys import path
 import unittest
 from graphs.graphs import Vertex
 
