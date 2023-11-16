@@ -12,14 +12,11 @@ class TestVertex(unittest.TestCase):
     def test_settup(self):
         """ Test if the data for an Vertex instance is stored in data."""
                 
-
         self.assertEqual(self.vertex_one.get_data(), 10)
         self.assertEqual(self.vertex_two.get_data(), 20)
         
         self.assertEqual(self.vertex_one.get_edge().__dict__['_Edge__src_vertex'], self.vertex_one)
         self.assertEqual(self.vertex_one.get_edge().__dict__['_Edge__dest_vertex'], None)
-        self.vertex_one = None
-        self.vertex_two = None
 
     def test_update_data(self):
         """ Test if the vertes overwrites properly """
@@ -30,6 +27,7 @@ class TestVertex(unittest.TestCase):
         
         print(f"\nmy public attribute:{test_filled_node.get_data()}\n")
         # self.assertEqual(test_filled_node.data, 1000)
+
 
 
     def test_edges(self):

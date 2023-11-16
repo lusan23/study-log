@@ -10,10 +10,8 @@ class Vertex:
 
     def __init__(self, data=None) -> None:
         """ (Int) -> Vertex object
-        >>> node_a = Vertex(10)
-        >>> node_a.__dict__
-        {'_Vertex__data': 10, 
-        '_Vertex__edge': <graphs.edges.Edge object at 0x7f3fe80e1f70>}
+
+        Takes data an Edges that point to other vertexes
                  
         """
         self.__data = data
@@ -50,8 +48,9 @@ class Vertex:
         self.__data = new_data
         return retval
     
-    def update_edge(self, src, dest, two=True) -> None:
+    def __update_edge(self, src, dest, two=True) -> None:
         """ (vertex, vertex) -> None
+
         It will change the src and dest attributes at its vertex's edge
 
         >>> vertex_a.get_edge()__dict__
@@ -60,6 +59,19 @@ class Vertex:
         >>> vertex_a.get_edge()__dict__
         {'__src_vertex': vertex_h, '__dest_vertex': vertex_g, 'weight':1.0}
          """
+        
+        # Error handling
+
+        # if src or dest is not None and not type Vertex raise an exception. 
+        if (not type(src) != None or not type(dest) != None):    
+            if (not isinstance(src, Vertex) or not isinstance(dest, Vertex)):
+                raise TypeError(f"Expected an instace of {Vertex}, but received {type(src), type(dest)}")
+        two_type = type(two)
+
+        # make sure that two is a boolean value
+        if (two_type != bool):
+            raise TypeError("Expected an instance of {bool}, but received {two_type}")
+            
         if (not two):
             self.__edge.update_edge(src, dest)
         else:
@@ -74,29 +86,19 @@ class Vertex:
     def point_to(self, vertex: "Vertex", direct=False) -> None:
         """    
         Make this edge object point to the given Vertex, and changes the edge of the given Vertex.
-        >>> vertex_a =  Vertex("Jefferson")
-        >>> vertex_a.set_vertexes(3)
-        >>> vertex_a.get_edge(two=True)
-        <An Edge Object x>
-        >>> vertex_b.get_edge()
-        <An Edge Object y>
-        >>> vertex_a.point_to(vertex_b)
-        >>> vertex_a.get_edge().get_dest_vertex()
-        <Vertex  Object b>
-        >>> vertex_b.get_get() == vertex_a.get_edget()
-        True
+      
         """
         if (not direct):    
             if (self.__edge_two.get_dest_vertex() == None):
-                self.__edge_two.to_vtx(vertex)
-                vertex.update_edge(vertex, self, two=False)
+                self.__edge_two.update_edge(self, vertex)
+                vertex.__update_edge(vertex, self, two=False)
                                 
             else:
                 print(f"This vertex is already pointing to somewhere else!!!")
             
         else:
             if (self.__edge_two.get_dest_vertex() == None):
-                self.__edge_two.to_vtx(vertex)
+                self.__edge_two.update_edge(self, vertex)
             else:
                 print(f"This vertex is already pointing to somewhere else!!!")
             
@@ -105,13 +107,6 @@ class Vertex:
         """
         Remove an existent vertex from edge attribute.
 
-        >>> node_a = Vertex('USA'),
-        >>> node_b = Vertex('Canada'),
-        >>> node_b.point_to(node_a)
-        >>> node_a.vertex_path()
-        [<graphs.graphs.Vertex object at 0x7f60eb563610>, <graphs.graphs.Vertex object at 0x7f60eb4503d0>]
-        >>> node_a.unpoint()
-        [<graphs.graphs.Vertex object at 0x7f60eb563610>]
         """
         if (self.__edge == None):
             raise Exception("the given argument is empty")
@@ -125,11 +120,7 @@ class Vertex:
     def vertex_path(self) -> list:
         """ (Vertex) -> [Vertex]
         Return a list of vertexes conected to each other
-        >>> vtx_a, vtx_b, vtx_c = Vertex('Buenos Aires'), Vertex('Paris'), Vertex('São Paulo')
-        >>> vtx_a.point_to(vtx_b), vtx_b.point_to(vtx_c)
-        
-        >>> vtx_a.vertex_path()
-        [<Vertex a Object> ,<Vertex b Object>, <Vertex c Object>]
+   
         """
         current_vtx = self
 
@@ -152,19 +143,11 @@ class GraphSet:
     def __init__(self) -> None:
         """  (int) -> GraphSet
         Create a set of nodes/vertex
-        >>> graph_x = GraphSet()
-        >>> graph_x.get_graphs()
-        {}
-        >>> graphs_a = GraphSet()
-        >>> graphs_a.set_vertexes(3)
-        >>> len(graphs_a.get_graphs())
-        3
+     
 
         @param enumerated if True the keys become numbers
         """
 
-        # if an argument is given, Create a list contaning (number_node) nodes with data None
-        # else just create a empty list
         self.__vertex_set = {}
         self.__number_nodes = None
         self.__enumerated = None
@@ -178,19 +161,39 @@ class GraphSet:
             for label in range(ord('a'), ord('a') + number_nodes):
                 if (label < number_nodes):
                     self.__vertex_set[chr(label)] = Vertex(None)
-                    next_vtx = Vertex(None)
-                    self.__vertex_set[chr(label)].point_to()
                     
                 else:
                     self.__vertex_set[chr(label)] = Vertex(None)
             self.__number_nodes = number_nodes
         else:
-            # Generate a dictinary  {'0': <Vertex Object>, ... number_nodes} of length number_nodes
+            # Generate a dictinary  {'0': <Vertex Object>, ... 'number_nodes-1':<Vertex Object>} of length number_nodes
 
             for label in range(1, self.__number_nodes + 1):
                 self.__vertex_set[label] = Vertex(None)
                     
-                    
+    def link_all(self,  direct=False):
+        """ ()
+            Link all the vertexes in the set by the created order.
+        """
+
+        if (self.__vertex_set == {}):
+            raise Exception("The vertex set is empty!!!")
+        elif (len(self.__vertex_set) == 1):
+            raise Exception("The vertex set has only a single vertex, there's nothing to link with.")
+            
+        vtxs = self.__vertex_set
+        vtxs_keys = list(vtxs.keys())
+        counter = 0
+        
+        # this loop stop at the (i number_nodes-2)th vertex 
+        while counter <= len(vtxs_keys)-2:
+            # vtx_i will point to vtx_i + 1
+            if (not direct):
+                vtxs[vtxs_keys[counter]].point_to(vtxs[vtxs_keys[counter+1]])
+            else:
+                vtxs[vtxs_keys[counter]].point_to(vtxs[vtxs_keys[counter+1]], direct=True)
+            counter+=1
+             
     def get_graphs(self):
         return self.__vertex_set
     

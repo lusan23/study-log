@@ -46,7 +46,7 @@ class Edge:
         self.__weight = new_weight
         return retval
 
-    def from_vtx(self, vertex, direct=False) -> None:
+    def __from_vtx(self, vertex, direct=False) -> None:
         """
         ### Define from what Vertex object the edge is comming from. 
         
@@ -69,7 +69,7 @@ class Edge:
             raise Exception("This attribute is already filled!!!")
         
 
-    def to_vtx(self, vertex, direct=False) -> None:
+    def __to_vtx(self, vertex, direct=False) -> None:
         """
         ### Define where the edge is ponting to what Vertex 
         
@@ -90,14 +90,9 @@ class Edge:
 
     def update_edge(self, new_source, new_destiny):
         """ (vertex, vertex) -> None
+        
             It will change the src and dest attributes at this edge
 
-            >>> vertex_a.get_edge()__dict__
-            {'__src_vertex': vertex_a, '__dest_vertex': vertex_b, 'weight':1.0}
-            >>> vertex_a.get_edge().update_get(vertex_h, vertex_g)
-            >>> vertex_a.get_edge()__dict__
-            {'__src_vertex': vertex_h, '__dest_vertex': vertex_g, 'weight':1.0}
-            
         """
-        self.from_vtx(new_source, direct=True)
-        self.to_vtx(new_destiny, direct=True)
+        self.__from_vtx(new_source, direct=True)
+        self.__to_vtx(new_destiny, direct=True)

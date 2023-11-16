@@ -1,4 +1,4 @@
-
+import random
 """ A implementation of the data structure Graph that handles multi-edge vertexes"""
 from graphs.graphs import Vertex
 from graphs.edges import Edge
@@ -31,13 +31,12 @@ class Mdv(Vertex):
         """
         if the edge two is empty just do the usual point_to else,
         point to a given edge name at edge set.
-        
-        >>> mdv_a = Mdv()
-        >>> mdv_b = Mdv()
-        ### case one: mdv_a is not pointing to anyone, therefore __edge_two.__dest_vertex is None
         >>> mdv_a.point_to(mdv_b) 
         """
+        # case one: ths mdv is not pointing to anyone, therefore __edge_two.__dest_vertex is None
         if (self.__dict__['_Vertex__edge_two'].get_dest_vertex() == None ):
             super().point_to(vertex, direct)
         else:
-            print("go to edge_set")
+        # case two: this mdv already has one edge
+            # what old be a good key name for that ? its memory addresss
+            vertex[hex(id(self))] = Edge(src_vertex=self,dest_vertex=vertex)
