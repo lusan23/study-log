@@ -46,8 +46,10 @@ class TestGraphSet(unittest.TestCase):
         """
         # UNDIRECT LINK TEST
         self.filled_set.link_all(direct=False)
+
         vtxs = self.filled_set.get_graphs()
         vtxs_keys = list(vtxs.keys())
+
         counter = 0
         
         # this loop stop at the (i number_nodes-2)th vertex 
@@ -55,21 +57,28 @@ class TestGraphSet(unittest.TestCase):
             # verify if vtx_i points to vtx_i + 1
             edge = vtxs[vtxs_keys[counter]].get_edge(two=True)
             self.assertIs(edge.get_dest_vertex(), vtxs[vtxs_keys[counter+1]] )
+
             src_edge = vtxs[vtxs_keys[counter+1]].get_edge()
             self.assertIs(src_edge.get_dest_vertex(), vtxs[vtxs_keys[counter]] )
+            
             counter+=1
 
             # DIRECT LINK TEST
-            self.filled_set.link_all(direct=True)
-            vtxs = self.filled_set.get_graphs()
+            cities = GraphSet()
+            cities.set_vertexes(5)
+
+            cities.link_all(direct=True)
+            vtxs = cities.get_graphs()
             vtxs_keys = list(vtxs.keys())
             counter = 0
             
             # this loop stop at the (i number_nodes-2)th vertex 
             while counter <= len(vtxs_keys)-2:
                 # verify if vtx_i points to vtx_i + 1
+
                 edge = vtxs[vtxs_keys[counter]].get_edge(two=True)
                 self.assertIs(edge.get_dest_vertex(), vtxs[vtxs_keys[counter+1]] )
+
                 src_edge = vtxs[vtxs_keys[counter+1]].get_edge()
                 self.assertIs(src_edge.get_dest_vertex(), None)
                 counter+=1

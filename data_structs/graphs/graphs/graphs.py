@@ -92,6 +92,7 @@ class Vertex:
             if (self.__edge_two.get_dest_vertex() == None):
                 self.__edge_two.update_edge(self, vertex)
                 vertex.__update_edge(vertex, self, two=False)
+                
                                 
             else:
                 print(f"This vertex is already pointing to somewhere else!!!")
