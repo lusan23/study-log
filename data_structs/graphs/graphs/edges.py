@@ -1,4 +1,4 @@
-
+""" Implementation of Edges as an Object, storing two 'pointers' and an weight data"""
 class Edge:
     """ (float, Vertex, Vertex) -> Edge
 
@@ -10,7 +10,7 @@ class Edge:
     
     """
     def __init__(self, src_vertex = None, 
-                 dest_vertex = None, weight=1.0,) -> "Edge":
+                 dest_vertex = None, weight=999999,) -> "Edge":
         """
         @param src_vertex the vertex object where the edge is comming from.
         @param dest_vertex the vertex object where the edge is pointing to.

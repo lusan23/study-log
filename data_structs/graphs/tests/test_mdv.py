@@ -125,7 +125,6 @@ class TestMdv(unittest.TestCase):
         self.assertTrue(expect_pointed_to != None)
         self.assertTrue(expect_pointing_back != None)
 
-
     def test_mdv_to_vtx_true_true(self):
         pass
 
