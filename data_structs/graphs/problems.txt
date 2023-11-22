@@ -1,8 +1,0 @@
-earth -> saturn
-earth -> jupyter (set edge)
-earth -> mart (set edge)
-
-[jupyter, mart, saturn]
-
-
-
