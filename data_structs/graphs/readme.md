@@ -26,7 +26,7 @@ For more details, refer to the docstrings provided in the code.
 ### Usage
 
 ```python
-from graphs.vertices import Vertex
+from graphs.graphs import Vertex
 
 vertex_a = Vertex(10000)
 data = vertex_a.get_data()
@@ -48,7 +48,7 @@ Refer to the docstrings for detailed information.
 ### Usage
 
 ```python
-from graphs.graph_set import GraphSet
+from graphs.graphs import GraphSet
 
 graphs_a = GraphSet()
 graphs_a.set_vertexes(3)
@@ -66,7 +66,7 @@ The `mdv.py` file introduces the `Mdv` class, extending the `Vertex` class to ha
 ### Usage
 
 ```python
-from graphs.multi_degree_vertex import Mdv
+from graphs.mdv import Mdv
 
 mdv_a = Mdv(10)
 mdv_b = Mdv(20)
