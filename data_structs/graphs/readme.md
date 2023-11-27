@@ -1,4 +1,4 @@
-This Graph data structure consists of three Python files: `edges.py`, `vertices.py`, and `graph_set.py`, each contributing to the implementation of a versatile graph data structure. Additionally, there is a `mdv.py` (muti degreed vertex) file extending the capabilities of the graph to handle vertices with multiple edges.
+This Graph data structure consists of three Python files: `edges.py` and`graphs.py`,  each contributing to the implementation of a versatile graph data structure. Additionally, there is a `mdv.py` (muti degreed vertex) file extending the capabilities of the graph to handle vertices with multiple edges.
 
 ## `edges.py`
 
@@ -19,9 +19,9 @@ edge_ab.update_edge(new_source, new_destiny)
 
 For more details, refer to the docstrings provided in the code.
 
-## `vertices.py`
+## `Vertex`
 
-The `vertices.py` file defines the `Vertex` class, representing vertices in a graph. Each vertex stores data and edges pointing to other vertices. Functionalities include creating a vertex, accessing and updating data and edges, pointing an edge to another vertex, updating the edge of the pointed vertex, and generating a list of connected vertices.
+`Vertex` class, representing vertices in a graph. Each vertex stores data and edges pointing to other vertices. Functionalities include creating a vertex, accessing and updating data and edges, pointing an edge to another vertex, updating the edge of the pointed vertex, and generating a list of connected vertices.
 
 ### Usage
 
@@ -41,9 +41,9 @@ path_list = vertex_a.vertex_path()
 
 Refer to the docstrings for detailed information.
 
-## `graph_set.py`
+## `GraphSet`
 
-The `graph_set.py` file defines the `GraphSet` class, managing a set of vertices and their connections. Functionalities include creating a set of vertices with optional enumeration, linking all vertices in the set in the order they were created, retrieving the set of graphs, and generating an adjacency list representing vertex connections.
+`GraphSet` class, managing a set of vertices and their connections. Functionalities include creating a set of vertices with optional enumeration, linking all vertices in the set in the order they were created, retrieving the set of graphs, and generating an adjacency list representing vertex connections.
 
 ### Usage
 
@@ -59,9 +59,9 @@ adjacency_list = graphs_a.adjascent_list()
 
 See the code comments and docstrings for detailed information.
 
-## `multi_degree_vertex.py`
+## `Mdv`
 
-The `multi_degree_vertex.py` file introduces the `Mdv` class, extending the `Vertex` class to handle vertices with multiple edges. This class includes methods to add edges, get the set of edges, and point to other vertices, creating new edges when necessary.
+The `mdv.py` file introduces the `Mdv` class, extending the `Vertex` class to handle vertices with multiple edges. This class includes methods to add edges, get the set of edges, and point to other vertices, creating new edges when necessary.
 
 ### Usage
 
