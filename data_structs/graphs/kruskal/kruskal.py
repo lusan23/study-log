@@ -1,5 +1,4 @@
 from graphs.mdv import Mdv
-
 earth  = Mdv("Earth")
 mart = Mdv("Mart")
 jupyter = Mdv("Jupyter")
@@ -113,6 +112,7 @@ def make_list (vertex_list) -> list:
 
 
 if __name__ == "__main__":
+
     # float in Astronomical Units
     define_connections(earth, [mart, 0.52 ], [jupyter, 4.20 ], [saturn, 8.34 ])
     define_connections(mart, [earth, 0.52 ], [jupyter, 3.68 ], [saturn, 7.82 ])
@@ -124,6 +124,6 @@ if __name__ == "__main__":
     #     print(edge)
     
     ls = make_list([ earth, mart,  jupyter, saturn])
-    for edg in ls:
-        src, dest = edg[1].get_src_vertex().get_data(), edg[1].get_dest_vertex().get_data()
-        print(f"weight:{edg[0]} | src:{src} | dest: {dest}")
+    # for edg in ls:
+    #     src, dest = edg[1].get_src_vertex().get_data(), edg[1].get_dest_vertex().get_data()
+    #     print(f"weight:{edg[0]} | src:{src} | dest: {dest}")

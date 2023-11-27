@@ -221,3 +221,4 @@ class GraphSet:
             adjct_dict[key] = self.__vertex_set[key].vertex_path()
         
         return adjct_dict
+    
