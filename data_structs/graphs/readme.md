@@ -1,5 +1,4 @@
-This Graph data structure consists of three Python files: `edges.py`, `vertices.py`, and `graph_set.py`, each contributing to the implementation of a versatile graph data structure. Additionally, there is a `mdv.py` (muti degreed vertex) file extending the capabilities of the graph to handle vertices with multiple edges.
-
+This Graph data structure consists of three Python files: `edges.py`, `vertices.py`, and `graph_set.py`, each contributing to the implementation of a versatile graph data structure. Additionally, there is a `mdv.py` (muti degreed vertex) file extending the capabilities of the graph to handle vertices with multiple edge
 ## `edges.py`
 
 The `edges.py` file contains the implementation of the `Edge` class. This class represents edges in a graph, storing two pointers to vertex objects and a weight attribute. Key functionalities include creating an edge, accessing and updating the weight, source, and destination vertices, and pointing the edge to a specific vertex.
