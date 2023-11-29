@@ -56,18 +56,36 @@ class Heap(BinaryTree):
             node.update_data(data)
             inserted = True
 
+        current_node = node
+        
         if (node.left == None and not inserted):
         # first try to insert at left child and check their values, swap if needed
             node.insert_left(data)
             inserted = True
-            if (node.data <=  data):
-                self.__swap_data(node, node.left)
+            
+            # go up the tree until the root or find the parent is bigger than the new node value.
+        
+            while (current_node.left.data > current_node.data):
+                
+                if (current_node.left.data > current_node.data):
+                    self.__swap_data(current_node, current_node.left)
+                
+                if (not current_node is self.root):
+                    current_node = current_node.parent
+
+            
         # than try to insert at right child and check their values swap them if needed
         elif (node.right == None and not inserted):
             node.insert_right(data)
-            if (node.data <=  data):
-                self.__swap_data(node, node.right)
-            
+            while (current_node.right.data > current_node.data):
+
+                if (current_node.right.data >  current_node.data):
+                    self.__swap_data(current_node, current_node.right)
+
+                if (not current_node is self.root):
+                
+                    current_node = current_node.parent
+                
             inserted = True
         elif (not inserted):
             self.insert(node.left, data)

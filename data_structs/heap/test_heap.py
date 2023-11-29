@@ -117,12 +117,58 @@ class TestHeap(unittest.TestCase):
         self.assertTrue(hp.root.data == 10 )
 
 
-    def test_insert_left_max_heap(self):
-        """ testing the case wher one node was already inserted """
+    def test_insert_left_max_heap_new_smaller(self):
+        """ testing when inserted in the left child, (new node < parent)"""
         hp = self.hp
-        hp.insert_max(hp.root,10)
-        hp.insert_max(hp.root,20)
+        hp.insert_max(20,hp.root,)
+        hp.insert_max(10,hp.root)
         self.assertTrue(hp.root.left.data == 10 )
         self.assertTrue(hp.root.data == 20 )
+
+    def test_insert_left_max_heap_new_bigger(self):
+        """ testing when inserted in the left child, (new node < parent) """
+        hp = self.hp
+        hp.insert_max(10,hp.root,)
+        hp.insert_max(20,hp.root)
+        self.assertTrue(hp.root.left.data == 10 )
+        self.assertTrue(hp.root.data == 20 )
+
+    def test_insert_right_max_heap_new_largest(self):
+        """ testing when inserted in the right child, (new node > parent) """
+        hp = self.hp
+        hp.insert_max(10,hp.root,)
+        hp.insert_max(9,hp.root)
+        hp.insert_max(30,hp.root)
+        self.assertTrue(hp.root.right.data == 10 )
+        self.assertTrue(hp.root.data == 30 )
+        self.assertTrue(hp.root.left.parent.data == 30)
+
+    
+
+    def test_insert_right_max_heap_new_smallest(self):
+        """ testing when inserted in the right child, (new node > parent) """
+        hp = self.hp
+        hp.insert_max(10,hp.root)
+        hp.insert_max(9,hp.root)
+        hp.insert_max(1,hp.root)
+
+        self.assertTrue( hp.root.right.data == 1 )
+        self.assertTrue( hp.root.data == 10 )
+        self.assertTrue( hp.root.left.data == 9 )
+
+    
+
+    def test_insert_left_left_max_heap_new_bigger(self):
+        """ testing when it insert the root.left.left, (new node > parent and new_node > parent.parent) """
+        hp = self.hp
+        hp.insert_max(10,hp.root,)
+        hp.insert_max(9,hp.root)
+        hp.insert_max(1,hp.root)
+        hp.insert_max(11, hp.root)
+        self.assertTrue(hp.root.left.left == 10 )
+        self.assertTrue(hp.root.data == 11 )
+        # self.assertTrue(hp.root.left.data == 9)
+
+    
 if __name__ == "__main__":
     unittest.main()
