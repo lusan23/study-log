@@ -2,10 +2,10 @@
 """ A implementation of the data structure Graph """
 from graphs.edges import Edge
 
-class Vertex:
+class DirectVertex:
     """   (int) -> Vertex
 
-    Represent a vertex b and its directional/undirectional edges  
+    Represent a vertex b and its directional edges  
     """
 
     def __init__(self, data=None) -> None:
@@ -64,8 +64,8 @@ class Vertex:
 
         # if src or dest is not None and not type Vertex raise an exception. 
         if (not type(src) != None or not type(dest) != None):    
-            if (not isinstance(src, Vertex) or not isinstance(dest, Vertex)):
-                raise TypeError(f"Expected an instace of {Vertex}, but received {type(src), type(dest)}")
+            if (not isinstance(src, DirectVertex) or not isinstance(dest, DirectVertex)):
+                raise TypeError(f"Expected an instace of {DirectVertex}, but received {type(src), type(dest)}")
         two_type = type(two)
 
         # make sure that two is a boolean value
@@ -83,33 +83,23 @@ class Vertex:
         """
         self.__edge = new_edge
 
-    def point_to(self, vertex: "Vertex", direct=False) -> None:
+    def point_to(self, vertex: "DirectVertex", ) -> None:
         """    
         Make this edge object point to the given Vertex, and changes the edge of the given Vertex.
       
         """
-        if (not direct):    
-            if (self.__edge_two.get_dest_vertex() == None):
-                self.__edge_two.update_edge(self, vertex)
-                vertex.__update_edge(vertex, self, two=False)
-                
-                                
-            else:
-                print(f"This vertex is already pointing to somewhere else!!!")
-            
+ 
+        if (self.__edge_two.get_dest_vertex() == None):
+            self.__edge_two.update_edge(self, vertex)
         else:
-            if (self.__edge_two.get_dest_vertex() == None):
-                self.__edge_two.update_edge(self, vertex)
-            else:
-                print(f"This vertex is already pointing to somewhere else!!!")
-            
-        
+            print(f"This vertex is already pointing to somewhere else!!!")
+
     def unpoint(self) -> None:
         """
         Remove an existent vertex from edge attribute.
 
         """
-        if (self.__edge == None):
+        if (not self.__edge):
             raise Exception("the given argument is empty")
 
         else:
@@ -130,7 +120,7 @@ class Vertex:
         path_list = []
         prev_vtx = current_vtx
         # iterate through all the path of vertexes starting from first_vtx
-        while (current_vtx != None):
+        while (current_vtx):
             path_list.append(current_vtx)
 
             prev_vtx = current_vtx
@@ -140,7 +130,28 @@ class Vertex:
         
         return path_list
 
-class GraphSet:
+class UndirectVertex(DirectVertex):
+    def __init__(self, data):
+        DirectVertex.__init__(self, data=None)
+
+    def point_to(self, vertex: "UndirectVertex", ) -> None:
+        """    
+        Make this edge object point to the given Vertex, and changes the edge of the given Vertex.
+      
+        """
+        
+        if (self.__edge_two.get_dest_vertex() == None):
+            self.__edge_two.update_edge(self, vertex)
+            vertex.__update_edge(vertex, self, two=False)
+                
+            
+        else:
+            if (self.__edge_two.get_dest_vertex() == None):
+                self.__edge_two.update_edge(self, vertex)
+            else:
+                print(f"This vertex is already pointing to somewhere else!!!")
+
+class DirectGraphSet:
     def __init__(self) -> None:
         """  (int) -> GraphSet
         Create a set of nodes/vertex
@@ -161,18 +172,18 @@ class GraphSet:
             # Generate a dictinary  {'a': <Vertex Object>, ... number_nodes} of length number_nodes
             for label in range(ord('a'), ord('a') + number_nodes):
                 if (label < number_nodes):
-                    self.__vertex_set[chr(label)] = Vertex(None)
+                    self.__vertex_set[chr(label)] = DirectVertex(None)
                     
                 else:
-                    self.__vertex_set[chr(label)] = Vertex(None)
+                    self.__vertex_set[chr(label)] = DirectVertex(None)
             self.__number_nodes = number_nodes
         else:
             # Generate a dictinary  {'0': <Vertex Object>, ... 'number_nodes-1':<Vertex Object>} of length number_nodes
 
             for label in range(1, self.__number_nodes + 1):
-                self.__vertex_set[label] = Vertex(None)
+                self.__vertex_set[label] = DirectVertex(None)
                     
-    def link_all(self,  direct=False):
+    def link_all(self):
         """ ()
             Link all the vertexes in the set by the created order.
         """
@@ -189,16 +200,13 @@ class GraphSet:
         # this loop stop at the (i number_nodes-2)th vertex 
         while counter <= len(vtxs_keys)-2:
             # vtx_i will point to vtx_i + 1
-            if (not direct):
-                vtxs[vtxs_keys[counter]].point_to(vtxs[vtxs_keys[counter+1]])
-            else:
-                vtxs[vtxs_keys[counter]].point_to(vtxs[vtxs_keys[counter+1]], direct=True)
+            vtxs[vtxs_keys[counter]].point_to(vtxs[vtxs_keys[counter+1]])
             counter+=1
              
     def get_graphs(self):
         return self.__vertex_set
     
-    def adjascent_list(self) -> [Vertex]:
+    def adjascent_list(self) -> [DirectVertex]:
         """ (None) -> dict of [Vertex]
         Return a list of paths of each vertex in vertex_set 
         >>> graphs_a = GraphSet()
@@ -222,3 +230,27 @@ class GraphSet:
         
         return adjct_dict
     
+class UndirectGraphSet(DirectGraphSet):
+    def __init__(self):
+        DirectGraphSet.__init__(self)  
+
+    def link_all(self):
+        """ ()
+            Link all the vertexes in the set by the created order.
+        """
+
+        if (self.__vertex_set == {}):
+            raise Exception("The vertex set is empty!!!")
+        elif (len(self.__vertex_set) == 1):
+            raise Exception("The vertex set has only a single vertex, there's nothing to link with.")
+            
+        vtxs = self.__vertex_set
+        vtxs_keys = list(vtxs.keys())
+        counter = 0
+        
+        # this loop stop at the (i number_nodes-2)th vertex 
+        while counter <= len(vtxs_keys)-2:
+            # vtx_i will point to vtx_i + 1 
+            vtxs[vtxs_keys[counter]].point_to(vtxs[vtxs_keys[counter+1]])
+            
+            counter+=1 

@@ -1,13 +1,13 @@
 import unittest
-from graphs.graphs import Vertex
-
+from graphs.graphs import DirectVertex
+from graphs.graphs import UndirectVertex
 class TestVertex(unittest.TestCase):
     """Test the behavior of the vertex class"""
     def __init__(self, *args, **kwargs):
         super(TestVertex, self).__init__(*args, **kwargs)
-        self.vertex_one = Vertex(10)
+        self.vertex_one = DirectVertex(10)
 
-        self.vertex_two = Vertex(20) 
+        self.vertex_two = DirectVertex(20) 
 
     def test_settup(self):
         """ Test if the data for an Vertex instance is stored in data."""
@@ -20,8 +20,8 @@ class TestVertex(unittest.TestCase):
 
     def test_update_data(self):
         """ Test if the vertes overwrites properly """
-        test_filled_node = Vertex(20)
-        test_empty_node = Vertex()
+        test_filled_node = DirectVertex(20)
+        test_empty_node = DirectVertex()
         
         test_filled_node.update_data(1000)
         
@@ -29,15 +29,14 @@ class TestVertex(unittest.TestCase):
         # self.assertEqual(test_filled_node.data, 1000)
 
 
-
     def test_edges(self):
         """ Test if the vertex A is has an edge to vertex B."""
-        vertex_a = Vertex(10)
-        vertex_b = Vertex(20)
-        vertex_c = Vertex(30)
+        vertex_a = UndirectVertex(10)
+        vertex_b = DirectVertex(20)
+        vertex_c = DirectVertex(30)
         # testing undirect edge
-        vertex_a.point_to(vertex_b, direct=False)
-        vertex_b.point_to(vertex_c, direct=True)
+        vertex_a.point_to(vertex_b)
+        vertex_b.point_to(vertex_c)
         
         self.assertIs(vertex_a.get_edge(two=True).__dict__['_Edge__dest_vertex'], vertex_b)
         self.assertIs(vertex_b.get_edge(two=False).__dict__['_Edge__dest_vertex'], vertex_a)
@@ -45,15 +44,13 @@ class TestVertex(unittest.TestCase):
         self.assertIs(vertex_b.get_edge(two=True).__dict__['_Edge__dest_vertex'], vertex_c)
         self.assertIs(vertex_c.get_edge(two=False).__dict__['_Edge__dest_vertex'], None)
         
-
-
         del vertex_a
         del vertex_b   
             
     def test_unpoint(self):
         
-        vertex_a = Vertex("Chile")
-        vertex_b = Vertex('Santiago')
+        vertex_a = DirectVertex("Chile")
+        vertex_b = DirectVertex('Santiago')
 
         vertex_a.point_to(vertex_a)
         self.assertTrue(vertex_a.get_edge(two=True).__dict__['_Edge__dest_vertex'] != None)
@@ -62,7 +59,7 @@ class TestVertex(unittest.TestCase):
         self.assertTrue(vertex_a.get_edge(two=True).__dict__['_Edge__dest_vertex'] == None)
 
     def test_path(self):
-        vtx_a, vtx_b, vtx_c = Vertex('Buenos Aires'), Vertex('Paris'), Vertex('São Paulo')
+        vtx_a, vtx_b, vtx_c = DirectVertex('Buenos Aires'), DirectVertex('Paris'), DirectVertex('São Paulo')
         vtx_a.point_to(vtx_b), vtx_b.point_to(vtx_c)
 
         print(vtx_a.vertex_path())

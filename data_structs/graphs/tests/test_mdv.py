@@ -1,6 +1,6 @@
 import unittest
 from graphs.mdv import Mdv
-from graphs.graphs import Vertex
+from graphs.graphs import UndirectVertex
 
 class TestMdv(unittest.TestCase):
     """Test the behavior of the mdv class"""
@@ -37,7 +37,7 @@ class TestMdv(unittest.TestCase):
         """
         # Mdv <--> Vertex
         self.vertex_one.point_to(self.vertex_two)
-        vtx_c = Vertex(30)
+        vtx_c = UndirectVertex(30)
         self.vertex_one.point_to(vtx_c)
         vone_edge_two = self.vertex_one.get_edge(two=True)
         

@@ -63,7 +63,7 @@ class Edge:
             self.__src_vertex = vertex
             return None
 
-        if (self.__src_vertex == None):
+        if (not self.__src_vertex):
             self.__src_vertex = vertex
         else:
             raise Exception("This attribute is already filled!!!")

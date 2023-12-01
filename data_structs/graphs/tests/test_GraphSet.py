@@ -1,7 +1,7 @@
 from sys import path
 import unittest
 
-from graphs.graphs import GraphSet
+from graphs.graphs import DirectGraphSet
 from random import random
 
 DICT_SIZE = 10
@@ -10,8 +10,8 @@ class TestGraphSet(unittest.TestCase):
     """Test the behavior of the vertex class"""
     def __init__(self, *args, **kwargs):
         super(TestGraphSet, self).__init__(*args, **kwargs)
-        self.graph_set = GraphSet()
-        self.filled_set = GraphSet()
+        self.graph_set = DirectGraphSet()
+        self.filled_set = DirectGraphSet()
  
         self.filled_set.set_vertexes(DICT_SIZE)
     def test_settup(self):
@@ -45,7 +45,7 @@ class TestGraphSet(unittest.TestCase):
 
         """
         # UNDIRECT LINK TEST
-        self.filled_set.link_all(direct=False)
+        self.filled_set.link_all()
 
         vtxs = self.filled_set.get_graphs()
         vtxs_keys = list(vtxs.keys())
@@ -64,7 +64,7 @@ class TestGraphSet(unittest.TestCase):
             counter+=1
 
             # DIRECT LINK TEST
-            cities = GraphSet()
+            cities = DirectGraphSet()
             cities.set_vertexes(5)
 
             cities.link_all(direct=True)
@@ -86,7 +86,7 @@ class TestGraphSet(unittest.TestCase):
     def test_adjacest_list(self):
         # testing vertex path
         # setting up graphset
-        cities_gs = GraphSet()
+        cities_gs = DirectGraphSet()
         cities_gs.set_vertexes(5)
 
         # all vertexes have path length 1, because they start without edges.

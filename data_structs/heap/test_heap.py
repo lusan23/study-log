@@ -156,8 +156,6 @@ class TestHeap(unittest.TestCase):
         self.assertTrue( hp.root.data == 10 )
         self.assertTrue( hp.root.left.data == 9 )
 
-    
-
     def test_insert_left_left_max_heap_new_bigger(self):
         """ testing when it insert the root.left.left, (new node > parent and new_node > parent.parent) """
         hp = self.hp
@@ -165,10 +163,33 @@ class TestHeap(unittest.TestCase):
         hp.insert_max(9,hp.root)
         hp.insert_max(1,hp.root)
         hp.insert_max(11, hp.root)
-        self.assertTrue(hp.root.left.left == 10 )
+        self.assertTrue(hp.root.left.data == 10 )
         self.assertTrue(hp.root.data == 11 )
-        # self.assertTrue(hp.root.left.data == 9)
+        self.assertTrue(hp.root.left.left.data == 9)
 
-    
+    def test_insert_right_left_max_heap_new_smaller(self):
+        """ testing when it insert the root.left.left, (new node > parent and new_node > parent.parent) """
+        hp = self.hp
+        hp.insert_max(10,hp.root,)
+        hp.insert_max(9,hp.root)
+        hp.insert_max(1,hp.root)
+        hp.insert_max(0, hp.root)
+        self.assertTrue(hp.root.left.data == 9 )
+        self.assertTrue(hp.root.data == 10 )
+        self.assertTrue(hp.root.left.left.data == 0)
+
+    def test_insert_left_left_max_heap_new_bigger(self):
+        """ testing when it insert the root.left.left, (new node > parent and new_node > parent.parent) """
+        hp = self.hp
+        hp.insert_max(10,hp.root,)
+        hp.insert_max(9, hp.root)
+        hp.insert_max(1, hp.root)
+        hp.insert_max(11, hp.root)
+        hp.insert_max(12, hp.root)
+        
+        self.assertTrue(hp.root.right.data == 11 )
+        self.assertTrue(hp.root.data == 12 )
+        self.assertTrue(hp.root.right.right.data == 1)
+
 if __name__ == "__main__":
     unittest.main()
