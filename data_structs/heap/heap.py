@@ -11,10 +11,11 @@ class Heap(BinaryTree):
         super().__init__()
         self.max_mode = True
 
-    def insert(self, node, data) -> None:
+    def insert(self, node, data, ) -> None:
         """
         insert an new node from left to right
         """
+
         inserted = False
         if (node.data == None and not inserted):
             node.update_data(data)
@@ -48,48 +49,66 @@ class Heap(BinaryTree):
     def __swap_data(self,src: Node,dest: Node ) -> None:
         src.data, dest.data = dest.data, src.data
 
-    def insert_max(self, data: int ,node: Node):
-        """ insert new nodes by following the rule: value(parent) >= value(child) """
-        inserted = False
-        # NOTE FOR TOMORROW : I CAN IMPLEMENT MAX AND MIN AT THE SAME FUNCTION
-        if (node.data == None and not inserted):
-            node.update_data(data)
-            inserted = True
 
-        current_node = node
-        
-        if (node.left == None and not inserted):
+    def __insert_root(self, data: int ,node: Node):
+        """ if the root node is empty it will update its data  """
+ 
+        node.update_data(data)
+        return True
+
+    
+    
+    def __insert_left_max(self, data: int, node: Node):
         # first try to insert at left child and check their values, swap if needed
-            node.insert_left(data)
-                        
-            inserted = True
-
-            # go up the tree until the root or find the parent is bigger than the new node value.    
-            while (current_node.left.data > current_node.data):
-                self.__swap_data(current_node, current_node.left)
-    
-                if (current_node is self.root):
-                    break
-                current_node = current_node.parent
-            return None
-        # than try to insert at right child and check their values swap them if needed
-        elif (node.right == None  and not inserted):
-            node.insert_right(data)
+        current_node = node
+        node.insert_left(data)
+        # go up the tree until the root or find the parent is bigger than the new node value.    
+        self.__update_ancestor(node.left)
+        return True
+          
                 
-            inserted = True
-
-            # go up the tree until the root or find the parent is bigger than the new node value.    
-            while (current_node.right.data > current_node.data):
-                self.__swap_data(current_node, current_node.right)
-    
-                if (current_node is self.root):
-                    break
-                current_node = current_node.parent
-            return None
+    def __insert_right_max(self, data: int, node: Node):
+        current_node = node
+        node.insert_right(data)
+        # go up the tree until the root or find the parent is bigger than the new node value.    
+        self.__update_ancestor(node.right)
+        return True
         
-        elif (not inserted):
-            self.insert_max( data , node.left )
-            self.insert_max( data , node.right ) 
+     
+    def __update_ancestor(self, new_node):
+        """ bubble up the highest node on the tree """
+        current_node = new_node
+
+        while (current_node.data > current_node.parent.data):
+            self.__swap_data(current_node, current_node.parent)
+
+            current_node = current_node.parent
+
+            if (not current_node.parent):
+                break
+     
+        
+    def insert_max(self, data: int, node: Node):
+        """ insert new nodes by following the rule: value(parent) >= value(child) """
+
+        if (node is self.root and node.data == None):
+            if (self.__insert_root(data, node)):
+                return True
+        elif (node.left == None):
+            if (self.__insert_left_max(data, node)):
+                return True
+        elif (node.right == None):
+            if (self.__insert_right_max(data, node)):
+                return True
+            
+
+        if (self.insert_max( data , node.left)):
+            return True
+        elif(self.insert_max( data , node.right)):
+            return True
+
+             
+                
 
 
 if __name__ == "__main__":

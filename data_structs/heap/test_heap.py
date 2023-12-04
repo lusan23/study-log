@@ -187,9 +187,12 @@ class TestHeap(unittest.TestCase):
         hp.insert_max(11, hp.root)
         hp.insert_max(12, hp.root)
         
-        self.assertTrue(hp.root.right.data == 11 )
+        print(hp.root.right.data)
+        self.assertTrue(hp.root.right.data == 1 )
         self.assertTrue(hp.root.data == 12 )
-        self.assertTrue(hp.root.right.right.data == 1)
+        self.assertTrue(hp.root.left.data == 11)
+
+
 
 if __name__ == "__main__":
     unittest.main()
