@@ -4,7 +4,7 @@ from node import Node
 
 # create a heap class 
     # create insert and delete methods
-    # 10 MIN BREAK
+    
 class Heap(BinaryTree):
     """ Represent an max/min heap data structure """
     def __init__(self):
@@ -88,24 +88,19 @@ class Heap(BinaryTree):
                 break
      
         
-    def insert_max(self, data: int, node: Node):
+    def insert_max(self, data: int, node: Node) :
         """ insert new nodes by following the rule: value(parent) >= value(child) """
 
-        if (node is self.root and node.data == None):
-            if (self.__insert_root(data, node)):
-                return True
-        elif (node.left == None):
-            if (self.__insert_left_max(data, node)):
-                return True
-        elif (node.right == None):
-            if (self.__insert_right_max(data, node)):
-                return True
+        # make a loop to iterate through all the levels in a the heap
+        # try to insert at all the nodes at level i
+
+        while True:
             
 
-        if (self.insert_max( data , node.left)):
-            return True
-        elif(self.insert_max( data , node.right)):
-            return True
+        
+        """ verifies the next node at the same level """
+            
+        
 
              
                 

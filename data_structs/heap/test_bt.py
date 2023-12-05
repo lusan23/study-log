@@ -31,6 +31,7 @@ class TestNode(unittest.TestCase):
         """ Check if the node is created properly """
         bt = self.bt 
         self.assertEqual( bt.right, None )
+        
 
 if __name__ == "__main__":
     unittest.main()

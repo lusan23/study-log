@@ -2,7 +2,7 @@
 
  A repo for tracking my study journey! 
  Obs.: All the code in this repository was made with the porpuse of enduring conceps of DSA by practice.
-#### Current task: studying heap (max/min)
+#### Current task: studying heap (max/min) // go back to study red-black-tree, b-tree and b+tree.
 
 * [Data Structures and Algorithms](https://github.com/lusan23/study-log/tree/master/)
      * [Data Structures](https://github.com/lusan23/study-log/tree/master/)
