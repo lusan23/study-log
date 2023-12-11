@@ -1,111 +1,45 @@
-""" representation of a heap data structure """
-from binary_tree import BinaryTree
-from node import Node
+""" implementation of the heap data structure and  the heap sort algorithm """
+from math import floor
+from  tree_print import print_ascii_tree_img
+binary_tree = [None, 3, 5, 1, 9, 2, 7, 10, 4, 6] # unsorted array 
 
-# create a heap class 
-    # create insert and delete methods
+
+def heapify_max(bt, n, i) -> None:
+    """ makes a regular complete binary tree into a max heap 
+    Precondition 0 < i
+
+    left child = i * 2
+    right child = i * 2 + 1
     
-class Heap(BinaryTree):
-    """ Represent an max/min heap data structure """
-    def __init__(self):
-        super().__init__()
-        self.max_mode = True
+    """
 
-    def insert(self, node, data, ) -> None:
-        """
-        insert an new node from left to right
-        """
+    # check the childs of each node 
 
-        inserted = False
-        if (node.data == None and not inserted):
-            node.update_data(data)
-            inserted = True
+    # if it's the parent < child swap them
+    largest = i
+    left = i* 2
+    right= i*2 + 1
 
-        if (node.left == None and not inserted):
-            # first try to insert at left child
-            node.insert_left(data)
-            inserted = True
-            # return None
-        elif (node.right == None and not inserted):
-            node.insert_right(data)
-            # return None
-            inserted = True
-        elif (not inserted):
-            self.insert(node.left, data)
-            self.insert(node.right, data) 
+    if (left < n) and (bt[left] > bt[largest]):
+        largest = left
 
-    def remove_at(self, given_node: Node):
-        """delete an node object from the tree/erase the data if it's the root."""
-        if (given_node is self.root):
-            self.root.update_data(None)
-        else:
-            if (given_node.parent.left is given_node):
-                given_node.parent.left = None
-                given_node = None
-            elif (given_node.parent.right is given_node):
-                given_node.parent.right = None
-                given_node = None
-
-    def __swap_data(self,src: Node,dest: Node ) -> None:
-        src.data, dest.data = dest.data, src.data
-
-
-    def __insert_root(self, data: int ,node: Node):
-        """ if the root node is empty it will update its data  """
- 
-        node.update_data(data)
-        return True
-
+    if (right < n) and (bt[right] > bt[largest]):
+        largest = right
     
-    
-    def __insert_left_max(self, data: int, node: Node):
-        # first try to insert at left child and check their values, swap if needed
-        current_node = node
-        node.insert_left(data)
-        # go up the tree until the root or find the parent is bigger than the new node value.    
-        self.__update_ancestor(node.left)
-        return True
-          
-                
-    def __insert_right_max(self, data: int, node: Node):
-        current_node = node
-        node.insert_right(data)
-        # go up the tree until the root or find the parent is bigger than the new node value.    
-        self.__update_ancestor(node.right)
-        return True
-        
-     
-    def __update_ancestor(self, new_node):
-        """ bubble up the highest node on the tree """
-        current_node = new_node
+    if largest != i:
+        bt[largest], bt[i] = bt[i], bt[largest]
 
-        while (current_node.data > current_node.parent.data):
-            self.__swap_data(current_node, current_node.parent)
+        heapify_max(bt, n, largest)
 
-            current_node = current_node.parent
+def build_heap(bt):
+    n = len(bt)
 
-            if (not current_node.parent):
-                break
-     
-        
-    def insert_max(self, data: int, node: Node) :
-        """ insert new nodes by following the rule: value(parent) >= value(child) """
-
-        # make a loop to iterate through all the levels in a the heap
-        # try to insert at all the nodes at level i
-
-        while True:
-            
-
-        
-        """ verifies the next node at the same level """
-            
-        
-
-             
-                
+    for i in range(n//2, 0, -1):
+        heapify_max(bt, n, i)
 
 
 if __name__ == "__main__":
-    heap = Heap()
-    print(heap.__dict__)
+    # print(f"unsorted:\n{print_ascii_tree(binary_tree)}")
+    print_ascii_tree_img(binary_tree)
+    build_heap(binary_tree)
+    print(f"sorted:\n{print_ascii_tree_img(binary_tree)}")
