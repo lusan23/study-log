@@ -52,7 +52,7 @@ def quick_sort(arr):
     arr_left_slice = arr[:length >> 1]
     arr_right_slice = arr[length >> 1:]
     
-    while left_item_i < right_item_i and :
+    while left_item_i < right_item_i:
 
         if ( arr[left_item_i] > arr[lst_index] ):
             swap( arr,left_item_i , right_item_i ) 
