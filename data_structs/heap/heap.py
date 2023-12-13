@@ -1,6 +1,5 @@
 """ implementation of the heap data structure and  the heap sort algorithm """
 from math import floor
-from  tree_print import print_ascii_tree_img
 binary_tree = [None, 3, 5, 1, 9, 2, 7, 10, 4, 6] # unsorted array 
 
 
@@ -39,7 +38,7 @@ def build_heap(bt):
 
 
 if __name__ == "__main__":
-    # print(f"unsorted:\n{print_ascii_tree(binary_tree)}")
-    print_ascii_tree_img(binary_tree)
+    print(f"unsorted:\n{(binary_tree)}")
+
     build_heap(binary_tree)
-    print(f"sorted:\n{print_ascii_tree_img(binary_tree)}")
+    print(f"sorted:\n{(binary_tree)}")
