@@ -16,14 +16,17 @@ def sort_pivot(arr: list) -> None:
     sorted_pivots = [initial_pivot, middle_pivot, final_pivot]
     sorted_pivots.sort()
     arr[0], arr[length >> 1], arr[length-1] = sorted_pivots[0], sorted_pivots[1], sorted_pivots[2]
+    print(f"choosen pivot:{sorted_pivots[1]}")
     pass
 
     
 
 def swap(arr, index_a, index_b):
     """ swap the to elements using its given indexes: a an db """
-    arr[index_a], arr[index_b] = arr[index_b], arr[index_a] 
-    pass
+    tmp = arr[index_b]
+    arr[index_b] = arr[index_a]  
+    arr[index_a] = tmp 
+    
 
 def quick_sort(arr):
     """ recursive function for rearranging the array 
@@ -47,19 +50,31 @@ def quick_sort(arr):
     left_item_i, right_item_i = 0, lst_index-1
     
     # keep going to left and right until left's index is bigger than right
-    # and if every item to the left of pivot smaller, also if every item to the right of pivot is bigger
-    
-    arr_left_slice = arr[:length >> 1]
-    arr_right_slice = arr[length >> 1:]
-    
-    while left_item_i < right_item_i:
+    # and if every item to the left of pivot smaller, also if every item to the right of pivot is bigger:
+        # swap left and right
 
-        if ( arr[left_item_i] > arr[lst_index] ):
+    left_ok = False
+    right_ok = False
+
+    while  not_pivot_condition:
+        print(f" loop init:{arr}")
+
+        if (left_item_i > right_item_i):
+            left_item_i , right_item_i = 0, lst_index-1
+
+        if ( arr[left_item_i] > arr[lst_index] and arr[right_item_i] < arr[lst_index]  ):
+
             swap( arr,left_item_i , right_item_i ) 
+        else:
+            left_ok = True
 
-        elif ( arr[right_item_i] < arr[lst_index] ):
-
+        if ( arr[right_item_i] < arr[lst_index] and arr[left_item_i] > arr[lst_index] ):
+            pivot_condition = False
             swap( arr,left_item_i , right_item_i) 
+        else:
+            not_pivot_condition = False
+        
+            pivot_condition = False
             
         left_item_i += 1
         right_item_i -= 1 
@@ -68,8 +83,9 @@ def quick_sort(arr):
     swap(arr,left_item_i , lst_index)
     
     # call quick sort for the left and right side of the pivot 
-    quick_sort(arr_left_slice)
-    quick_sort(arr_right_slice)
+    print(f"before next call:{arr}")
+    quick_sort(arr[:length >> 1])
+    quick_sort(arr[length >> 1:])
 
 
 if __name__ == "__main__":
